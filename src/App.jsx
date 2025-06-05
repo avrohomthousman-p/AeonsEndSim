@@ -11,10 +11,22 @@ function App() {
 			</div>
 			<h1>Aeons End Simulator</h1>
 			<div>
-				{/* TODO: make UI elements for the user to enter the character and cards they want */}
+				<p>Pick a character</p>
+				<CharacterPicker />
 			</div>
 		</>
 	)
 }
 
 export default App
+
+
+
+function CharacterPicker(){
+	return (
+		<div>
+			<button className="btn" >Garu</button>
+			<button className="btn" >Kadir</button>
+		</div>
+	)
+}
