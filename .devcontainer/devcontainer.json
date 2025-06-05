@@ -1,0 +1,10 @@
+{
+  "name": "React Vite Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "postCreateCommand": "npm install",
+  "forwardPorts": [5173],
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
