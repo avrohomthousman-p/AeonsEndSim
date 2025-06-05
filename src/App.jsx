@@ -1,5 +1,6 @@
 import logo from '/icon.jpg'
 import './App.css'
+import { CHARACTERS } from './data/characters'
 
 function App() {
 	return (
@@ -25,8 +26,9 @@ export default App
 function CharacterPicker(){
 	return (
 		<div>
-			<button className="btn" >Garu</button>
-			<button className="btn" >Kadir</button>
+			{Object.keys(CHARACTERS).map((name) => (
+				<button key={name} className="btn">{name}</button>
+			))}
 		</div>
 	)
 }
