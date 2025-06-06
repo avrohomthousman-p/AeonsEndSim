@@ -6,7 +6,6 @@
  */
 export const CHARACTERS = Object.freeze({
     Kadir: Object.freeze({
-        image: "https://static.wikia.nocookie.net/aeonsend/images/8/89/Kadir1.jpg/revision/latest/scale-to-width-down/1000?cb=20200216064236",
         startingDeck: ["Crystal", "Crystal", "Crystal", "Spark", "Spark"],
         startingHand: ["Emerald Shard", "Crystal", "Crystal", "Crystal", "Spark"],
         breaches: [

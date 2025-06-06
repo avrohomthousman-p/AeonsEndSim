@@ -1,0 +1,15 @@
+#root {
+    margin: 0 auto;
+    padding: 0rem;
+    text-align: center;
+}
+
+
+.back-link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
