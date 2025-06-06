@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from './data/characters'
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
 
 
@@ -86,11 +87,60 @@ function CharacterSection({ characterName }) {
 
 
 function HandSection(){
-    //TODO
-    return(
-        <div id="hand">
+    const [isOpen, setIsOpen] = useState(false);
 
+    const toggleTab = () => {
+        setIsOpen(prev => !prev);
+    }
+
+
+    return(
+        <div id="hand" style={{ position: 'relative' }}>
+            <div 
+                style={{ 
+                    ...styles.collapsableTab,
+                    bottom: isOpen ? '0px' : '-65px'
+                }} >
+
+
+                <div onClick={toggleTab}>
+                    {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                    <span style={{ padding: "0px 10px"}}>Cards In Hand</span>
+                    {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                </div>
+                <div>
+                    <p>TODO: card images here</p>
+                </div>
+            </div>
         </div>
     )
 }
 
+
+
+const styles = {
+    collapsableTab: {
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        backgroundColor: '#edebe6',
+        padding: '10px 20px',
+        borderTop: '1px solid #444',
+        cursor: 'pointer',
+        transition: 'transform 0.3s ease-in-out',
+        zIndex: 1000,
+    },
+    handContent: {
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        backgroundColor: '#edebe6',
+        padding: '20px 0',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflowX: 'auto',
+        transition: 'bottom 0.3s ease-in-out',
+        zIndex: 999,
+    }
+}
