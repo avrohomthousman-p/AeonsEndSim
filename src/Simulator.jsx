@@ -32,13 +32,14 @@ export default Simulator
 function PlayerArea() {
     const { characterName } = useParams();
     const data = CHARACTERS[characterName];
+    const [cardsInHand, setCardsInHand] = useState(data.startingHand);
 
 
     return (
         <div>
             <BreachSection characterData={data} />
-            <CharacterSection characterName={characterName} />
-            <HandSection />
+            <CharacterSection characterName={characterName} cardsInHand={cardsInHand} />
+            <HandSection cardsInHand={cardsInHand} />
         </div>
     )
 }
@@ -64,11 +65,11 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName }) {
+function CharacterSection({ characterName, cardsInHand }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
             <div style={{ display: "inline-block", width: "12%" }}>
-                <p>5 cards</p>
+                <p>{ cardsInHand.length } card{ cardsInHand.length === 1 ? "" : "s" }</p>
                 <img src={BASE_URL + "cards/cardBack.webp"} alt="deck" width="100%" />
             </div>
 
@@ -86,8 +87,9 @@ function CharacterSection({ characterName }) {
 
 
 
-function HandSection(){
+function HandSection({ cardsInHand }){
     const [isOpen, setIsOpen] = useState(false);
+    
 
     const toggleTab = () => {
         setIsOpen(prev => !prev);
@@ -99,7 +101,7 @@ function HandSection(){
             <div 
                 style={{ 
                     ...styles.collapsableTab,
-                    bottom: isOpen ? '0px' : '-65px'
+                    bottom: isOpen ? '0px' : '-275px'
                 }} >
 
 
@@ -109,7 +111,13 @@ function HandSection(){
                     {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                 </div>
                 <div>
-                    <p>TODO: card images here</p>
+                    {cardsInHand.map((cardName) => (
+                        <img 
+                            src={BASE_URL + "cards/" + cardName + ".webp"} 
+                            alt={cardName}
+                            style={{ margin: "5px 10px" }}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
