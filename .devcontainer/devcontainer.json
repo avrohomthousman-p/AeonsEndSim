@@ -7,5 +7,6 @@
 	],
 	"extensions": [
 		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
 	]
 }
