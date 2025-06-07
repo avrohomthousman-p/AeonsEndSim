@@ -52,14 +52,60 @@ function BreachSection({ characterData }) {
             {
                 characterData.breaches.map(
                     (breachData) =>
-                        <img
-                            src={`${BASE_URL}breaches/breach${breachData.breachID}-${breachData.orientation}.webp`}
-                            alt="breach"
-                            width="12%"
-                        />
+                        <SingleBeach breachNumber={breachData.breachID} startingOrientation={breachData.orientation} />
                 )
             }
         </div>
+    )
+}
+
+
+
+/**
+* The breach orientation indicates the direction it faces. 0 is the state that
+* is farthest away from open. 90 is one rotation closer to biend open, 180 is
+* 2 rotations closer, ect. 360 means its already open.
+*/
+function SingleBeach({ breachNumber, startingOrientation }) {
+    const [breachState, setBreachState] = useState({
+        orientation: Math.min(startingOrientation, 360),
+        isOpen: startingOrientation >= 360
+    });
+
+
+    const focusBreach = () => {
+        if (breachState.isOpen) {
+            return;
+        }
+        
+        //increment the orientation by 90 degrees, and mark the breach as opened if needed.
+        setBreachState(({ orientation }) => {
+            const newOrientation = orientation + 90;
+            return {
+                orientation: newOrientation,
+                isOpen: newOrientation === 360,
+            }
+        });
+    }
+
+
+    //URL must be dynamic, based on state
+    const url = BASE_URL + `breaches/breach${breachNumber}-${breachState.isOpen ? "open" : "closed"}.webp`;
+
+
+    return (
+        <img
+            key={breachNumber}
+            src={url}
+            alt="breach"
+            width="12%"
+            onClick={focusBreach}
+            style={{
+                transform: `rotate(${breachState.orientation || 0}deg)`,
+                transition: 'transform 0.2s ease-in-out',
+                cursor: 'pointer'
+            }}
+        />
     )
 }
 
@@ -69,7 +115,7 @@ function CharacterSection({ characterName, cardsInHand }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
             <div style={{ display: "inline-block", width: "12%" }}>
-                <p>{ cardsInHand.length } card{ cardsInHand.length === 1 ? "" : "s" }</p>
+                <p>{cardsInHand.length} card{cardsInHand.length === 1 ? "" : "s"}</p>
                 <img src={BASE_URL + "cards/cardBack.webp"} alt="deck" width="100%" />
             </div>
 
@@ -87,19 +133,19 @@ function CharacterSection({ characterName, cardsInHand }) {
 
 
 
-function HandSection({ cardsInHand }){
+function HandSection({ cardsInHand }) {
     const [isOpen, setIsOpen] = useState(false);
-    
+
 
     const toggleTab = () => {
         setIsOpen(prev => !prev);
     }
 
 
-    return(
+    return (
         <div id="hand" style={{ position: 'relative' }}>
-            <div 
-                style={{ 
+            <div
+                style={{
                     ...styles.collapsableTab,
                     bottom: isOpen ? '0px' : '-275px'
                 }} >
@@ -107,13 +153,13 @@ function HandSection({ cardsInHand }){
 
                 <div onClick={toggleTab}>
                     {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
-                    <span style={{ padding: "0px 10px"}}>Cards In Hand</span>
+                    <span style={{ padding: "0px 10px" }}>Cards In Hand</span>
                     {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                 </div>
                 <div>
                     {cardsInHand.map((cardName) => (
-                        <img 
-                            src={BASE_URL + "cards/" + cardName + ".webp"} 
+                        <img
+                            src={BASE_URL + "cards/" + cardName + ".webp"}
                             alt={cardName}
                             style={{ margin: "5px 10px" }}
                         />

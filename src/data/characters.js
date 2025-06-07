@@ -9,10 +9,10 @@ export const CHARACTERS = Object.freeze({
         startingDeck: ["Crystal", "Crystal", "Crystal", "Spark", "Spark"],
         startingHand: ["Emerald_Shard", "Crystal", "Crystal", "Crystal", "Spark"],
         breaches: [
-            { breachID: 1, orientation: 0 },
-            { breachID: 2, orientation: 2 },
-            { breachID: 3, orientation: 3 },
-            { breachID: 4, orientation: 2 },
+            { breachID: 1, orientation: 360 },
+            { breachID: 2, orientation: 180 },
+            { breachID: 3, orientation: 90 },
+            { breachID: 4, orientation: 180 },
         ],
     }),
     // TODO: more characters
