@@ -1,5 +1,5 @@
-import CharacterSelectorPage from './CharacterSelector'
-import Simulator from './Simulator'
+import CharacterSelectorPage from './pages/CharacterSelector'
+import Simulator from './pages/Simulator'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 

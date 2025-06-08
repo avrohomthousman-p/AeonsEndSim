@@ -1,6 +1,6 @@
 import logo from '/icon.jpg'
 import './CharacterSelector.css'
-import { CHARACTERS } from './data/characters'
+import { CHARACTERS } from '../data/characters'
 import { useNavigate } from 'react-router-dom'
 
 

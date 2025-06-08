@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './Simulator.css'
-import { CHARACTERS } from './data/characters'
+import { CHARACTERS } from '../data/characters'
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
-import SingleBreach from './Breach'
+import SingleBreach from '../components/Breach'
 
 
 const BASE_URL = "https://storage.googleapis.com/aeons-end-pics/";
