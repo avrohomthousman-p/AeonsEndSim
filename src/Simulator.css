@@ -13,21 +13,3 @@
     text-decoration: underline;
     cursor: pointer;
 }
-
-
-.menu-item {
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.menu-item:hover {
-    background-color: azure;
-}
-
-
-.menu-item.disabled {
-    color: gray;
-    pointer-events: none;
-    opacity: 0.5;
-    cursor: not-allowed;
-}
