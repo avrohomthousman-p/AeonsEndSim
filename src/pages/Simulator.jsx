@@ -89,11 +89,11 @@ function CharacterSection({ characterName, cardsInHand }) {
 
 
 function HandSection({ cardsInHand }) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isTabOpen, setIsTabOpen] = useState(false);
 
 
     const toggleTab = () => {
-        setIsOpen(prev => !prev);
+        setIsTabOpen(prev => !prev);
     }
 
 
@@ -102,14 +102,14 @@ function HandSection({ cardsInHand }) {
             <div
                 style={{
                     ...styles.collapsableTab,
-                    bottom: isOpen ? '0px' : '-275px'
+                    bottom: isTabOpen ? '0px' : '-275px'
                 }} >
 
 
                 <div onClick={toggleTab}>
-                    {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                    {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                     <span style={{ padding: "0px 10px" }}>Cards In Hand</span>
-                    {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                    {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                 </div>
                 <div>
                     {cardsInHand.map((cardName, index) => (
