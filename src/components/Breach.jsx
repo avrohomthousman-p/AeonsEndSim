@@ -25,7 +25,6 @@ function Tier1Breach() {
 
     return (
         <img
-            key={1}
             src={url}
             alt="breach"
             width="12%"
@@ -149,7 +148,6 @@ function RegularBreach({ breachNumber, startingOrientation }) {
     return (
         <>
             <img
-                key={breachNumber}
                 src={url}
                 alt="breach"
                 width="12%"

@@ -53,7 +53,11 @@ function BreachSection({ characterData }) {
             {
                 characterData.breaches.map(
                     (breachData) =>
-                        <SingleBreach breachNumber={breachData.breachID} startingOrientation={breachData.orientation} />
+                        <SingleBreach 
+                            key={breachData.breachID}
+                            breachNumber={breachData.breachID} 
+                            startingOrientation={breachData.orientation}
+                        />
                 )
             }
         </div>
@@ -108,8 +112,9 @@ function HandSection({ cardsInHand }) {
                     {isOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                 </div>
                 <div>
-                    {cardsInHand.map((cardName) => (
+                    {cardsInHand.map((cardName, index) => (
                         <img
+                            key={index}
                             src={BASE_URL + "cards/" + cardName + ".webp"}
                             alt={cardName}
                             style={{ margin: "5px 10px" }}
