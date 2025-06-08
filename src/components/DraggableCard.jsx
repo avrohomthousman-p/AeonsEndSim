@@ -1,12 +1,13 @@
 import { useDrag } from 'react-dnd';
-import { BASE_URL } from '../data/constants'
+import { BASE_URL, DraggableCardType } from '../data/constants'
+
 
 /**
  * Represents a card in hand.
  */
 export default function DraggableCard({ cardName }) {
     const [{ isDragging }, dragRef] = useDrag({
-        type: 'DraggableCard',
+        type: DraggableCardType,
         item: { cardName },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),

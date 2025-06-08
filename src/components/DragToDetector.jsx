@@ -1,4 +1,5 @@
-import { useDrop } from 'react-dnd';
+import { useDrop } from "react-dnd";
+import { DraggableCardType } from "../data/constants"
 
 
 /**
@@ -7,7 +8,7 @@ import { useDrop } from 'react-dnd';
  */
 export default function DragToDetector({ children, onDragTo }){
     const [{ item }, dropRef] = useDrop({
-        accept: 'DraggableCard',
+        accept: DraggableCardType,
         collect: (monitor) => ({
             item: monitor.getItem(),
         }),
