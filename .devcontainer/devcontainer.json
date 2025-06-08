@@ -5,8 +5,9 @@
 	"forwardPorts": [
 		5173
 	],
+	"files.useExperimentalFileWatcher": true,
 	"extensions": [
-		"dbaeumer.vscode-eslint",
 		"eamodio.gitlens",
+		"dbaeumer.vscode-eslint",
 	]
 }
