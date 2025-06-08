@@ -6,6 +6,7 @@ import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
 import SingleBreach from '../components/Breach'
 import DraggableCard from '../components/DraggableCard'
+import DragToDetector from '../components/DragToDetector'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -108,14 +109,19 @@ function HandSection({ cardsInHand }) {
                 }} >
 
 
-                <div onClick={toggleTab}>
-                    {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
-                    <span style={{ padding: "0px 10px" }}>Cards In Hand</span>
-                    {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                <div>
+                    <DragToDetector onDragTo={toggleTab}>
+                        <div onClick={toggleTab}>
+                            {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                            <span style={{ padding: "0px 10px" }}>Cards In Hand</span>
+                            {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                        </div>
+                    </DragToDetector>
                 </div>
+
                 <div>
                     {cardsInHand.map((cardName, index) => (
-                        <DraggableCard cardName={cardName} cardNumber={index} />
+                        <DraggableCard key={index} cardName={cardName} />
                     ))}
                 </div>
             </div>
