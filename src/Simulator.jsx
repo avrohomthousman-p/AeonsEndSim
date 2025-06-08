@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from './data/characters'
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
@@ -72,12 +72,64 @@ function SingleBeach({ breachNumber, startingOrientation }) {
         isOpen: startingOrientation >= 360
     });
 
+    const [contextMenu, setContextMenu] = useState({
+        visible: false,
+        x: 0,
+        y: 0,
+    });
+
+
+
+    const showContextMenu = (event) => {
+        event.preventDefault();
+        setContextMenu({
+            visible: true,
+            x: event.pageX,
+            y: event.pageY,
+        })
+    };
+
+
+
+    const hideContextMenu = () => {
+        if (contextMenu.visible) {
+            setContextMenu({
+                visible: false,
+                x: 0,
+                y: 0,
+            })
+        }
+    };
+
+
+
+    useEffect(() => {
+        if (!contextMenu.visible)
+            return;
+
+        document.addEventListener("click", hideContextMenu);
+        return () => {
+            document.removeEventListener("click", hideContextMenu);
+        };
+
+    }, [contextMenu.visible]);
+
+
+    const handleBreachClick = (event) => {
+        if (event.button === 0) {           //left click
+            focusBreach();
+        }
+        else if (event.button === 2) {      //right click
+            showContextMenu(event);
+        }
+    }
+
 
     const focusBreach = () => {
         if (breachState.isOpen) {
             return;
         }
-        
+
         //increment the orientation by 90 degrees, and mark the breach as opened if needed.
         setBreachState(({ orientation }) => {
             const newOrientation = orientation + 90;
@@ -89,23 +141,75 @@ function SingleBeach({ breachNumber, startingOrientation }) {
     }
 
 
+    const unfocusBreach = () => {
+        if (breachState.orientation === 0) {
+            return;
+        }
+
+        //decrement the orientation by 90 degrees, and mark the breach as closed if needed.
+        setBreachState(({ orientation }) => {
+            const newOrientation = orientation - 90;
+            return {
+                orientation: newOrientation,
+                isOpen: newOrientation === 360,
+            }
+        });
+    }
+
+
+
+    const openBreach = () => {
+        if (breachState.isOpen) {
+            return; //no need to re-render the component
+        }
+
+        setBreachState(() => {
+            return {
+                orientation: 360,
+                isOpen: true,
+            }
+        });
+    }
+
+
     //URL must be dynamic, based on state
     const url = BASE_URL + `breaches/breach${breachNumber}-${breachState.isOpen ? "open" : "closed"}.webp`;
 
+    //TODO: ensure that tier 1 breaches dont have all this stuff
+
 
     return (
-        <img
-            key={breachNumber}
-            src={url}
-            alt="breach"
-            width="12%"
-            onClick={focusBreach}
-            style={{
-                transform: `rotate(${breachState.orientation || 0}deg)`,
-                transition: 'transform 0.2s ease-in-out',
-                cursor: 'pointer'
-            }}
-        />
+        <>
+            <img
+                key={breachNumber}
+                src={url}
+                alt="breach"
+                width="12%"
+                onClick={handleBreachClick}
+                onContextMenu={showContextMenu}
+                style={{
+                    transform: `rotate(${breachState.orientation || 0}deg)`,
+                    transition: 'transform 0.2s ease-in-out',
+                    cursor: 'pointer'
+                }}
+            />
+
+            {
+                contextMenu.visible &&
+                <ul
+                    style={{
+                        ...styles.breachContextMenu,
+                        top: contextMenu.y,
+                        left: contextMenu.x,
+                    }}
+                >
+
+                    <li className={`menu-item ${breachState.isOpen ? 'disabled' : ''}`} onClick={focusBreach}>Focus</li>
+                    <li className={`menu-item ${breachState.orientation === 0 ? 'disabled' : ''}`} onClick={unfocusBreach}>Un-Focus</li>
+                    <li className={`menu-item ${breachState.isOpen ? 'disabled' : ''}`} onClick={openBreach}>Open</li>
+                </ul>
+            }
+        </>
     )
 }
 
@@ -172,6 +276,11 @@ function HandSection({ cardsInHand }) {
 
 
 
+/** 
+ * Static styles should be stored in Simulator.css. A style should only be
+ * here if the code needs to use it together with non-static styling like
+ *      style={{ ...styles.myStyle, dynamicStyleHere }}
+*/
 const styles = {
     collapsableTab: {
         position: 'fixed',
@@ -184,17 +293,12 @@ const styles = {
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
     },
-    handContent: {
-        position: 'fixed',
-        left: 0,
-        right: 0,
-        backgroundColor: '#edebe6',
-        padding: '20px 0',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflowX: 'auto',
-        transition: 'bottom 0.3s ease-in-out',
-        zIndex: 999,
-    }
+    breachContextMenu: {
+        position: 'absolute',
+        backgroundColor: '#fff',
+        border: '1px solid #ccc',
+        listStyle: 'none',
+        padding: '5px',
+        zIndex: 10000,
+    },
 }
