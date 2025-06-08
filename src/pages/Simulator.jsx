@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from '../data/characters'
+import { BASE_URL } from '../data/constants'
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
 import SingleBreach from '../components/Breach'
+import DraggableCard from '../components/DraggableCard'
+import { DndProvider, useDrag } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
-
-const BASE_URL = "https://storage.googleapis.com/aeons-end-pics/";
 
 
 function Simulator() {
@@ -19,7 +21,9 @@ function Simulator() {
                 </a>
                 <h3 className='title'>Aeons End Simulator</h3>
 
-                <PlayerArea />
+                <DndProvider backend={HTML5Backend} >
+                    <PlayerArea />
+                </DndProvider>
             </div>
         </div>
     )
@@ -53,9 +57,9 @@ function BreachSection({ characterData }) {
             {
                 characterData.breaches.map(
                     (breachData) =>
-                        <SingleBreach 
+                        <SingleBreach
                             key={breachData.breachID}
-                            breachNumber={breachData.breachID} 
+                            breachNumber={breachData.breachID}
                             startingOrientation={breachData.orientation}
                         />
                 )
@@ -90,8 +94,6 @@ function CharacterSection({ characterName, cardsInHand }) {
 
 function HandSection({ cardsInHand }) {
     const [isTabOpen, setIsTabOpen] = useState(false);
-
-
     const toggleTab = () => {
         setIsTabOpen(prev => !prev);
     }
@@ -113,12 +115,7 @@ function HandSection({ cardsInHand }) {
                 </div>
                 <div>
                     {cardsInHand.map((cardName, index) => (
-                        <img
-                            key={index}
-                            src={BASE_URL + "cards/" + cardName + ".webp"}
-                            alt={cardName}
-                            style={{ margin: "5px 10px" }}
-                        />
+                        <DraggableCard cardName={cardName} cardNumber={index} />
                     ))}
                 </div>
             </div>

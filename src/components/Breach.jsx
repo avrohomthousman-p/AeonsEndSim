@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Breach.css';
+import { BASE_URL } from '../data/constants'
 
-const BASE_URL = "https://storage.googleapis.com/aeons-end-pics/";
 
 
 /**
