@@ -1,0 +1,12 @@
+.drop-zone {
+    display: inline-block;
+    width: 10px;
+    height: 250px;
+    margin: 0 5px;
+    background-color: transparent;
+}
+
+.drop-zone.hovered {
+    background-color: rgba(167, 172, 181, 0.5);
+    width: 120px;
+}
