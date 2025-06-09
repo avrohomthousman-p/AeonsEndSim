@@ -125,12 +125,12 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                 <div>
                     {cardsInHand.map((cardName, index) => (
                         <React.Fragment key={index}>
-                            <CardDropZone positionNumber={index} cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
+                            <CardDropZone positionNumber={index} cardsList={cardsInHand} setCardsList={setCardsInHand} />
                             <DraggableCard cardName={cardName} cardPosition={index} />
                         </React.Fragment>
                     ))}
 
-                    <CardDropZone positionNumber={cardsInHand.length} cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
+                    <CardDropZone positionNumber={cardsInHand.length} cardsList={cardsInHand} setCardsList={setCardsInHand} />
                 </div>
             </div>
         </div>
