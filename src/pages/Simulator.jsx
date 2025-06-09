@@ -8,6 +8,7 @@ import SingleBreach from '../components/Breach'
 import DraggableCard from '../components/DraggableCard'
 import DragToDetector from '../components/DragToDetector'
 import CardDropZone from '../components/CardDropZone'
+import Deck from '../components/Deck'
 import { HandleCardDropIntoList } from '../components/CardDropHandlers'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -48,7 +49,7 @@ function PlayerArea() {
     return (
         <div>
             <BreachSection characterData={data} />
-            <CharacterSection characterName={characterName} cardsInHand={cardsInHand} />
+            <CharacterSection characterName={characterName} characterData={data} />
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
     )
@@ -75,13 +76,10 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName, cardsInHand }) {
+function CharacterSection({ characterName, characterData }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-            <div style={{ display: "inline-block", width: "12%" }}>
-                <p>{cardsInHand.length} card{cardsInHand.length === 1 ? "" : "s"}</p>
-                <img src={BASE_URL + "cards/cardBack.webp"} alt="deck" width="100%" />
-            </div>
+            <Deck characterData={characterData} />
 
             <div style={{ display: "inline-block", width: "35%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
