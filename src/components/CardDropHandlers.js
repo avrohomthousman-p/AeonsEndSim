@@ -91,7 +91,22 @@ export class HandleCardDropIntoList {
  * by putting the card on the top of the pile.
  */
 export class HandleCardDropOntoPile {
-    onCardDrop(droppedItem) {
+    constructor(cardSrcList, setCardSrcList, cardDestList, setCardDestList){
+        this.cardSrcList = cardSrcList;
+        this.setCardSrcList = setCardSrcList;
+        this.cardDestList = cardDestList;
+        this.setCardDestList = setCardDestList;
+    }
 
+    onCardDrop(droppedItem) {
+        //remove card from src
+        let copyOfSrcList = [...this.cardSrcList];
+        copyOfSrcList.splice(droppedItem.cardPosition, 1);
+        this.setCardSrcList(copyOfSrcList);
+
+
+        //put card into of dest
+        let copyOfDestList = [droppedItem.cardName, ...this.cardDestList];
+        this.setCardDestList(copyOfDestList);
     }
 }
