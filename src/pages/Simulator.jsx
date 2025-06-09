@@ -7,8 +7,11 @@ import { useParams } from "react-router-dom"
 import SingleBreach from '../components/Breach'
 import DraggableCard from '../components/DraggableCard'
 import DragToDetector from '../components/DragToDetector'
+import CardDropZone from '../components/CardDropZone'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import React from "react";
+
 
 
 
@@ -45,7 +48,7 @@ function PlayerArea() {
         <div>
             <BreachSection characterData={data} />
             <CharacterSection characterName={characterName} cardsInHand={cardsInHand} />
-            <HandSection cardsInHand={cardsInHand} />
+            <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
     )
 }
@@ -93,7 +96,7 @@ function CharacterSection({ characterName, cardsInHand }) {
 
 
 
-function HandSection({ cardsInHand }) {
+function HandSection({ cardsInHand, setCardsInHand }) {
     const [isTabOpen, setIsTabOpen] = useState(false);
     const toggleTab = () => {
         setIsTabOpen(prev => !prev);
@@ -121,8 +124,13 @@ function HandSection({ cardsInHand }) {
 
                 <div>
                     {cardsInHand.map((cardName, index) => (
-                        <DraggableCard key={index} cardName={cardName} />
+                        <React.Fragment key={index}>
+                            <CardDropZone positionNumber={index} cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
+                            <DraggableCard cardName={cardName} cardPosition={index} />
+                        </React.Fragment>
                     ))}
+
+                    <CardDropZone positionNumber={cardsInHand.length} cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
                 </div>
             </div>
         </div>
