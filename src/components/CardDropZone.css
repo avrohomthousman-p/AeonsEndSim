@@ -1,6 +1,8 @@
+
+/** Generic styles for all uses **/
+
 .drop-zone {
     display: inline-block;
-    width: 10px;
     height: 250px;
     margin: 0 5px;
     background-color: transparent;
@@ -8,5 +10,26 @@
 
 .drop-zone.hovered {
     background-color: rgba(167, 172, 181, 0.5);
+}
+
+
+/** Styles for specific uses only **/
+
+
+.inside-list.drop-zone {
+    width: 10px;
+}
+
+.inside-list.drop-zone.hovered {
     width: 175px;
 }
+
+
+
+.card-pile.drop-zone.hovered {
+    outline: 3px solid #00f0ff;
+    box-shadow: 0 0 15px #00f0ff;
+    transition: box-shadow 0.2s ease-in-out;
+    border-radius: 8px;
+}
+

@@ -49,7 +49,13 @@ function PlayerArea() {
     return (
         <div>
             <BreachSection characterData={data} />
-            <CharacterSection characterName={characterName} characterData={data} />
+            
+            <CharacterSection 
+                    characterName={characterName} 
+                    characterData={data} 
+                    cardsInHand={cardsInHand} 
+                    setCardsInHand={setCardsInHand} />
+
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
     )
@@ -76,10 +82,10 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName, characterData }) {
+function CharacterSection({ characterName, characterData, cardsInHand, setCardsInHand }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-            <Deck characterData={characterData} />
+            <Deck characterData={characterData} cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
 
             <div style={{ display: "inline-block", width: "35%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
@@ -103,6 +109,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 
 
     const lastCardDropHandler = new HandleCardDropIntoList(cardsInHand, setCardsInHand, cardsInHand.length);
+    const stylingClass = "inside-list";
 
     return (
         <div id="hand" style={{ position: 'relative' }}>
@@ -128,13 +135,13 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                         const cardDropHandler = new HandleCardDropIntoList(cardsInHand, setCardsInHand, index);
                         return (
                             <React.Fragment key={index}>
-                                <CardDropZone cardDropHandler={cardDropHandler} />
+                                <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
                                 <DraggableCard cardName={cardName} cardPosition={index} />
                             </React.Fragment>
                         )
                     })}
 
-                    <CardDropZone cardDropHandler={lastCardDropHandler} />
+                    <CardDropZone cardDropHandler={lastCardDropHandler} stylingClass={stylingClass} />
                 </div>
             </div>
         </div>

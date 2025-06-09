@@ -1,15 +1,20 @@
 import { useState } from "react"
 import { BASE_URL } from "../data/constants"
+import CardDropZone from "./CardDropZone";
+import { HandleCardDropOntoPile } from '../components/CardDropHandlers'
 
 
-export default function Deck({ characterData }) {
+export default function Deck({ characterData, cardsInHand, setCardsInHand }) {
     const [cardsInDeck, setCardsInDeck] = useState(characterData.startingDeck);
 
-    //TODO: make this a droppable area
+    const onDropHandler = new HandleCardDropOntoPile(cardsInHand, setCardsInHand, cardsInDeck, setCardsInDeck);
+
     return (
         <div style={{ display: "inline-block", width: "12%" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
-            <img src={BASE_URL + "cards/cardBack.webp"} alt="deck" width="100%" />
+            <CardDropZone cardDropHandler={onDropHandler} stylingClass="card-pile" >
+                <img src={BASE_URL + "cards/cardBack.webp"} alt="deck" width="100%" />
+            </CardDropZone>
         </div>
     )
 }
