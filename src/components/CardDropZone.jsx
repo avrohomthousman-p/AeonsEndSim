@@ -22,8 +22,7 @@ export default function CardDropZone({ positionNumber, cardsInHand, setCardsInHa
             return;
             
 
-        //TODO: change the order of cards in hand
-        console.log("Need to reorder hand");
+        reorderCards(draggedItem);
     }
 
 
@@ -51,6 +50,22 @@ export default function CardDropZone({ positionNumber, cardsInHand, setCardsInHa
         }
 
         return true;
+    }
+
+
+
+    const reorderCards = (draggedItem) => {
+        let src = draggedItem.cardPosition;
+        let dest = positionNumber;
+        if(dest > src){
+            dest--;
+        }
+
+        //Move from src to dest
+        let copy = [...cardsInHand];
+        copy.splice(src, 1);                            //remove card at src
+        copy.splice(dest, 0, draggedItem.cardName);     //insert card into dest;
+        setCardsInHand(copy);
     }
 
 
