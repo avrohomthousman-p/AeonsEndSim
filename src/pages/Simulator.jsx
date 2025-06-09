@@ -8,6 +8,7 @@ import SingleBreach from '../components/Breach'
 import DraggableCard from '../components/DraggableCard'
 import DragToDetector from '../components/DragToDetector'
 import CardDropZone from '../components/CardDropZone'
+import { HandleCardDropIntoList } from '../components/CardDropHandlers'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
@@ -103,6 +104,8 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     }
 
 
+    const lastCardDropHandler = new HandleCardDropIntoList(cardsInHand, setCardsInHand, cardsInHand.length);
+
     return (
         <div id="hand" style={{ position: 'relative' }}>
             <div
@@ -123,14 +126,17 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                 </div>
 
                 <div>
-                    {cardsInHand.map((cardName, index) => (
-                        <React.Fragment key={index}>
-                            <CardDropZone positionNumber={index} cardsList={cardsInHand} setCardsList={setCardsInHand} />
-                            <DraggableCard cardName={cardName} cardPosition={index} />
-                        </React.Fragment>
-                    ))}
+                    {cardsInHand.map((cardName, index) => {
+                        const cardDropHandler = new HandleCardDropIntoList(cardsInHand, setCardsInHand, index);
+                        return (
+                            <React.Fragment key={index}>
+                                <CardDropZone cardDropHandler={cardDropHandler} />
+                                <DraggableCard cardName={cardName} cardPosition={index} />
+                            </React.Fragment>
+                        )
+                    })}
 
-                    <CardDropZone positionNumber={cardsInHand.length} cardsList={cardsInHand} setCardsList={setCardsInHand} />
+                    <CardDropZone cardDropHandler={lastCardDropHandler} />
                 </div>
             </div>
         </div>
