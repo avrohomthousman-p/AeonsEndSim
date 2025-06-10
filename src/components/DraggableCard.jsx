@@ -10,12 +10,13 @@ import { BASE_URL, DraggableCardType } from '../data/constants'
  * @param {string[]} a reference to the list of cards that this card is in.
  * @param {function} setter for setting the card sorce list. 
  */
-export default function DraggableCard({ cardName, cardPosition, cardSrcList, setCardSrcList }) {
+export default function DraggableCard({ cardName, cardPosition, locationName, cardSrcList, setCardSrcList }) {
     const [{ isDragging }, dragRef] = useDrag({
         type: DraggableCardType,
         item: { 
             "cardName": cardName,
             "cardPosition": cardPosition,
+            "locationName": locationName,
             "cardSrcList": cardSrcList,
             "setCardSrcList": setCardSrcList,
         },

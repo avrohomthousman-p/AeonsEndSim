@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { BASE_URL } from "../data/constants"
+import { BASE_URL, CardLocations } from "../data/constants"
 import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from '../components/CardDropHandlers'
 
@@ -7,7 +7,7 @@ import { HandleCardDropOntoPile } from '../components/CardDropHandlers'
 export default function Deck({ characterData }) {
     const [cardsInDeck, setCardsInDeck] = useState(characterData.startingDeck);
 
-    const onDropHandler = new HandleCardDropOntoPile(cardsInDeck, setCardsInDeck);
+    const onDropHandler = new HandleCardDropOntoPile(CardLocations.Deck, cardsInDeck, setCardsInDeck);
 
     return (
         <div style={{ display: "inline-block", width: "12%" }}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BASE_URL } from "../data/constants";
+import { BASE_URL, CardLocations } from "../data/constants";
 import CardDropZone from "./CardDropZone";
 import DraggableCard from './DraggableCard';
 import { HandleCardDropOntoPile } from './CardDropHandlers';
@@ -9,7 +9,7 @@ import { HandleCardDropOntoPile } from './CardDropHandlers';
 export default function DiscardPile() {
     const [cardsInDiscard, setCardsInDiscard] = useState([]);
 
-    const onDropHandler = new HandleCardDropOntoPile(cardsInDiscard, setCardsInDiscard);
+    const onDropHandler = new HandleCardDropOntoPile(CardLocations.DiscardPile, cardsInDiscard, setCardsInDiscard);
 
 
     
@@ -25,6 +25,7 @@ export default function DiscardPile() {
             <DraggableCard 
                 cardName={cardName} 
                 cardPosition={cardPosition} 
+                locationName={CardLocations.DiscardPile} 
                 cardSrcList={cardsInDiscard} 
                 setCardSrcList={setCardsInDiscard} />
         );

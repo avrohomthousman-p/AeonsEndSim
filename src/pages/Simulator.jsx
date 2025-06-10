@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from '../data/characters'
-import { BASE_URL } from '../data/constants'
+import { BASE_URL, CardLocations } from '../data/constants'
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
 import SingleBreach from '../components/Breach'
@@ -9,7 +9,7 @@ import DraggableCard from '../components/DraggableCard'
 import DragToDetector from '../components/DragToDetector'
 import CardDropZone from '../components/CardDropZone'
 import Deck from '../components/Deck'
-import { HandleMoveCardWithinList } from '../components/CardDropHandlers'
+import { HandleCardDropIntoList } from '../components/CardDropHandlers'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
@@ -100,7 +100,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     }
 
 
-    const lastCardDropHandler = new HandleMoveCardWithinList(cardsInHand.length);
+    const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
     const stylingClass = "inside-list";
 
     return (
@@ -124,13 +124,14 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 
                 <div>
                     {cardsInHand.map((cardName, index) => {
-                        const cardDropHandler = new HandleMoveCardWithinList(index);
+                        const cardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, index, cardsInHand, setCardsInHand);
                         return (
                             <React.Fragment key={index}>
                                 <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
                                 <DraggableCard 
                                     cardName={cardName} 
-                                    cardPosition={index} 
+                                    cardPosition={index}
+                                    locationName={CardLocations.Hand} 
                                     cardSrcList={cardsInHand} 
                                     setCardSrcList={setCardsInHand} />
 
