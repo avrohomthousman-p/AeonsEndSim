@@ -9,7 +9,7 @@ import DraggableCard from '../components/DraggableCard'
 import DragToDetector from '../components/DragToDetector'
 import CardDropZone from '../components/CardDropZone'
 import Deck from '../components/Deck'
-import { HandleCardDropIntoList } from '../components/CardDropHandlers'
+import { HandleMoveCardWithinList } from '../components/CardDropHandlers'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
@@ -49,13 +49,7 @@ function PlayerArea() {
     return (
         <div>
             <BreachSection characterData={data} />
-            
-            <CharacterSection 
-                    characterName={characterName} 
-                    characterData={data} 
-                    cardsInHand={cardsInHand} 
-                    setCardsInHand={setCardsInHand} />
-
+            <CharacterSection characterName={characterName} characterData={data}  />
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
     )
@@ -82,10 +76,10 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName, characterData, cardsInHand, setCardsInHand }) {
+function CharacterSection({ characterName, characterData }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-            <Deck characterData={characterData} cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
+            <Deck characterData={characterData} />
 
             <div style={{ display: "inline-block", width: "35%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
@@ -108,7 +102,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     }
 
 
-    const lastCardDropHandler = new HandleCardDropIntoList(cardsInHand, setCardsInHand, cardsInHand.length);
+    const lastCardDropHandler = new HandleMoveCardWithinList(cardsInHand.length);
     const stylingClass = "inside-list";
 
     return (
@@ -132,11 +126,16 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 
                 <div>
                     {cardsInHand.map((cardName, index) => {
-                        const cardDropHandler = new HandleCardDropIntoList(cardsInHand, setCardsInHand, index);
+                        const cardDropHandler = new HandleMoveCardWithinList(index);
                         return (
                             <React.Fragment key={index}>
                                 <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
-                                <DraggableCard cardName={cardName} cardPosition={index} />
+                                <DraggableCard 
+                                    cardName={cardName} 
+                                    cardPosition={index} 
+                                    cardSrcList={cardsInHand} 
+                                    setCardSrcList={setCardsInHand} />
+
                             </React.Fragment>
                         )
                     })}
