@@ -7,7 +7,7 @@ import { HandleCardDropOntoPile } from '../components/CardDropHandlers'
 export default function Deck({ characterData }) {
     const [cardsInDeck, setCardsInDeck] = useState(characterData.startingDeck);
 
-    const onDropHandler = new HandleCardDropOntoPile(cardsInDeck, setCardsInDeck, true);
+    const onDropHandler = new HandleCardDropOntoPile(cardsInDeck, setCardsInDeck);
 
     return (
         <div style={{ display: "inline-block", width: "12%" }}>

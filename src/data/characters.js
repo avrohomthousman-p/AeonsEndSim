@@ -6,7 +6,7 @@
  */
 export const CHARACTERS = Object.freeze({
     Kadir: Object.freeze({
-        startingDeck: ["Crystal", "Crystal", "Crystal", "Spark", "Spark"],
+        startingDeck: ["Spark", "Spark", "Crystal", "Crystal", "Crystal"],
         startingHand: ["Emerald_Shard", "Crystal", "Crystal", "Crystal", "Spark"],
         breaches: [
             { breachID: 1, orientation: 360 },
