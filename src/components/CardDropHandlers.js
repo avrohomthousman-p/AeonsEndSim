@@ -87,15 +87,15 @@ export class HandleMoveCardWithinList {
 
 /**
  * Handles dragging cards from one card list to another (like from 
- * hand to discard pile). The card moved is placed in beginning or 
- * end of the destination list, depending on the settings chosen.
- * Adding it to any other place in the list is not supported.
+ * hand to discard pile). The card moved is placed on the top of 
+ * the pile.
+ * 
+ * Adding a card to anywhere other than the top is not supported.
  */
 export class HandleCardDropOntoPile {
-    constructor(cardDestList, setCardDestList, putOnTop){
+    constructor(cardDestList, setCardDestList){
         this.cardDestList = cardDestList;
         this.setCardDestList = setCardDestList;
-        this.putOnTop = putOnTop;
     }
 
     onCardDrop(droppedItem) {
@@ -106,14 +106,7 @@ export class HandleCardDropOntoPile {
 
 
         //put card into of dest
-        let copyOfDestList;
-        if (this.putOnTop){
-            copyOfDestList = [droppedItem.cardName, ...this.cardDestList];
-        }
-        else {
-            copyOfDestList = [...this.cardDestList, droppedItem.cardName];
-        }
-        
+        let copyOfDestList = [...this.cardDestList, droppedItem.cardName];
         this.setCardDestList(copyOfDestList);
     }
 }

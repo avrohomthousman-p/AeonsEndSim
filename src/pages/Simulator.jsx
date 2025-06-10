@@ -13,6 +13,7 @@ import { HandleMoveCardWithinList } from '../components/CardDropHandlers'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
+import DiscardPile from '../components/DiscardPile';
 
 
 
@@ -85,10 +86,7 @@ function CharacterSection({ characterName, characterData }) {
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
             </div>
 
-            <div style={{ display: "inline-block", width: "12%" }}>
-                <p>0 cards</p>
-                <img src={BASE_URL + "cards/noCard.webp"} alt="discard pile" width="100%" />
-            </div>
+            <DiscardPile />
         </div>
     )
 }
