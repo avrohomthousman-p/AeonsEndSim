@@ -4,10 +4,10 @@ import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from '../components/CardDropHandlers'
 
 
-export default function Deck({ characterData, cardsInHand, setCardsInHand }) {
+export default function Deck({ characterData }) {
     const [cardsInDeck, setCardsInDeck] = useState(characterData.startingDeck);
 
-    const onDropHandler = new HandleCardDropOntoPile(cardsInHand, setCardsInHand, cardsInDeck, setCardsInDeck);
+    const onDropHandler = new HandleCardDropOntoPile(cardsInDeck, setCardsInDeck, true);
 
     return (
         <div style={{ display: "inline-block", width: "12%" }}>
