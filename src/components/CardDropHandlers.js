@@ -122,9 +122,8 @@ export class HandleCardDropIntoList {
  * Adding a card to anywhere other than the top is not supported.
  */
 export class HandleCardDropOntoPile {
-    constructor(destinationName, cardDestList, setCardDestList){
+    constructor(destinationName, setCardDestList){
         this.destinationName = destinationName;
-        this.cardDestList = cardDestList;
         this.setCardDestList = setCardDestList;
     }
 
@@ -135,13 +134,14 @@ export class HandleCardDropOntoPile {
 
 
         //remove card from src
-        let copyOfSrcList = [...droppedItem.cardSrcList];
-        copyOfSrcList.splice(droppedItem.cardPosition, 1);
-        droppedItem.setCardSrcList(copyOfSrcList);
+        droppedItem.setCardSrcList(prev => {
+            let copyOfSrcList = [...prev];
+            copyOfSrcList.splice(droppedItem.cardPosition, 1);
+            return copyOfSrcList;
+        });
 
 
         //put card into of dest
-        let copyOfDestList = [...this.cardDestList, droppedItem.cardName];
-        this.setCardDestList(copyOfDestList);
+        this.setCardDestList(prev => [...prev, droppedItem.cardName]);
     }
 }

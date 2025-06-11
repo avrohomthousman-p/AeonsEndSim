@@ -9,7 +9,7 @@ import { HandleCardDropOntoPile } from './CardDropHandlers';
 export default function DiscardPile() {
     const [cardsInDiscard, setCardsInDiscard] = useState([]);
 
-    const onDropHandler = new HandleCardDropOntoPile(CardLocations.DiscardPile, cardsInDiscard, setCardsInDiscard);
+    const onDropHandler = new HandleCardDropOntoPile(CardLocations.DiscardPile, setCardsInDiscard);
 
 
     

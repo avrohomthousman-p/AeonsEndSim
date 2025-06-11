@@ -50,7 +50,12 @@ function PlayerArea() {
     return (
         <div>
             <BreachSection characterData={data} />
-            <CharacterSection characterName={characterName} characterData={data}  />
+
+            <CharacterSection 
+                characterName={characterName} 
+                characterData={data} 
+                setCardsInHand={setCardsInHand}  />
+                
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
     )
@@ -77,10 +82,10 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName, characterData }) {
+function CharacterSection({ characterName, characterData, setCardsInHand }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-            <Deck characterData={characterData} />
+            <Deck characterData={characterData} setCardsInHand={setCardsInHand} />
 
             <div style={{ display: "inline-block", width: "35%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
