@@ -31,7 +31,7 @@ export default function CardDropZone({ children, cardDropHandler, stylingClass =
             className={`drop-zone ${isOver ? "hovered" : ""} ${stylingClass}`}>
 
 
-            {children || null}
+            {children || <span>&nbsp;</span>}
         </div>
     )
 }

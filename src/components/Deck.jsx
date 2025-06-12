@@ -38,11 +38,15 @@ export default function Deck({ characterData, setCardsInHand }) {
     }, [setCardsInDeck, setCardsInHand]);
 
 
+
+    const imgUrl = BASE_URL + (cardsInDeck.length === 0 ? "cards/refresh.webp" : "cards/cardBack.webp");
+
+
     return (
         <div style={{ display: "inline-block", width: "12%" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
             <CardDropZone cardDropHandler={onDropHandler} stylingClass="card-pile" >
-                <img src={BASE_URL + "cards/cardBack.webp"} onClick={drawCard} alt="deck" width="100%" />
+                <img src={imgUrl} onClick={drawCard} alt="deck" width="100%" />
             </CardDropZone>
         </div>
     )

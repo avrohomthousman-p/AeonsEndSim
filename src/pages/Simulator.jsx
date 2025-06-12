@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from '../data/characters'
 import { BASE_URL, CardLocations } from '../data/constants'
@@ -51,11 +51,11 @@ function PlayerArea() {
         <div>
             <BreachSection characterData={data} />
 
-            <CharacterSection 
-                characterName={characterName} 
-                characterData={data} 
-                setCardsInHand={setCardsInHand}  />
-                
+            <CharacterSection
+                characterName={characterName}
+                characterData={data}
+                setCardsInHand={setCardsInHand} />
+
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
     )
@@ -105,6 +105,17 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     }
 
 
+    const containerRef = useRef(null);
+
+    const scrollLeft = () => {
+        containerRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+
+    const scrollRight = () => {
+        containerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+
+
     const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
     const stylingClass = "inside-list";
 
@@ -127,27 +138,49 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                     </DragToDetector>
                 </div>
 
-                <div>
-                    {cardsInHand.map((cardName, index) => {
-                        const cardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, index, cardsInHand, setCardsInHand);
-                        return (
-                            <React.Fragment key={index}>
-                                <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
-                                <DraggableCard 
-                                    cardName={cardName} 
-                                    cardPosition={index}
-                                    locationName={CardLocations.Hand} 
-                                    cardSrcList={cardsInHand} 
-                                    setCardSrcList={setCardsInHand} />
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <button onClick={scrollLeft}>
+                        <img src="/left-arrow.webp" alt="left arrow" />
+                    </button>
 
-                            </React.Fragment>
-                        )
-                    })}
 
-                    <CardDropZone cardDropHandler={lastCardDropHandler} stylingClass={stylingClass} />
+                    <div
+                        ref={containerRef}
+                        style={{
+                            display: 'flex',
+                            overflowX: 'auto',
+                            scrollBehavior: 'smooth',
+                            gap: '10px',
+                            padding: '10px',
+                        }}>
+                        {cardsInHand.map((cardName, index) => {
+                            const cardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, index, cardsInHand, setCardsInHand);
+
+                            return (
+                                <React.Fragment key={index}>
+                                    <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
+                                    <DraggableCard
+                                        cardName={cardName}
+                                        cardPosition={index}
+                                        locationName={CardLocations.Hand}
+                                        cardSrcList={cardsInHand}
+                                        setCardSrcList={setCardsInHand} />
+
+                                </React.Fragment>
+                            )
+                        })}
+
+                        <CardDropZone cardDropHandler={lastCardDropHandler} stylingClass={stylingClass} />
+                    </div>
+
+
+                    <button onClick={scrollRight}>
+                        <img src="/right-arrow.webp" alt="right arrow" />
+                    </button>
                 </div>
+
             </div>
-        </div>
+        </div >
     )
 }
 

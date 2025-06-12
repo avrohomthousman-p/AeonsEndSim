@@ -17,11 +17,16 @@
 
 
 .inside-list.drop-zone {
-    width: 10px;
+    width: 50px;
+    min-width: 50px;
+    flex-shrink: 0; 
 }
 
 .inside-list.drop-zone.hovered {
-    width: 175px;
+    outline: 3px solid #00f0ff;
+    box-shadow: 0 0 15px #00f0ff;
+    transition: box-shadow 0.2s ease-in-out;
+    border-radius: 8px;
 }
 
 
