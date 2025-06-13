@@ -10,6 +10,7 @@ import DragToDetector from '../components/DragToDetector'
 import CardDropZone from '../components/CardDropZone'
 import Deck from '../components/Deck'
 import { HandleCardDropIntoList } from '../components/CardDropHandlers'
+import Modal from '../components/Modal'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
@@ -46,6 +47,14 @@ function PlayerArea() {
     const data = CHARACTERS[characterName];
     const [cardsInHand, setCardsInHand] = useState(data.startingHand);
     const [cardsInDiscard, setCardsInDiscard] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalType, setModalType] = useState(null);
+
+
+    const openModal = (newModalType) => {
+        setModalType(newModalType);
+        setModalIsOpen(true);
+    }
 
 
     return (
@@ -60,6 +69,9 @@ function PlayerArea() {
                 setCardsInDiscard={setCardsInDiscard} />
 
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
+            
+
+            <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} modalType={modalType} />
         </div>
     )
 }
