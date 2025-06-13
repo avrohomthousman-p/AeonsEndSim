@@ -107,7 +107,6 @@ function HandSection({ cardsInHand, setCardsInHand }) {
         setIsTabOpen(prev => !prev);
     }
 
-
     const containerRef = useRef(null);
 
     const scrollLeft = () => {
@@ -141,39 +140,45 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                     </DragToDetector>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                     <button onClick={scrollLeft}>
                         <img src="/left-arrow.webp" alt="left arrow" />
                     </button>
 
 
-                    <div
-                        ref={containerRef}
+                    <div ref={containerRef}
                         style={{
-                            display: 'flex',
+                            flexGrow: 1,
                             overflowX: 'auto',
                             scrollBehavior: 'smooth',
-                            gap: '10px',
                             padding: '10px',
                         }}>
-                        {cardsInHand.map((cardName, index) => {
-                            const cardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, index, cardsInHand, setCardsInHand);
+                        <div
+                            style={{
+                                display: 'inline-flex',
+                                gap: '10px',
+                                minWidth: '100%',
+                                justifyContent: 'center',
+                            }}>
+                            {cardsInHand.map((cardName, index) => {
+                                const cardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, index, cardsInHand, setCardsInHand);
 
-                            return (
-                                <React.Fragment key={index}>
-                                    <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
-                                    <DraggableCard
-                                        cardName={cardName}
-                                        cardPosition={index}
-                                        locationName={CardLocations.Hand}
-                                        cardSrcList={cardsInHand}
-                                        setCardSrcList={setCardsInHand} />
+                                return (
+                                    <React.Fragment key={index}>
+                                        <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
+                                        <DraggableCard
+                                            cardName={cardName}
+                                            cardPosition={index}
+                                            locationName={CardLocations.Hand}
+                                            cardSrcList={cardsInHand}
+                                            setCardSrcList={setCardsInHand} />
 
-                                </React.Fragment>
-                            )
-                        })}
+                                    </React.Fragment>
+                                )
+                            })}
 
-                        <CardDropZone cardDropHandler={lastCardDropHandler} stylingClass={stylingClass} />
+                            <CardDropZone cardDropHandler={lastCardDropHandler} stylingClass={stylingClass} />
+                        </div>
                     </div>
 
 
