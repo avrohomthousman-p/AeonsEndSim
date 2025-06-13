@@ -4,7 +4,7 @@ import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from "../components/CardDropHandlers"
 
 
-export default function Deck({ characterData, setCardsInHand }) {
+export default function Deck({ characterData, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
     const [cardsInDeck, setCardsInDeck] = useState(characterData.startingDeck);
 
 
@@ -38,6 +38,21 @@ export default function Deck({ characterData, setCardsInHand }) {
     }, [setCardsInDeck, setCardsInHand]);
 
 
+    const resetDeck = useCallback(() => {
+        if (cardsInDeck.length > 0 || cardsInDiscard.length === 0)
+            return;
+
+
+        let cardsToTransfer = [];
+        setCardsInDiscard(prev => {
+            cardsToTransfer = [...prev].reverse();
+            return [];
+        });
+        
+
+        queueMicrotask(() => setCardsInDeck(prev => cardsToTransfer));
+    }, [cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard]);
+
 
     const imgUrl = BASE_URL + (cardsInDeck.length === 0 ? "cards/refresh.webp" : "cards/cardBack.webp");
 
@@ -46,7 +61,7 @@ export default function Deck({ characterData, setCardsInHand }) {
         <div style={{ display: "inline-block", width: "12%" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
             <CardDropZone cardDropHandler={onDropHandler} stylingClass="card-pile" >
-                <img src={imgUrl} onClick={drawCard} alt="deck" width="100%" />
+                <img src={imgUrl} onClick={drawCard} onDoubleClick={resetDeck} alt="deck" width="100%" />
             </CardDropZone>
         </div>
     )

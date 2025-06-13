@@ -45,6 +45,7 @@ function PlayerArea() {
     const { characterName } = useParams();
     const data = CHARACTERS[characterName];
     const [cardsInHand, setCardsInHand] = useState(data.startingHand);
+    const [cardsInDiscard, setCardsInDiscard] = useState([]);
 
 
     return (
@@ -54,7 +55,9 @@ function PlayerArea() {
             <CharacterSection
                 characterName={characterName}
                 characterData={data}
-                setCardsInHand={setCardsInHand} />
+                setCardsInHand={setCardsInHand}
+                cardsInDiscard={cardsInDiscard}
+                setCardsInDiscard={setCardsInDiscard} />
 
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
         </div>
@@ -82,16 +85,16 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName, characterData, setCardsInHand }) {
+function CharacterSection({ characterName, characterData, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-            <Deck characterData={characterData} setCardsInHand={setCardsInHand} />
+            <Deck characterData={characterData} setCardsInHand={setCardsInHand} cardsInDiscard={cardsInDiscard} setCardsInDiscard={setCardsInDiscard} />
 
             <div style={{ display: "inline-block", width: "35%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
             </div>
 
-            <DiscardPile />
+            <DiscardPile cardsInDiscard={cardsInDiscard} setCardsInDiscard={setCardsInDiscard} />
         </div>
     )
 }
