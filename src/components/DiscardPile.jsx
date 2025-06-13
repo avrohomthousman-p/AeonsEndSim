@@ -32,7 +32,7 @@ export default function DiscardPile({ cardsInDiscard, setCardsInDiscard }) {
     return (
         <div style={{ display: "inline-block", width: "12%" }}>
             <p>{cardsInDiscard.length} card{cardsInDiscard.length === 1 ? "" : "s"}</p>
-            <CardDropZone cardDropHandler={onDropHandler} stylingClass="card-pile" >
+            <CardDropZone cardDropHandler={onDropHandler} >
                 {imageComponent}
             </CardDropZone>
         </div>

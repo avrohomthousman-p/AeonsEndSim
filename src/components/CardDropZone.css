@@ -10,6 +10,10 @@
 
 .drop-zone.hovered {
     background-color: rgba(167, 172, 181, 0.5);
+    outline: 3px solid #00f0ff;
+    box-shadow: 0 0 15px #00f0ff;
+    transition: box-shadow 0.2s ease-in-out;
+    border-radius: 8px;
 }
 
 
@@ -22,19 +26,17 @@
     flex-shrink: 0; 
 }
 
+
+.last-card.drop-zone {
+    width: 80%;
+    min-width: 50px;
+    flex-shrink: 0;
+}
+
+
 .inside-list.drop-zone.hovered {
     outline: 3px solid #00f0ff;
     box-shadow: 0 0 15px #00f0ff;
     transition: box-shadow 0.2s ease-in-out;
     border-radius: 8px;
 }
-
-
-
-.card-pile.drop-zone.hovered {
-    outline: 3px solid #00f0ff;
-    box-shadow: 0 0 15px #00f0ff;
-    transition: box-shadow 0.2s ease-in-out;
-    border-radius: 8px;
-}
-

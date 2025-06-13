@@ -60,7 +60,7 @@ export default function Deck({ characterData, setCardsInHand, cardsInDiscard, se
     return (
         <div style={{ display: "inline-block", width: "12%" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
-            <CardDropZone cardDropHandler={onDropHandler} stylingClass="card-pile" >
+            <CardDropZone cardDropHandler={onDropHandler} >
                 <img src={imgUrl} onClick={drawCard} onDoubleClick={resetDeck} alt="deck" width="100%" />
             </CardDropZone>
         </div>

@@ -119,7 +119,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 
 
     const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
-    const stylingClass = "inside-list";
+    const stylingClass = ( cardsInHand.length > 0 ? "inside-list" : "last-card");
 
     return (
         <div id="hand" style={{ position: 'relative' }}>
