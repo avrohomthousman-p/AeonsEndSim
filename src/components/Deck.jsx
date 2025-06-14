@@ -1,15 +1,11 @@
-import { useState, useCallback, useRef } from "react"
+import { useCallback, useRef } from "react"
 import { BASE_URL, CardLocations } from "../data/constants"
 import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from "../components/CardDropHandlers"
 
 
-export default function Deck({ characterData, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
-    const [cardsInDeck, setCardsInDeck] = useState(characterData.startingDeck);
-
-
+export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
     const onDropHandler = new HandleCardDropOntoPile(CardLocations.Deck, setCardsInDeck);
-
 
     const cardRef = useRef(null);
 
@@ -29,7 +25,8 @@ export default function Deck({ characterData, setCardsInHand, cardsInDiscard, se
 
         queueMicrotask(() => {
             if (cardRef.current) {
-                setCardsInHand(prevHand => [...prevHand, cardRef.current]);
+                const drawnCard = cardRef.current;
+                setCardsInHand(prevHand => [...prevHand, drawnCard]);
                 cardRef.current = null;
             }
         });

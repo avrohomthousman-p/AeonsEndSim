@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from '../data/characters'
-import { BASE_URL, CardLocations } from '../data/constants'
+import { BASE_URL, CardLocations, ModalShowing } from '../data/constants'
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
 import SingleBreach from '../components/Breach'
@@ -10,7 +10,7 @@ import DragToDetector from '../components/DragToDetector'
 import CardDropZone from '../components/CardDropZone'
 import Deck from '../components/Deck'
 import { HandleCardDropIntoList } from '../components/CardDropHandlers'
-import Modal from '../components/Modal'
+import ReorderCardListModal from '../components/ReorderCardListModal'
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
@@ -45,15 +45,52 @@ export default Simulator
 function PlayerArea() {
     const { characterName } = useParams();
     const data = CHARACTERS[characterName];
+    
     const [cardsInHand, setCardsInHand] = useState(data.startingHand);
+    const [cardsInDeck, setCardsInDeck] = useState(data.startingDeck);
     const [cardsInDiscard, setCardsInDiscard] = useState([]);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [modalType, setModalType] = useState(null);
+    const [modalShowing, setModalShowing] = useState(ModalShowing.NONE);
 
 
-    const openModal = (newModalType) => {
-        setModalType(newModalType);
-        setModalIsOpen(true);
+    let correctModal = null;
+
+    switch (modalShowing) {
+        case ModalShowing.REORDER_DECK:
+            correctModal = (
+                <ReorderCardListModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
+                    cardList={cardsInDeck}
+                    setCardList={setCardsInDeck} />
+            );
+            break;
+
+        case ModalShowing.REORDER_HAND:
+            correctModal = (
+                <ReorderCardListModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
+                    cardList={cardsInHand}
+                    setCardList={setCardsInHand} />
+            );
+            break;
+
+        case ModalShowing.REORDER_DISCARD:
+            correctModal = (
+                <ReorderCardListModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
+                    cardList={cardsInDiscard}
+                    setCardList={setCardsInDiscard} />
+            );
+            break;
+
+        case ModalShowing.ADD_NEW_CARDS:
+            //TODO: return a new type of modal
+            break;
+
+        default:
+            break;
     }
 
 
@@ -63,15 +100,16 @@ function PlayerArea() {
 
             <CharacterSection
                 characterName={characterName}
-                characterData={data}
+                cardsInDeck={cardsInDeck}
+                setCardsInDeck={setCardsInDeck}
                 setCardsInHand={setCardsInHand}
                 cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
 
             <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
-            
 
-            <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} modalType={modalType} />
+
+            {correctModal}
         </div>
     )
 }
@@ -97,10 +135,15 @@ function BreachSection({ characterData }) {
 
 
 
-function CharacterSection({ characterName, characterData, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
+function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-            <Deck characterData={characterData} setCardsInHand={setCardsInHand} cardsInDiscard={cardsInDiscard} setCardsInDiscard={setCardsInDiscard} />
+            <Deck
+                cardsInDeck={cardsInDeck}
+                setCardsInDeck={setCardsInDeck}
+                setCardsInHand={setCardsInHand}
+                cardsInDiscard={cardsInDiscard}
+                setCardsInDiscard={setCardsInDiscard} />
 
             <div style={{ display: "inline-block", width: "35%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
@@ -131,7 +174,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 
 
     const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
-    const stylingClass = ( cardsInHand.length > 0 ? "inside-list" : "last-card");
+    const stylingClass = (cardsInHand.length > 0 ? "inside-list" : "last-card");
 
     return (
         <div id="hand" style={{ position: 'relative' }}>
