@@ -184,6 +184,8 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
     const stylingClass = (cardsInHand.length > 0 ? "inside-list" : "last-card");
 
+    const cardTabTitle = `Hand: (${cardsInHand.length} Card${ cardsInHand.length === 1 ? "" : "s" })`;
+
     return (
         <div id="hand" style={{ position: 'relative' }}>
             <div
@@ -197,7 +199,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                     <DragToDetector onDragTo={toggleTab}>
                         <div onClick={toggleTab}>
                             {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
-                            <span style={{ padding: "0px 10px" }}>Cards In Hand</span>
+                            <span style={{ padding: "0px 10px" }}> { cardTabTitle } </span>
                             {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                         </div>
                     </DragToDetector>
