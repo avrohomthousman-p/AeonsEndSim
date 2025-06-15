@@ -11,6 +11,7 @@ import CardDropZone from '../components/CardDropZone'
 import Deck from '../components/Deck'
 import { HandleCardDropIntoList } from '../components/CardDropHandlers'
 import ReorderCardListModal from '../components/ReorderCardListModal'
+import AddNewCardsModal from "../components/AddNewCardsModal"
 import { DndProvider, useDrag } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
@@ -86,7 +87,14 @@ function PlayerArea() {
             break;
 
         case ModalShowing.ADD_NEW_CARDS:
-            //TODO: return a new type of modal
+            correctModal = (
+                <AddNewCardsModal 
+                    modalShowing={modalShowing} 
+                    setModalShowing={setModalShowing} 
+                    setCardsInHand={setCardsInHand}
+                    setCardsInDeck={setCardsInDeck} 
+                    setCardsInDiscard={setCardsInDiscard}  />
+            );
             break;
 
         default:
@@ -196,7 +204,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                    <button onClick={scrollLeft}>
+                    <button onClick={scrollLeft} style={{ backgroundColor: "LightGray" }}>
                         <img src="/left-arrow.webp" alt="left arrow" />
                     </button>
 
@@ -237,7 +245,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                     </div>
 
 
-                    <button onClick={scrollRight}>
+                    <button onClick={scrollRight} style={{ backgroundColor: "LightGray" }}>
                         <img src="/right-arrow.webp" alt="right arrow" />
                     </button>
                 </div>
