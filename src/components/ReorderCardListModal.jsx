@@ -20,9 +20,6 @@ export default function ReorderCardListModal({ modalShowing, setModalShowing, ca
         case ModalShowing.REORDER_DECK:
             mainContent = (<div>TODO: reorder deck</div>);
             break;
-        case ModalShowing.REORDER_HAND:
-            mainContent = (<div>TODO: reorder hand</div>);
-            break;
         case ModalShowing.REORDER_DISCARD:
             mainContent = (<div>TODO: reorder discard</div>);
             break;

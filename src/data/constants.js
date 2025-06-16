@@ -10,14 +10,13 @@ export const CardLocations = {
     Hand: "HAND",
     Deck: "DECK",
     DiscardPile: "DISCARD_PILE",
-
+    DestroyedPile: "DESTROYED_PILE",
 }
 
 
 export const ModalShowing = {
     NONE: "none",
     REORDER_DECK: "reorder_deck",
-    REORDER_HAND: "reorder_hand",
     REORDER_DISCARD: "reorder_discard",
     ADD_NEW_CARDS: "add_new_cards",
 };

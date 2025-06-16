@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from '../data/characters'
 import { BASE_URL, CardLocations, ModalShowing } from '../data/constants'
@@ -12,10 +12,10 @@ import Deck from '../components/Deck'
 import { HandleCardDropIntoList } from '../components/CardDropHandlers'
 import ReorderCardListModal from '../components/ReorderCardListModal'
 import AddNewCardsModal from "../components/AddNewCardsModal"
-import { DndProvider, useDrag } from 'react-dnd';
+import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import React from "react";
-import DiscardPile from '../components/DiscardPile';
+import FaceUpCardPile from '../components/FaceUpCardPile';
 
 
 
@@ -63,16 +63,6 @@ function PlayerArea() {
                     setModalShowing={setModalShowing}
                     cardList={cardsInDeck}
                     setCardList={setCardsInDeck} />
-            );
-            break;
-
-        case ModalShowing.REORDER_HAND:
-            correctModal = (
-                <ReorderCardListModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    cardList={cardsInHand}
-                    setCardList={setCardsInHand} />
             );
             break;
 
@@ -125,7 +115,6 @@ function PlayerArea() {
             <div id="toolbar" style={{ flex: "2" }}>
                 <h3 style={{ margin: "5px", textDecoration: "underline" }}>ToolBar</h3>
                 <button onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
-                <button onClick={() => setModalShowing(ModalShowing.REORDER_HAND)}>Reorder Hand</button>
                 <button onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
                 <button onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
                 {/* TODO: add more tools here */}
@@ -169,7 +158,7 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
             </div>
 
-            <DiscardPile cardsInDiscard={cardsInDiscard} setCardsInDiscard={setCardsInDiscard} />
+            <FaceUpCardPile pileType={CardLocations.DiscardPile} cardList={cardsInDiscard} setCardList={setCardsInDiscard} />
         </div>
     )
 }
