@@ -30,11 +30,11 @@ export default function FaceUpCardPile({ pileType, cardList, setCardList }) {
 
 
     return (
-        <div style={{ display: "inline-block", width: "14%" }}>
+        <>
             <p>{cardList.length} card{cardList.length === 1 ? "" : "s"}</p>
             <CardDropZone cardDropHandler={onDropHandler} >
                 {imageComponent}
             </CardDropZone>
-        </div>
+        </>
     )
 }

@@ -50,6 +50,7 @@ function PlayerArea() {
     const [cardsInHand, setCardsInHand] = useState(data.startingHand);
     const [cardsInDeck, setCardsInDeck] = useState(data.startingDeck);
     const [cardsInDiscard, setCardsInDiscard] = useState([]);
+    const [destroyedCards, setDestroyedCards] = useState([]);
     const [modalShowing, setModalShowing] = useState(ModalShowing.NONE);
 
 
@@ -94,7 +95,7 @@ function PlayerArea() {
 
     return (
         <div style={{ display: "flex", height: "100%" }}>
-            <div style={{ flex: "8" }}>
+            <div style={{ flex: "70" }}>
                 <div style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
                     <BreachSection characterData={data} />
 
@@ -112,7 +113,13 @@ function PlayerArea() {
                     {correctModal}
                 </div>
             </div>
-            <div id="toolbar" style={{ flex: "2" }}>
+
+            <div style={{ flex: "15" }}>
+                <p><strong> Destroyed Cards </strong></p>
+                <FaceUpCardPile pileType={CardLocations.DestroyedPile} cardList={destroyedCards} setCardList={setDestroyedCards} />
+            </div>
+
+            <div id="toolbar" style={{ flex: "15" }}>
                 <h3 style={{ margin: "5px", textDecoration: "underline" }}>ToolBar</h3>
                 <button onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
                 <button onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
@@ -154,11 +161,13 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
                 cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
 
-            <div style={{ display: "inline-block", width: "45%" }} >
+            <div style={{ display: "inline-block", width: "58%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
             </div>
 
-            <FaceUpCardPile pileType={CardLocations.DiscardPile} cardList={cardsInDiscard} setCardList={setCardsInDiscard} />
+            <div style={{ width: "15%" }}>
+                <FaceUpCardPile pileType={CardLocations.DiscardPile} cardList={cardsInDiscard} setCardList={setCardsInDiscard} />
+            </div>
         </div>
     )
 }
