@@ -31,6 +31,8 @@ export default function DraggableCard({ cardName, cardPosition, locationName, ca
             src={BASE_URL + "cards/" + cardName + ".webp"}
             alt={cardName}
             style={{ 
+                width: "175px",
+                height: "auto",
                 margin: "5px 10px",
                 opacity: isDragging ? 0.5 : 1,
                 cursor: "grab",

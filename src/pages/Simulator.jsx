@@ -46,7 +46,7 @@ export default Simulator
 function PlayerArea() {
     const { characterName } = useParams();
     const data = CHARACTERS[characterName];
-    
+
     const [cardsInHand, setCardsInHand] = useState(data.startingHand);
     const [cardsInDeck, setCardsInDeck] = useState(data.startingDeck);
     const [cardsInDiscard, setCardsInDiscard] = useState([]);
@@ -88,12 +88,12 @@ function PlayerArea() {
 
         case ModalShowing.ADD_NEW_CARDS:
             correctModal = (
-                <AddNewCardsModal 
-                    modalShowing={modalShowing} 
-                    setModalShowing={setModalShowing} 
+                <AddNewCardsModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
                     setCardsInHand={setCardsInHand}
-                    setCardsInDeck={setCardsInDeck} 
-                    setCardsInDiscard={setCardsInDiscard}  />
+                    setCardsInDeck={setCardsInDeck}
+                    setCardsInDiscard={setCardsInDiscard} />
             );
             break;
 
@@ -184,7 +184,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
     const stylingClass = (cardsInHand.length > 0 ? "inside-list" : "last-card");
 
-    const cardTabTitle = `Hand: (${cardsInHand.length} Card${ cardsInHand.length === 1 ? "" : "s" })`;
+    const cardTabTitle = `Hand: (${cardsInHand.length} Card${cardsInHand.length === 1 ? "" : "s"})`;
 
     return (
         <div id="hand" style={{ position: 'relative' }}>
@@ -199,7 +199,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                     <DragToDetector onDragTo={toggleTab}>
                         <div onClick={toggleTab}>
                             {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
-                            <span style={{ padding: "0px 10px" }}> { cardTabTitle } </span>
+                            <span style={{ padding: "0px 10px" }}> {cardTabTitle} </span>
                             {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
                         </div>
                     </DragToDetector>
@@ -237,7 +237,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                                             locationName={CardLocations.Hand}
                                             cardSrcList={cardsInHand}
                                             setCardSrcList={setCardsInHand} />
-
+                                            
                                     </React.Fragment>
                                 )
                             })}
