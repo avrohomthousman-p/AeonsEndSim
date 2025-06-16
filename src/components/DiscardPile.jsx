@@ -30,7 +30,7 @@ export default function DiscardPile({ cardsInDiscard, setCardsInDiscard }) {
 
 
     return (
-        <div style={{ display: "inline-block", width: "12%" }}>
+        <div style={{ display: "inline-block", width: "14%" }}>
             <p>{cardsInDiscard.length} card{cardsInDiscard.length === 1 ? "" : "s"}</p>
             <CardDropZone cardDropHandler={onDropHandler} >
                 {imageComponent}

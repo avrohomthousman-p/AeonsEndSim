@@ -55,7 +55,7 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
 
 
     return (
-        <div style={{ display: "inline-block", width: "12%" }}>
+        <div style={{ display: "inline-block", width: "14%" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
             <CardDropZone cardDropHandler={onDropHandler} >
                 <img src={imgUrl} onClick={drawCard} onDoubleClick={resetDeck} alt="deck" width="100%" />

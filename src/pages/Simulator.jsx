@@ -103,21 +103,33 @@ function PlayerArea() {
 
 
     return (
-        <div>
-            <BreachSection characterData={data} />
+        <div style={{ display: "flex", height: "100%" }}>
+            <div style={{ flex: "8" }}>
+                <div style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
+                    <BreachSection characterData={data} />
 
-            <CharacterSection
-                characterName={characterName}
-                cardsInDeck={cardsInDeck}
-                setCardsInDeck={setCardsInDeck}
-                setCardsInHand={setCardsInHand}
-                cardsInDiscard={cardsInDiscard}
-                setCardsInDiscard={setCardsInDiscard} />
+                    <CharacterSection
+                        characterName={characterName}
+                        cardsInDeck={cardsInDeck}
+                        setCardsInDeck={setCardsInDeck}
+                        setCardsInHand={setCardsInHand}
+                        cardsInDiscard={cardsInDiscard}
+                        setCardsInDiscard={setCardsInDiscard} />
 
-            <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
+                    <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
 
 
-            {correctModal}
+                    {correctModal}
+                </div>
+            </div>
+            <div id="toolbar" style={{ flex: "2" }}>
+                <h3 style={{ margin: "5px", textDecoration: "underline" }}>ToolBar</h3>
+                <button onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
+                <button onClick={() => setModalShowing(ModalShowing.REORDER_HAND)}>Reorder Hand</button>
+                <button onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
+                <button onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
+                {/* TODO: add more tools here */}
+            </div>
         </div>
     )
 }
@@ -153,7 +165,7 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
                 cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
 
-            <div style={{ display: "inline-block", width: "35%" }} >
+            <div style={{ display: "inline-block", width: "45%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
             </div>
 
@@ -191,7 +203,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
             <div
                 style={{
                     ...styles.collapsableTab,
-                    bottom: isTabOpen ? '0px' : '-275px'
+                    bottom: isTabOpen ? '0px' : '-295px'
                 }} >
 
 
@@ -237,7 +249,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                                             locationName={CardLocations.Hand}
                                             cardSrcList={cardsInHand}
                                             setCardSrcList={setCardsInHand} />
-                                            
+
                                     </React.Fragment>
                                 )
                             })}

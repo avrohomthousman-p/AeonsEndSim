@@ -27,7 +27,7 @@ function Tier1Breach() {
         <img
             src={url}
             alt="breach"
-            width="12%"
+            width="14%"
             style={{ cursor: 'pointer' }}
         />
     );
@@ -150,7 +150,7 @@ function RegularBreach({ breachNumber, startingOrientation }) {
             <img
                 src={url}
                 alt="breach"
-                width="12%"
+                width="14%"
                 onClick={handleBreachClick}
                 onContextMenu={showContextMenu}
                 style={{
