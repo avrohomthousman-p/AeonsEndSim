@@ -1,21 +1,18 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import './Simulator.css'
 import { CHARACTERS } from '../data/characters'
 import { BASE_URL, CardLocations, ModalShowing } from '../data/constants'
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useParams } from "react-router-dom"
 import SingleBreach from '../components/Breach'
-import DraggableCard from '../components/DraggableCard'
 import DragToDetector from '../components/DragToDetector'
-import CardDropZone from '../components/CardDropZone'
 import Deck from '../components/Deck'
-import { HandleCardDropIntoList } from '../components/CardDropHandlers'
 import ReorderCardListModal from '../components/ReorderCardListModal'
 import AddNewCardsModal from "../components/AddNewCardsModal"
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import React from "react";
 import FaceUpCardPile from '../components/FaceUpCardPile';
+import CardListDisplay from '../components/CardListDisplay';
 
 
 
@@ -180,19 +177,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
         setIsTabOpen(prev => !prev);
     }
 
-    const containerRef = useRef(null);
-
-    const scrollLeft = () => {
-        containerRef.current.scrollBy({ left: -200, behavior: "smooth" });
-    }
-
-    const scrollRight = () => {
-        containerRef.current.scrollBy({ left: 200, behavior: "smooth" });
-    }
-
-
-    const lastCardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, cardsInHand.length, cardsInHand, setCardsInHand);
-    const stylingClass = (cardsInHand.length > 0 ? "inside-list" : "last-card");
+    
 
     const cardTabTitle = `Hand: (${cardsInHand.length} Card${cardsInHand.length === 1 ? "" : "s"})`;
 
@@ -215,53 +200,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
                     </DragToDetector>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                    <button onClick={scrollLeft} style={{ backgroundColor: "LightGray" }}>
-                        <img src="/left-arrow.webp" alt="left arrow" />
-                    </button>
-
-
-                    <div ref={containerRef}
-                        style={{
-                            flexGrow: 1,
-                            overflowX: 'auto',
-                            scrollBehavior: 'smooth',
-                            padding: '10px',
-                        }}>
-                        <div
-                            style={{
-                                display: 'inline-flex',
-                                gap: '10px',
-                                minWidth: '100%',
-                                justifyContent: 'center',
-                            }}>
-                            {cardsInHand.map((cardName, index) => {
-                                const cardDropHandler = new HandleCardDropIntoList(CardLocations.Hand, index, cardsInHand, setCardsInHand);
-
-                                return (
-                                    <React.Fragment key={index}>
-                                        <CardDropZone cardDropHandler={cardDropHandler} stylingClass={stylingClass} />
-                                        <DraggableCard
-                                            cardName={cardName}
-                                            cardPosition={index}
-                                            locationName={CardLocations.Hand}
-                                            cardSrcList={cardsInHand}
-                                            setCardSrcList={setCardsInHand} />
-
-                                    </React.Fragment>
-                                )
-                            })}
-
-                            <CardDropZone cardDropHandler={lastCardDropHandler} stylingClass={stylingClass} />
-                        </div>
-                    </div>
-
-
-                    <button onClick={scrollRight} style={{ backgroundColor: "LightGray" }}>
-                        <img src="/right-arrow.webp" alt="right arrow" />
-                    </button>
-                </div>
-
+                <CardListDisplay locationName={CardLocations.Hand} cardList={cardsInHand} setCardList={setCardsInHand} />
             </div>
         </div >
     )
