@@ -11,6 +11,10 @@ export const CardLocations = {
     Deck: "DECK",
     DiscardPile: "DISCARD_PILE",
     DestroyedPile: "DESTROYED_PILE",
+    Breach1: "BREACH_1",
+    Breach2: "BREACH_2",
+    Breach3: "BREACH_3",
+    Breach4: "BREACH_4",
 }
 
 

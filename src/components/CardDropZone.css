@@ -40,3 +40,8 @@
     transition: box-shadow 0.2s ease-in-out;
     border-radius: 8px;
 }
+
+
+.on-breach.drop-zone {
+    width: 140px;
+}

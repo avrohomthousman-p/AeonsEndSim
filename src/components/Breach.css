@@ -14,3 +14,17 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+
+.breach-container {
+    display: inline;
+    position: relative;
+}
+
+
+.breach-dropzone {
+    position: absolute;
+    top: -150px;
+    left: 0;
+    z-index: 10;
+}

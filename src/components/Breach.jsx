@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Breach.css';
 import { BASE_URL } from '../data/constants'
+import CardDropZone from './CardDropZone';
+import DraggableCard from './DraggableCard';
+import { HandleCardDropOntoPile } from "./CardDropHandlers";
+import { CardLocations } from '../data/constants';
 
 
 
@@ -10,12 +14,44 @@ import { BASE_URL } from '../data/constants'
 * 2 rotations closer, ect. 360 means its already open.
 */
 export default function SingleBreach({ breachNumber, startingOrientation }) {
-    if (breachNumber === 1) {
-        return <Tier1Breach />
+    const [preppedSpells, setPreppedSpells] = useState([]);
+
+    const cardDropHandler = new HandleCardDropOntoPile(preppedSpells, setPreppedSpells);
+
+    let location = "";
+    switch (breachNumber) {
+        case 1: location = CardLocations.Breach1; break;
+        case 2: location = CardLocations.Breach2; break;
+        case 3: location = CardLocations.Breach3; break;
+        case 4: location = CardLocations.Breach4; break;
     }
-    else {
-        return <RegularBreach breachNumber={breachNumber} startingOrientation={startingOrientation} />
-    }
+
+    //TODO: add styling to make it float above the breach
+
+
+    return (
+        <div className="breach-container">
+            {
+                breachNumber === 1 ?
+                    (<Tier1Breach />) :
+                    (<RegularBreach breachNumber={breachNumber} startingOrientation={startingOrientation} />)
+            }
+
+            <div className="breach-dropzone">
+                <CardDropZone cardDropHandler={cardDropHandler} stylingClass={"on-breach"} >
+                    {preppedSpells.length > 0 && (
+                        <DraggableCard
+                            cardName={preppedSpells[preppedSpells.length - 1]}
+                            cardPosition={preppedSpells.length - 1}
+                            locationName={location}
+                            cardSrcList={preppedSpells}
+                            setCardSrcList={setPreppedSpells}
+                        />
+                    )}
+                </CardDropZone>
+            </div>
+        </div>
+    );
 }
 
 
