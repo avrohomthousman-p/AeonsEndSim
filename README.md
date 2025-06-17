@@ -1,12 +1,10 @@
-# React + Vite
+# Aeons End Simulator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website for testing [Aeons End](https://aeonsend.fandom.com/wiki/Aeon%27s_End_Wiki) decks or startup strategies without needing a hard copy of the game and without requiring the user
+to spend a long time setting it up.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Screenshots
+![Screenshot 2025-06-17 103223](https://github.com/user-attachments/assets/0d59d6e7-94ff-44d8-80d0-86fb9b3e6f28)
+![Screenshot 2025-06-17 103139](https://github.com/user-attachments/assets/3e6b54cc-cfad-44bb-b33b-01d24b4a018c)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
