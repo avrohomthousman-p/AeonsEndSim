@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Breach.css';
 import { BASE_URL } from '../data/constants'
 import CardDropZone from './CardDropZone';
 import DraggableCard from './DraggableCard';
 import { HandleCardDropOntoPile } from "./CardDropHandlers";
 import { CardLocations } from '../data/constants';
+import { PiX } from 'react-icons/pi';
 
 
 
@@ -26,7 +27,7 @@ export default function SingleBreach({ breachNumber, startingOrientation }) {
         case 4: location = CardLocations.Breach4; break;
     }
 
-    //TODO: add styling to make it float above the breach
+    const breachID = `tier-${breachNumber}-breach`;
 
 
     return (
@@ -34,11 +35,11 @@ export default function SingleBreach({ breachNumber, startingOrientation }) {
             {
                 breachNumber === 1 ?
                     (<Tier1Breach />) :
-                    (<RegularBreach breachNumber={breachNumber} startingOrientation={startingOrientation} />)
+                    (<RegularBreach breachNumber={breachNumber} startingOrientation={startingOrientation} preppedSpells={preppedSpells} />)
             }
 
             <div className="breach-dropzone">
-                <CardDropZone cardDropHandler={cardDropHandler} stylingClass={"on-breach"} >
+                <CardDropZone cardDropHandler={cardDropHandler} stylingClass={"on-breach"} underlyingElementID={breachID} >
                     {preppedSpells.length > 0 && (
                         <DraggableCard
                             cardName={preppedSpells[preppedSpells.length - 1]}
@@ -61,8 +62,9 @@ function Tier1Breach() {
 
     return (
         <img
+            id="tier-1-breach"
             src={url}
-            alt="breach"
+            alt="tier 1 breach"
             width="16%"
             style={{ cursor: 'pointer' }}
         />
@@ -71,7 +73,7 @@ function Tier1Breach() {
 
 
 
-function RegularBreach({ breachNumber, startingOrientation }) {
+function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
     const [breachState, setBreachState] = useState({
         orientation: Math.min(startingOrientation, 360),
         isOpen: startingOrientation >= 360
@@ -84,13 +86,28 @@ function RegularBreach({ breachNumber, startingOrientation }) {
     });
 
 
+    const breachRef = useRef(null);
+
 
     const showContextMenu = (event) => {
         event.preventDefault();
+
+        if (preppedSpells.length > 0) {
+            return;
+        }
+
+        
+        const breachRect = event.currentTarget.getBoundingClientRect();
+
+        //If the click is in the CardDropZone but outside the breach
+        if (event.clientY > breachRect.bottom)
+            return;
+        
+
         setContextMenu({
             visible: true,
-            x: event.pageX,
-            y: event.pageY,
+            x: event.clientX - breachRect.left,
+            y: event.clientY - breachRect.bottom,
         })
     };
 
@@ -121,12 +138,18 @@ function RegularBreach({ breachNumber, startingOrientation }) {
 
 
     const handleBreachClick = (event) => {
-        if (event.button === 0) {           //left click
-            focusBreach();
+        if (preppedSpells.length > 0) {
+            return;
         }
-        else if (event.button === 2) {      //right click
-            showContextMenu(event);
-        }
+
+
+        //If the click is in the CardDropZone but outside the breach
+        const breachRect = event.currentTarget.getBoundingClientRect();
+        if (event.clientY > breachRect.bottom)
+            return;
+
+
+        focusBreach();
     }
 
 
@@ -184,8 +207,10 @@ function RegularBreach({ breachNumber, startingOrientation }) {
     return (
         <>
             <img
+                ref={breachRef}
+                id={`tier-${breachNumber}-breach`}
                 src={url}
-                alt="breach"
+                alt={`tier ${breachNumber} breach`}
                 width="16%"
                 onClick={handleBreachClick}
                 onContextMenu={showContextMenu}
@@ -221,6 +246,7 @@ const styles = {
         position: 'absolute',
         backgroundColor: '#fff',
         border: '1px solid #ccc',
+        width: "95px",
         listStyle: 'none',
         padding: '5px',
         zIndex: 10000,
