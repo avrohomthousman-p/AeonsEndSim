@@ -18,8 +18,8 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
 
 
     return (
-        <div id="overlay-style">
-            <div id="modal-style">
+        <div id="overlay">
+            <div className="modal-base-style">
                 <h3>Add a Card to Your Deck</h3>
                 <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
 

@@ -7,14 +7,14 @@ export const DraggableCardType = "draggableCard"
  * All Places cards could be kept on the screen.
  */
 export const CardLocations = {
-    Hand: "HAND",
-    Deck: "DECK",
-    DiscardPile: "DISCARD_PILE",
-    DestroyedPile: "DESTROYED_PILE",
-    Breach1: "BREACH_1",
-    Breach2: "BREACH_2",
-    Breach3: "BREACH_3",
-    Breach4: "BREACH_4",
+    Hand: "Hand",
+    Deck: "Deck",
+    DiscardPile: "Discard Pile",
+    DestroyedPile: "Destroyed Pile",
+    Breach1: "Breach 1",
+    Breach2: "Breach 2",
+    Breach3: "Breach 3",
+    Breach4: "Breach 4",
 }
 
 

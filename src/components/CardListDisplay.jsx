@@ -46,7 +46,7 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
                 <div
                     style={{
                         display: 'inline-flex',
-                        gap: '10px',
+                        gap: '5px',
                         minWidth: '100%',
                         justifyContent: 'center',
                     }}>

@@ -1,4 +1,4 @@
-#overlay-style {
+#overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     z-index: 1000;
 }
 
-#modal-style {
+.modal-base-style {
     display: flex;
     flex-direction: column;
     background: white;
@@ -21,6 +21,11 @@
     height: 50%;
     width: 100%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.modal-base-style.large-modal {
+    max-width: 90%;
+    height: 70%;
 }
 
 .close-btn {

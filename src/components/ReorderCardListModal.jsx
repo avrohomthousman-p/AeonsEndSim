@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "./Modal.css"
 import { ModalShowing } from '../data/constants';
+import CardListDisplay from './CardListDisplay';
 
 
-export default function ReorderCardListModal({ modalShowing, setModalShowing, cardList, setCardList}) {
+export default function ReorderCardListModal({ modalShowing, setModalShowing, locationName, cardList, setCardList}) {
     if (modalShowing === ModalShowing.NONE) {
         return null;
     }
@@ -15,21 +16,11 @@ export default function ReorderCardListModal({ modalShowing, setModalShowing, ca
     }
 
 
-    let mainContent = <></>;
-    switch (modalShowing) {
-        case ModalShowing.REORDER_DECK:
-            mainContent = (<div>TODO: reorder deck</div>);
-            break;
-        case ModalShowing.REORDER_DISCARD:
-            mainContent = (<div>TODO: reorder discard</div>);
-            break;
-    }
-
-
     return (
-        <div id="overlay-style">
-            <div id="modal-style">
-                {mainContent}
+        <div id="overlay">
+            <div className="modal-base-style large-modal">
+                <h3 style={{ textDecoration: "underline", fontWeight: "bold" }}>Reorder { locationName }</h3>
+                <CardListDisplay locationName={locationName} cardList={cardList} setCardList={setCardList} />
 
                 <button onClick={closeModal} className="close-btn">Close</button>
             </div>

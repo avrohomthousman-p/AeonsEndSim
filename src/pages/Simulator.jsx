@@ -59,6 +59,7 @@ function PlayerArea() {
                 <ReorderCardListModal
                     modalShowing={modalShowing}
                     setModalShowing={setModalShowing}
+                    locationName={CardLocations.Deck}
                     cardList={cardsInDeck}
                     setCardList={setCardsInDeck} />
             );
@@ -69,6 +70,7 @@ function PlayerArea() {
                 <ReorderCardListModal
                     modalShowing={modalShowing}
                     setModalShowing={setModalShowing}
+                    locationName={CardLocations.DiscardPile}
                     cardList={cardsInDiscard}
                     setCardList={setCardsInDiscard} />
             );
