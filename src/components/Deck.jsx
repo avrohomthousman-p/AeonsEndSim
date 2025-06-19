@@ -4,6 +4,14 @@ import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from "../components/CardDropHandlers"
 
 
+/**
+ * Componenet representing the dack (draw pile) in the game.
+ * @param {string[]} cardsInDeck - An array of cards in the deck (last index is top of the deck).
+ * @param {function} setCardsInDeck - A setter function for modifying the deck contennts.
+ * @param {function} setCardsInHand - A setter function for modifying the hand contents.
+ * @param {string[]} cardsInDiscard - An array of cards in the discard pile (last index is the top of the pile).
+ * @param {function} setCardsInDiscard - A setter function for modifying the discard pile contents
+ */
 export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
     const onDropHandler = new HandleCardDropOntoPile(CardLocations.Deck, setCardsInDeck);
 

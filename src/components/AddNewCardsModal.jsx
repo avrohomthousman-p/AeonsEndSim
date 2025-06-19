@@ -5,6 +5,14 @@ import { SORTED_CARD_NAMES } from "../data/cards";
 import Select from "react-select";
 
 
+/**
+ * Modal popup that allows users to add new cards to their deck/hand/discard pile.
+ * @param {ModalShowing} modalShowing - A enum that tells which modal popup is currently visible.
+ * @param {function} setModalShowing - A setter function for changing which modal is showing.
+ * @param {function} setCardsInHand - A setter function for modifying the user's cards in hand.
+ * @param {function} setCardsInDeck - A setter function for modifying the cards in theuser's deck.
+ * @param {function} setCardsInDiscard - A setter function for modifying the cards in the user's discard pile.
+ */
 export default function AddNewCardsModal({ modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
     if (modalShowing === ModalShowing.NONE) {
         return null;
@@ -29,7 +37,12 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
 }
 
 
-
+/**
+ * A widget that lets the user search for any Aeons End card they want to add.
+ * @param {function} setCardsInHand - A setter for the user's cards in hand.
+ * @param {function} setCardsInDeck - A setter for the cards in the user's deck.
+ * @param {function} setCardsInDiscard - A setter for the cards in the user's discard pile.
+ */
 function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
     const [selectedItem, setSelectedItem] = useState(null);
 

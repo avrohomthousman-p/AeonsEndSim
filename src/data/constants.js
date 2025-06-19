@@ -18,6 +18,9 @@ export const CardLocations = {
 }
 
 
+/**
+ * An enum representing the different kinds of modals that could be displayed.
+ */
 export const ModalShowing = {
     NONE: "none",
     REORDER_DECK: "reorder_deck",

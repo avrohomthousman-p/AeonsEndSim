@@ -16,7 +16,9 @@ import CardListDisplay from "../components/CardListDisplay";
 
 
 
-
+/**
+ * The main component of the simulator page.
+ */
 function Simulator() {
     return (
         <div>
@@ -40,6 +42,9 @@ export default Simulator
 
 
 
+/**
+ * The main area of the page that displays all the game components.
+ */
 function PlayerArea() {
     const { characterName } = useParams();
     const data = CHARACTERS[characterName];
@@ -131,6 +136,11 @@ function PlayerArea() {
 
 
 
+/**
+ * Componenet that holds all the breaches.
+ * @param {Object} characterData - All the data needed for the chosen character's setup as defined
+ *                          in data/characters.js.
+ */
 function BreachSection({ characterData }) {
     return (
         <div id="breaches">
@@ -150,6 +160,9 @@ function BreachSection({ characterData }) {
 
 
 
+/**
+ * Component that displays the player mat, deck, and discard pile.
+ */
 function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
@@ -173,6 +186,10 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
 
 
 
+/**
+ * A component for displaying the hand in a collapsable tab so it doesnt get in the way of the rest of
+ * the game board.
+ */
 function HandSection({ cardsInHand, setCardsInHand }) {
     const [isTabOpen, setIsTabOpen] = useState(false);
     const toggleTab = () => {

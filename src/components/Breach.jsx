@@ -9,10 +9,13 @@ import { CardLocations } from "../data/constants";
 
 
 /**
-* The breach orientation indicates the direction it faces. 0 is the state that
-* is farthest away from open. 90 is one rotation closer to biend open, 180 is
-* 2 rotations closer, ect. 360 means its already open.
-*/
+ * The breach orientation indicates the direction it faces. 0 is the state that
+ * is farthest away from open. 90 is one rotation closer to biend open, 180 is
+ * 2 rotations closer, ect. 360 means its already open.
+ * 
+ * @param {number} breachNumber - The breach tier that should be rendered (1-4).
+ * @param {number} startingOrientation - The position the breach starts in.
+ */
 export default function SingleBreach({ breachNumber, startingOrientation }) {
     const [preppedSpells, setPreppedSpells] = useState([]);
 
@@ -56,6 +59,10 @@ export default function SingleBreach({ breachNumber, startingOrientation }) {
 
 
 
+/**
+ * Represents a tier 1 breach that is always open and cannot be focused
+ * or un-focused.
+ */
 function Tier1Breach() {
     const url = BASE_URL + "breaches/breach1-open.webp";
 
@@ -72,6 +79,17 @@ function Tier1Breach() {
 
 
 
+/**
+ * Represents a breach that can be focused, opened, or have spells prepped to it. Should not
+ * be used to represent a tier 1 breach, becuase that cannot be focused, and does not need
+ * any of the extra context menu functionality.
+ * 
+ * @param {number} breachNumber - The breach tier that this breach is (2-4).
+ * @param {number} startingOrientation - A value indication which way the breach is facing.
+ *          0, 90, 180, 270, or 360 degrees.
+ * 
+ * @param {string[]} preppedSpells - An array of spells prepped to this breach.
+ */
 function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
     const [breachState, setBreachState] = useState({
         orientation: Math.min(startingOrientation, 360),

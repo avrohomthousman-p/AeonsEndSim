@@ -6,11 +6,11 @@ import { DraggableCardType } from "../data/constants";
 /**
  * Component that you can drop a draggable card into, to move it to a specific position 
  * within a list of cards (like your hand or discard pile).
- * @param {Component} (optional) The children components you want inside the drop-zone.
- * @param {Object} an object with a onDropCard function (and all the data it needs) that 
- *      can be used to handle the cardDrop.
- * @param {string} an extra class used to decide what styling to use for the component.
- * @param {string} the id of the element you want to handle click events on this element.
+ * @param {Component} children - (optional) The children components you want inside the drop-zone.
+ * @param {Object} cardDropHandler - An object with a onDropCard function (and all the data it needs)
+ *      that can be used to handle the cardDrop.
+ * @param {string} stylingClass - An extra class used to decide what styling to use for the component.
+ * @param {string} underlyingElementID - The id of the element you want to forward click events to.
  *                  leave null if you dont want this done.
  * @returns a component that you can drop a card into.
  */
