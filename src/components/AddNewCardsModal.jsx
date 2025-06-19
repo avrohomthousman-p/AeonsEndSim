@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-import ReactDOM from "react-dom";
+import { useState } from "react";
 import "./Modal.css";
 import { ModalShowing } from "../data/constants";
 import { SORTED_CARD_NAMES } from "../data/cards";

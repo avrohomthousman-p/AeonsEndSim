@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import './Simulator.css'
-import { CHARACTERS } from '../data/characters'
-import { BASE_URL, CardLocations, ModalShowing } from '../data/constants'
-import { FaArrowLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { useState } from "react";
+import "./Simulator.css"
+import { CHARACTERS } from "../data/characters"
+import { BASE_URL, CardLocations, ModalShowing } from "../data/constants"
+import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useParams } from "react-router-dom"
-import SingleBreach from '../components/Breach'
-import DragToDetector from '../components/DragToDetector'
-import Deck from '../components/Deck'
-import ReorderCardListModal from '../components/ReorderCardListModal'
+import SingleBreach from "../components/Breach"
+import DragToDetector from "../components/DragToDetector"
+import Deck from "../components/Deck"
+import ReorderCardListModal from "../components/ReorderCardListModal"
 import AddNewCardsModal from "../components/AddNewCardsModal"
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import FaceUpCardPile from '../components/FaceUpCardPile';
-import CardListDisplay from '../components/CardListDisplay';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import FaceUpCardPile from "../components/FaceUpCardPile";
+import CardListDisplay from "../components/CardListDisplay";
 
 
 
@@ -21,11 +21,11 @@ function Simulator() {
     return (
         <div>
             <div style={{ position: "relative" }}>
-                <a href="/" className='back-link'>
-                    <FaArrowLeft style={{ marginRight: '0.5rem' }} />
+                <a href="/" className="back-link">
+                    <FaArrowLeft style={{ marginRight: "0.5rem" }} />
                     Select a different character
                 </a>
-                <h3 className='title'>Aeons End Simulator</h3>
+                <h3 className="title">Aeons End Simulator</h3>
 
                 <DndProvider backend={HTML5Backend} >
                     <PlayerArea />
@@ -184,11 +184,11 @@ function HandSection({ cardsInHand, setCardsInHand }) {
     const cardTabTitle = `Hand: (${cardsInHand.length} Card${cardsInHand.length === 1 ? "" : "s"})`;
 
     return (
-        <div id="hand" style={{ position: 'relative' }}>
+        <div id="hand" style={{ position: "relative" }}>
             <div
                 style={{
                     ...styles.collapsableTab,
-                    bottom: isTabOpen ? '0px' : '-295px'
+                    bottom: isTabOpen ? "0px" : "-295px"
                 }} >
 
 
@@ -217,14 +217,14 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 */
 const styles = {
     collapsableTab: {
-        position: 'fixed',
+        position: "fixed",
         left: 0,
         right: 0,
-        backgroundColor: '#edebe6',
-        padding: '10px 20px',
-        borderTop: '1px solid #444',
-        cursor: 'pointer',
-        transition: 'transform 0.3s ease-in-out',
+        backgroundColor: "#edebe6",
+        padding: "10px 20px",
+        borderTop: "1px solid #444",
+        cursor: "pointer",
+        transition: "transform 0.3s ease-in-out",
         zIndex: 1000,
     },
 }

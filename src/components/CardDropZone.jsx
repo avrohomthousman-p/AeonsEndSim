@@ -1,6 +1,6 @@
 import "./CardDropZone.css"
-import { useDrop } from 'react-dnd';
-import { DraggableCardType } from '../data/constants';
+import { useDrop } from "react-dnd";
+import { DraggableCardType } from "../data/constants";
 
 
 /**

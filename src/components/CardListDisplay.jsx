@@ -30,7 +30,7 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
 
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             <button onClick={scrollLeft} style={{ backgroundColor: "LightGray" }}>
                 <img src="/left-arrow.webp" alt="left arrow" />
             </button>
@@ -39,16 +39,16 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
             <div ref={containerRef}
                 style={{
                     flexGrow: 1,
-                    overflowX: 'auto',
-                    scrollBehavior: 'smooth',
-                    padding: '10px',
+                    overflowX: "auto",
+                    scrollBehavior: "smooth",
+                    padding: "10px",
                 }}>
                 <div
                     style={{
-                        display: 'inline-flex',
-                        gap: '5px',
-                        minWidth: '100%',
-                        justifyContent: 'center',
+                        display: "inline-flex",
+                        gap: "5px",
+                        minWidth: "100%",
+                        justifyContent: "center",
                     }}>
                     {cardList.map((cardName, index) => {
                         const cardDropHandler = new HandleCardDropIntoList(locationName, index, cardList, setCardList);

@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import './Breach.css';
-import { BASE_URL } from '../data/constants'
-import CardDropZone from './CardDropZone';
-import DraggableCard from './DraggableCard';
+import { useEffect, useState, useRef } from "react";
+import "./Breach.css";
+import { BASE_URL } from "../data/constants"
+import CardDropZone from "./CardDropZone";
+import DraggableCard from "./DraggableCard";
 import { HandleCardDropOntoPile } from "./CardDropHandlers";
-import { CardLocations } from '../data/constants';
-import { PiX } from 'react-icons/pi';
+import { CardLocations } from "../data/constants";
 
 
 
@@ -66,7 +65,7 @@ function Tier1Breach() {
             src={url}
             alt="tier 1 breach"
             width="16%"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
         />
     );
 }
@@ -216,8 +215,8 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
                 onContextMenu={showContextMenu}
                 style={{
                     transform: `rotate(${breachState.orientation || 0}deg)`,
-                    transition: 'transform 0.2s ease-in-out',
-                    cursor: 'pointer'
+                    transition: "transform 0.2s ease-in-out",
+                    cursor: "pointer"
                 }}
             />
 
@@ -231,9 +230,9 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
                     }}
                 >
 
-                    <li className={`menu-item ${breachState.isOpen ? 'disabled' : ''}`} onClick={focusBreach}>Focus</li>
-                    <li className={`menu-item ${breachState.orientation === 0 ? 'disabled' : ''}`} onClick={unfocusBreach}>Un-Focus</li>
-                    <li className={`menu-item ${breachState.isOpen ? 'disabled' : ''}`} onClick={openBreach}>Open</li>
+                    <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={focusBreach}>Focus</li>
+                    <li className={`menu-item ${breachState.orientation === 0 ? "disabled" : ''}`} onClick={unfocusBreach}>Un-Focus</li>
+                    <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={openBreach}>Open</li>
                 </ul>
             }
         </>
@@ -243,12 +242,12 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
 
 const styles = {
     breachContextMenu: {
-        position: 'absolute',
-        backgroundColor: '#fff',
-        border: '1px solid #ccc',
+        position: "absolute",
+        backgroundColor: "#fff",
+        border: "1px solid #ccc",
         width: "95px",
-        listStyle: 'none',
-        padding: '5px',
+        listStyle: "none",
+        padding: "5px",
         zIndex: 10000,
     },
 }

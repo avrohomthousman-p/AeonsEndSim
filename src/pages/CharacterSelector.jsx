@@ -1,7 +1,7 @@
-import logo from '/icon.jpg'
-import './CharacterSelector.css'
-import { CHARACTERS } from '../data/characters'
-import { useNavigate } from 'react-router-dom'
+import logo from "/icon.jpg"
+import "./CharacterSelector.css"
+import { CHARACTERS } from "../data/characters"
+import { useNavigate } from "react-router-dom"
 
 
 function CharacterSelectorPage() {
