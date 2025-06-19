@@ -13,6 +13,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import FaceUpCardPile from "../components/FaceUpCardPile";
 import CardListDisplay from "../components/CardListDisplay";
+import TurnTracker from "../components/TurnTracker";
 
 
 
@@ -125,6 +126,7 @@ function PlayerArea() {
 
             <div id="toolbar" style={{ flex: "15" }}>
                 <h3 style={{ margin: "5px", textDecoration: "underline" }}>ToolBar</h3>
+                <TurnTracker />
                 <button onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
                 <button onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
                 <button onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
