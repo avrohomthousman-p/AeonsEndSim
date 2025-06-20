@@ -59,7 +59,7 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
     }, [cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard]);
 
 
-    const imgUrl = BASE_URL + (cardsInDeck.length === 0 ? "cards/refresh.webp" : "cards/cardBack.webp");
+    const imgUrl = (cardsInDeck.length === 0 ? "/refresh.webp" : BASE_URL + "other/cardBack.webp");
 
 
     return (

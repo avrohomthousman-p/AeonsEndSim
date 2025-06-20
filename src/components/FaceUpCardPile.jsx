@@ -20,8 +20,7 @@ export default function FaceUpCardPile({ pileType, cardList, setCardList }) {
     
     let imageComponent;
     if (cardList.length === 0){
-        const imgUrl = BASE_URL + "cards/emptyPile.webp";
-        imageComponent = (<img src={imgUrl} alt="discard pile" width="100%" />);
+        imageComponent = (<img src="/emptyPile.webp" alt="discard pile" width="100%" />);
     }
     else {
         const cardPosition = cardList.length - 1;
