@@ -28,3 +28,15 @@ export const ModalShowing = {
     ADD_NEW_CARDS: "add_new_cards",
 };
 
+
+
+/**
+ * Enum for the different kinds of breaches that exist. A character who 
+ * is missing a breach has type NONE.
+ */
+export const BreachType = {
+    REGULAR: "REGULAR",
+    NONE: "NONE",
+    //TODO: add special breaches for the characters that have them
+};
+

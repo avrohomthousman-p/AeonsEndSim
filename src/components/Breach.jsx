@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./Breach.css";
-import { BASE_URL } from "../data/constants"
+import { BASE_URL, BreachType } from "../data/constants"
 import CardDropZone from "./CardDropZone";
 import DraggableCard from "./DraggableCard";
 import { HandleCardDropOntoPile } from "./CardDropHandlers";
@@ -14,10 +14,21 @@ import { CardLocations } from "../data/constants";
  * 2 rotations closer, ect. 360 means its already open.
  * 
  * @param {number} breachNumber - The breach tier that should be rendered (1-4).
+ * @param {BreachType} breachType - The kind of breach to be displayed (some characters have special breaches).
  * @param {number} startingOrientation - The position the breach starts in.
  */
-export default function SingleBreach({ breachNumber, startingOrientation }) {
+export default function SingleBreach({ breachNumber, breachType, startingOrientation }) {
     const [preppedSpells, setPreppedSpells] = useState([]);
+
+
+    if (breachType === BreachType.NONE){
+        return (
+            <div style={{ minWidth: "16%", minHeight: "1px", display: "inline-block" }}>
+                &nbsp;
+            </div>
+        );
+    }
+
 
     const cardDropHandler = new HandleCardDropOntoPile(preppedSpells, setPreppedSpells);
 
@@ -249,7 +260,7 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
                 >
 
                     <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={focusBreach}>Focus</li>
-                    <li className={`menu-item ${breachState.orientation === 0 ? "disabled" : ''}`} onClick={unfocusBreach}>Un-Focus</li>
+                    <li className={`menu-item ${breachState.orientation === 0 ? "disabled" : ""}`} onClick={unfocusBreach}>Un-Focus</li>
                     <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={openBreach}>Open</li>
                 </ul>
             }

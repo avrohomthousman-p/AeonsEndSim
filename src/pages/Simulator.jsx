@@ -150,8 +150,9 @@ function BreachSection({ characterData }) {
                 characterData.breaches.map(
                     (breachData) =>
                         <SingleBreach
-                            key={breachData.breachID}
-                            breachNumber={breachData.breachID}
+                            key={breachData.breachNumber}
+                            breachNumber={breachData.breachNumber}
+                            breachType={breachData.breachType}
                             startingOrientation={breachData.orientation}
                         />
                 )
