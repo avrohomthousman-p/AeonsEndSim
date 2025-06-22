@@ -5,16 +5,6 @@
 }
 
 
-#toolbar {
-    border: 1px solid #ccc;
-    padding: 0px 10px;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-center;
-}
-
-
 .back-link {
     position: absolute;
     left: 0;

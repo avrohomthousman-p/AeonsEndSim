@@ -1,19 +1,20 @@
 import { useState } from "react";
-import "./Simulator.css"
-import { CHARACTERS } from "../data/characters"
-import { BASE_URL, CardLocations, ModalShowing } from "../data/constants"
+import "./Simulator.css";
+import { CHARACTERS } from "../data/characters";
+import { BASE_URL, CardLocations, ModalShowing } from "../data/constants";
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { useParams } from "react-router-dom"
-import SingleBreach from "../components/Breach"
-import DragToDetector from "../components/DragToDetector"
-import Deck from "../components/Deck"
-import ReorderCardListModal from "../components/ReorderCardListModal"
-import AddNewCardsModal from "../components/AddNewCardsModal"
+import { useParams } from "react-router-dom";
+import SingleBreach from "../components/Breach";
+import DragToDetector from "../components/DragToDetector";
+import Deck from "../components/Deck";
+import ReorderCardListModal from "../components/ReorderCardListModal";
+import AddNewCardsModal from "../components/AddNewCardsModal";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import FaceUpCardPile from "../components/FaceUpCardPile";
 import CardListDisplay from "../components/CardListDisplay";
-import TurnTracker from "../components/TurnTracker";
+import Toolbar from "../components/Toolbar";
+
 
 
 
@@ -124,14 +125,7 @@ function PlayerArea() {
                 <FaceUpCardPile pileType={CardLocations.DestroyedPile} cardList={destroyedCards} setCardList={setDestroyedCards} />
             </div>
 
-            <div id="toolbar" style={{ flex: "15" }}>
-                <h3 style={{ margin: "5px", textDecoration: "underline" }}>ToolBar</h3>
-                <TurnTracker />
-                <button onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
-                <button onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
-                <button onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
-                {/* TODO: add more tools here */}
-            </div>
+            <Toolbar setModalShowing={setModalShowing} />
         </div>
     )
 }
