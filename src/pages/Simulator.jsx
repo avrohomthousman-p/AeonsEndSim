@@ -176,11 +176,11 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
                 cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
 
-            <div style={{ display: "inline-block", width: "58%" }} >
+            <div style={{ display: "inline-block", width: "55%" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
             </div>
 
-            <div style={{ width: "15%" }}>
+            <div>
                 <FaceUpCardPile pileType={CardLocations.DiscardPile} cardList={cardsInDiscard} setCardList={setCardsInDiscard} />
             </div>
         </div>

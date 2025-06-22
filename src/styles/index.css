@@ -54,3 +54,8 @@ button:hover {
     display: flex;
     flex-direction: column;
 }
+
+
+.card-image {
+    max-width: 180px;
+}

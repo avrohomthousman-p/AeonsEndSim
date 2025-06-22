@@ -2,6 +2,7 @@ import { useCallback, useRef } from "react"
 import { BASE_URL, CardLocations } from "../data/constants"
 import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from "../components/CardDropHandlers"
+import DraggableCard from "../components/DraggableCard";
 
 
 /**
@@ -53,20 +54,39 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
             cardsToTransfer = [...prev].reverse();
             return [];
         });
-        
+
 
         queueMicrotask(() => setCardsInDeck(prev => cardsToTransfer));
     }, [cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard]);
 
 
-    const imgUrl = (cardsInDeck.length === 0 ? "/refresh.webp" : BASE_URL + "other/cardBack.webp");
+
+    let deckImage;
+    if (cardsInDeck.length === 0) {
+        deckImage = (
+            <img src={"/refresh.webp"} onClick={drawCard} onDoubleClick={resetDeck} className="card-image" alt="deck" width="100%" />
+        );
+    }
+    else {
+        deckImage = (
+            <div onClick={drawCard}>
+                <DraggableCard
+                    cardName={cardsInDeck.at(-1)}
+                    cardPosition={cardsInDeck.length - 1}
+                    locationName={CardLocations.Deck}
+                    cardSrcList={cardsInDeck}
+                    setCardSrcList={setCardsInDeck}
+                    altImageUrl={BASE_URL + "other/cardBack.webp"} />
+            </div>
+        );
+    }
 
 
     return (
-        <div style={{ display: "inline-block", width: "15%" }}>
+        <div style={{ display: "inline-block" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
             <CardDropZone cardDropHandler={onDropHandler} >
-                <img src={imgUrl} onClick={drawCard} onDoubleClick={resetDeck} alt="deck" width="100%" />
+                {deckImage}
             </CardDropZone>
         </div>
     )
