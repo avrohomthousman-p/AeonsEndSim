@@ -1,8 +1,9 @@
-import { useCallback, useRef } from "react"
-import { BASE_URL, CardLocations } from "../data/constants"
+import { useCallback, useRef } from "react";
+import { BASE_URL, CardLocations } from "../data/constants";
 import CardDropZone from "./CardDropZone";
-import { HandleCardDropOntoPile } from "../components/CardDropHandlers"
+import { HandleCardDropOntoPile } from "../components/CardDropHandlers";
 import DraggableCard from "../components/DraggableCard";
+import { Tooltip } from "react-tooltip";
 
 
 /**
@@ -64,12 +65,25 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
     let deckImage;
     if (cardsInDeck.length === 0) {
         deckImage = (
-            <img src={"/refresh.webp"} onClick={drawCard} onDoubleClick={resetDeck} className="card-image" alt="deck" width="100%" />
+            <img 
+                src={"/refresh.webp"} 
+                data-tooltip-id="deck-tooltip"
+                data-tooltip-content="Double Click to move discard pile into deck"
+                data-tooltip-place="top"
+                onDoubleClick={resetDeck} 
+                className="card-image" 
+                alt="deck" 
+                width="100%" />
         );
     }
     else {
         deckImage = (
-            <div onClick={drawCard}>
+            <div 
+                data-tooltip-id="deck-tooltip"
+                data-tooltip-content="Click to draw a card"
+                data-tooltip-place="right"
+                onClick={drawCard}>
+
                 <DraggableCard
                     cardName={cardsInDeck.at(-1)}
                     cardPosition={cardsInDeck.length - 1}
@@ -85,6 +99,7 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
     return (
         <div style={{ display: "inline-block" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
+            <Tooltip id="deck-tooltip" />
             <CardDropZone cardDropHandler={onDropHandler} >
                 {deckImage}
             </CardDropZone>
