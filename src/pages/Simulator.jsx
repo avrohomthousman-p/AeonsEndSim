@@ -125,7 +125,14 @@ function PlayerArea() {
                 <FaceUpCardPile pileType={CardLocations.DestroyedPile} cardList={destroyedCards} setCardList={setDestroyedCards} />
             </div>
 
-            <Toolbar setModalShowing={setModalShowing} />
+            <Toolbar 
+                setModalShowing={setModalShowing} 
+                cardsInHand={cardsInHand} 
+                setCardsInHand={setCardsInHand} 
+                cardsInDeck={cardsInDeck} 
+                setCardsInDeck={setCardsInDeck} 
+                cardsInDiscard={cardsInDiscard} 
+                setCardsInDiscard={setCardsInDiscard} />
         </div>
     )
 }

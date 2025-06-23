@@ -1,5 +1,7 @@
 export const BASE_URL = "https://storage.googleapis.com/aeons-end-pics/";
 
+export const NORMAL_HAND_SIZE = 5; //number of cards drawn at end of turn
+
 export const DraggableCardType = "draggableCard"
 
 
