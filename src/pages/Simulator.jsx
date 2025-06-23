@@ -239,6 +239,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 const styles = {
     collapsableTab: {
         position: "fixed",
+        height: "310px",
         left: 0,
         right: 0,
         backgroundColor: "#edebe6",
