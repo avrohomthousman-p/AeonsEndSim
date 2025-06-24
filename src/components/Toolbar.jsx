@@ -49,7 +49,7 @@ function drawNewHand(cardsInHand, setCardsInHand, cardsInDeck, setCardsInDeck, c
         //Draw remaining cards from discard pile, and reset the deck.
         const additionalCardsNeeded = Math.min(NORMAL_HAND_SIZE - cardsDrawn.length, cardsInDiscard.length);
         let cardsDrawnFromDiscard = cardsInDiscard.slice(0, additionalCardsNeeded);
-        let cardsLeftInDiscard = cardsInDiscard.slice(additionalCardsNeeded, cardsDrawn.length);
+        let cardsLeftInDiscard = cardsInDiscard.slice(additionalCardsNeeded, cardsInDiscard.length);
 
         cardsDrawn = [...cardsDrawn, ...cardsDrawnFromDiscard];
         setCardsInDeck(cardsLeftInDiscard);
