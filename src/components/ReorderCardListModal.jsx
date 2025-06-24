@@ -25,7 +25,11 @@ export default function ReorderCardListModal({ modalShowing, setModalShowing, lo
     return (
         <div id="overlay">
             <div className="modal-base-style large-modal">
-                <h3 style={{ textDecoration: "underline", fontWeight: "bold" }}>Reorder {locationName}</h3>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <p>Bottom of {locationName}</p>
+                    <h3 style={{ textDecoration: "underline", fontWeight: "bold" }}>Reorder {locationName}</h3>
+                    <p>Top of {locationName}</p>
+                </div>
                 <CardListDisplay locationName={locationName} cardList={cardList} setCardList={setCardList} />
 
                 <button onClick={closeModal} className="close-btn">Close</button>
