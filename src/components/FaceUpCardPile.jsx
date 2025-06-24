@@ -1,7 +1,7 @@
 import { BASE_URL } from "../data/constants";
 import CardDropZone from "./CardDropZone";
 import DraggableCard from "./DraggableCard";
-import { HandleCardDropOntoPile } from "./CardDropHandlers";
+import { HandleCardDropOntoPile } from "../utils/CardDropHandlers";
 
 
 

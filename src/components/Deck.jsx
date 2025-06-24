@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import { BASE_URL, CardLocations } from "../data/constants";
 import CardDropZone from "./CardDropZone";
-import { HandleCardDropOntoPile } from "../components/CardDropHandlers";
+import { HandleCardDropOntoPile } from "../utils/CardDropHandlers";
 import DraggableCard from "../components/DraggableCard";
 import { Tooltip } from "react-tooltip";
 
