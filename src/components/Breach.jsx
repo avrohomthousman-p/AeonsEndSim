@@ -21,7 +21,7 @@ export default function SingleBreach({ breachNumber, breachType, startingOrienta
     const [preppedSpells, setPreppedSpells] = useState([]);
 
 
-    if (breachType === BreachType.NONE){
+    if (breachType === BreachType.NONE) {
         return (
             <div style={{ minWidth: "16%", minHeight: "1px", display: "inline-block" }}>
                 &nbsp;
@@ -102,67 +102,28 @@ function Tier1Breach() {
  * @param {string[]} preppedSpells - An array of spells prepped to this breach.
  */
 function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
-    const [breachState, setBreachState] = useState({
-        orientation: Math.min(startingOrientation, 360),
-        isOpen: startingOrientation >= 360
-    });
-
-    const [contextMenu, setContextMenu] = useState({
-        visible: false,
-        x: 0,
-        y: 0,
-    });
+    const { breachState, focusBreach, unfocusBreach, openBreach } = useBreachOrientation(startingOrientation);
+    const { contextMenu, showContextMenu, hideContextMenu } = useContextMenu();
 
 
-    const breachRef = useRef(null);
-
-
-    const showContextMenu = (event) => {
+    //This event is dispached from the CardDropZone used for prepped spells
+    const handleContextMenuEvent = (event) => {
         event.preventDefault();
 
         if (preppedSpells.length > 0) {
             return;
         }
 
-        
+
         const breachRect = event.currentTarget.getBoundingClientRect();
 
         //If the click is in the CardDropZone but outside the breach
         if (event.clientY > breachRect.bottom)
             return;
-        
 
-        setContextMenu({
-            visible: true,
-            x: event.clientX - breachRect.left,
-            y: event.clientY - breachRect.bottom,
-        })
+
+        showContextMenu(event.clientX - breachRect.left, event.clientY - breachRect.bottom);
     };
-
-
-
-    const hideContextMenu = () => {
-        if (contextMenu.visible) {
-            setContextMenu({
-                visible: false,
-                x: 0,
-                y: 0,
-            })
-        }
-    };
-
-
-
-    useEffect(() => {
-        if (!contextMenu.visible)
-            return;
-
-        document.addEventListener("click", hideContextMenu);
-        return () => {
-            document.removeEventListener("click", hideContextMenu);
-        };
-
-    }, [contextMenu.visible]);
 
 
     const handleBreachClick = (event) => {
@@ -179,6 +140,58 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
 
         focusBreach();
     }
+
+    //URL must be dynamic, based on state
+    const url = BASE_URL + `breaches/breach${breachNumber}-${breachState.isOpen ? "open" : "closed"}.webp`;
+
+
+    return (
+        <>
+            <img
+                id={`tier-${breachNumber}-breach`}
+                src={url}
+                alt={`tier ${breachNumber} breach`}
+                width="16%"
+                onClick={handleBreachClick}
+                onContextMenu={handleContextMenuEvent}
+                style={{
+                    transform: `rotate(${breachState.orientation || 0}deg)`,
+                    transition: "transform 0.2s ease-in-out",
+                    cursor: "pointer"
+                }}
+            />
+
+            {
+                contextMenu.visible &&
+                <ul
+                    style={{
+                        ...styles.breachContextMenu,
+                        top: contextMenu.y,
+                        left: contextMenu.x,
+                    }}
+                >
+
+                    <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={focusBreach}>Focus</li>
+                    <li className={`menu-item ${breachState.orientation === 0 ? "disabled" : ""}`} onClick={unfocusBreach}>Un-Focus</li>
+                    <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={openBreach}>Open</li>
+                </ul>
+            }
+        </>
+    )
+}
+
+
+
+/**
+ * Custom hook containing all breach functionality related to focusing.
+ * @param {number} startingOrientation - The starting orientation of the breach.
+ * @returns The breach state data and functions for focusing, unfocusing, and opening.
+ */
+function useBreachOrientation(startingOrientation) {
+    const [breachState, setBreachState] = useState({
+        orientation: Math.min(startingOrientation, 360),
+        isOpen: startingOrientation >= 360
+    });
 
 
     const focusBreach = () => {
@@ -213,60 +226,60 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
     }
 
 
-
     const openBreach = () => {
-        if (breachState.isOpen) {
-            return; //no need to re-render the component
-        }
-
-        setBreachState(() => {
-            return {
-                orientation: 360,
-                isOpen: true,
-            }
-        });
+        setBreachState({ orientation: 360, isOpen: true });
     }
 
-
-    //URL must be dynamic, based on state
-    const url = BASE_URL + `breaches/breach${breachNumber}-${breachState.isOpen ? "open" : "closed"}.webp`;
-
-
-    return (
-        <>
-            <img
-                ref={breachRef}
-                id={`tier-${breachNumber}-breach`}
-                src={url}
-                alt={`tier ${breachNumber} breach`}
-                width="16%"
-                onClick={handleBreachClick}
-                onContextMenu={showContextMenu}
-                style={{
-                    transform: `rotate(${breachState.orientation || 0}deg)`,
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer"
-                }}
-            />
-
-            {
-                contextMenu.visible &&
-                <ul
-                    style={{
-                        ...styles.breachContextMenu,
-                        top: contextMenu.y,
-                        left: contextMenu.x,
-                    }}
-                >
-
-                    <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={focusBreach}>Focus</li>
-                    <li className={`menu-item ${breachState.orientation === 0 ? "disabled" : ""}`} onClick={unfocusBreach}>Un-Focus</li>
-                    <li className={`menu-item ${breachState.isOpen ? "disabled" : ""}`} onClick={openBreach}>Open</li>
-                </ul>
-            }
-        </>
-    )
+    return { breachState, focusBreach, unfocusBreach, openBreach };
 }
+
+
+
+/**
+ * Custom hook containing all the logic for the breach context menu.
+ * @returns the context menu state variable and a showContextMenu and hideContextMenu function.
+ */
+function useContextMenu() {
+    const [contextMenu, setContextMenu] = useState({
+        visible: false,
+        x: 0,
+        y: 0,
+    });
+
+
+    const showContextMenu = (x, y) => {
+        setContextMenu({
+            visible: true,
+            x: x,
+            y: y,
+        })
+    };
+
+
+    const hideContextMenu = () => {
+        setContextMenu({
+            visible: false,
+            x: 0,
+            y: 0,
+        })
+    };
+
+
+    useEffect(() => {
+        if (!contextMenu.visible)
+            return;
+
+        document.addEventListener("click", hideContextMenu);
+        return () => {
+            document.removeEventListener("click", hideContextMenu);
+        };
+
+    }, [contextMenu.visible]);
+
+
+    return { contextMenu, showContextMenu, hideContextMenu };
+}
+
 
 
 const styles = {
