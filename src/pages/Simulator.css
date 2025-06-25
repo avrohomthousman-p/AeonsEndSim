@@ -13,3 +13,19 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+
+#charge-track {
+    position: absolute;
+    top: 90%;
+    height: 12%;
+}
+
+
+.charge {
+    position: absolute;
+    top: 0;
+    width: 2.3vw;
+    height: auto;
+    cursor: pointer;
+}

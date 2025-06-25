@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Simulator.css";
 import { CHARACTERS } from "../data/characters";
-import { BASE_URL, CardLocations, ModalShowing } from "../data/constants";
+import { BASE_URL, CardLocations, ModalShowing, GetChargeTrackPosition } from "../data/constants";
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import SingleBreach from "../components/Breach";
@@ -107,6 +107,7 @@ function PlayerArea() {
 
                     <CharacterSection
                         characterName={characterName}
+                        characterData={data}
                         cardsInDeck={cardsInDeck}
                         setCardsInDeck={setCardsInDeck}
                         setCardsInHand={setCardsInHand}
@@ -125,13 +126,13 @@ function PlayerArea() {
                 <FaceUpCardPile pileType={CardLocations.DestroyedPile} cardList={destroyedCards} setCardList={setDestroyedCards} />
             </div>
 
-            <Toolbar 
-                setModalShowing={setModalShowing} 
-                cardsInHand={cardsInHand} 
-                setCardsInHand={setCardsInHand} 
-                cardsInDeck={cardsInDeck} 
-                setCardsInDeck={setCardsInDeck} 
-                cardsInDiscard={cardsInDiscard} 
+            <Toolbar
+                setModalShowing={setModalShowing}
+                cardsInHand={cardsInHand}
+                setCardsInHand={setCardsInHand}
+                cardsInDeck={cardsInDeck}
+                setCardsInDeck={setCardsInDeck}
+                cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
         </div>
     )
@@ -167,7 +168,9 @@ function BreachSection({ characterData }) {
 /**
  * Component that displays the player mat, deck, and discard pile.
  */
-function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
+function CharacterSection({ characterName, characterData, cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
+    const [chargeCount, setChargeCount] = useState(0);
+
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
             <Deck
@@ -177,8 +180,24 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
                 cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
 
-            <div style={{ display: "inline-block", width: "55%" }} >
+            <div style={{ display: "inline-block", width: "55%", position: "relative" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
+
+                <div id="charge-track" style={GetChargeTrackPosition(characterData.chargeSlots)}>
+                    {Array.from({ length: characterData.chargeSlots }).map((_, index) => (
+                        <img
+                            key={index}
+                            src={BASE_URL + "other/Charge.webp"}
+                            alt="charge"
+                            className="charge"
+                            style={{
+                                left: `${3 * index}vw`,
+                                opacity: chargeCount >= index + 1 ? "1" : "0"
+                            }}
+                            onClick={() => HandleChargeSlotClick(index + 1, setChargeCount)}
+                        />
+                    ))}
+                </div>
             </div>
 
             <div>
@@ -186,6 +205,39 @@ function CharacterSection({ characterName, cardsInDeck, setCardsInDeck, setCards
             </div>
         </div>
     )
+}
+
+
+
+/**
+ * Click handler for adjusting charges when the user clicks on a charge slot.
+ * 
+ * In accordance with normal gameplay, charges are added left to right (and removed right
+ * to left). So clicking the left-most empty charge slot adds a charge to that slot. Clicking
+ * the right-most filled charge slot, removes the charge from that slot. Clicking anywhere
+ * else does nothing.
+ * 
+ * E.g.  [filled, filled, empty, empty, empty]
+ * A new charge could only be added in index 2 (charge slot 3)
+ * A charge could only be removed from index 1 (charge slot 2)
+ * @param {number} chargeSlotClicked - 1 based index of which charge slot was clicked.
+ * @param {function} setChargeCount - State setter for modifying charge count.
+ */
+function HandleChargeSlotClick(chargeSlotClicked, setChargeCount) {
+    setChargeCount((chargeCount) => {
+        const isLastFilledSlot = chargeSlotClicked === chargeCount;
+        const isFirstEmptySlot = chargeSlotClicked === chargeCount + 1;
+
+        if (isLastFilledSlot) {
+            return chargeCount - 1;
+        }
+        else if (isFirstEmptySlot) {
+            return chargeCount + 1;
+        }
+        else {
+            return chargeCount;
+        }
+    });
 }
 
 
@@ -200,7 +252,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
         setIsTabOpen(prev => !prev);
     }
 
-    
+
 
     const cardTabTitle = `Hand: (${cardsInHand.length} Card${cardsInHand.length === 1 ? "" : "s"})`;
 

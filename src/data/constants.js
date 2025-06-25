@@ -42,3 +42,25 @@ export const BreachType = {
     //TODO: add special breaches for the characters that have them
 };
 
+
+/**
+ * The charge slots displayed on charcter mats are displayed in slightly different places
+ * when there are more or fewer charge slots. As such, for the charges to be aligned 
+ * correctly, they need dynamic CSS that offsets them from the player mat based on the
+ * number of charges.
+ * @param {number} numCharges - The maximum number of charges the character can have (number of charge slots).
+ * @returns A style that can be applied to the charge image to align it with the charge slots.
+ */
+export function GetChargeTrackPosition(numCharges){
+    switch(numCharges){
+        case 4:
+            return {left: "55%"};
+        case 5:
+            return {left: "51%"};
+        case 6:
+            return {left: "48%"}
+        default:
+            throw new Error("Invalid number of charges");
+    }
+}
+
