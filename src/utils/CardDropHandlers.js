@@ -1,3 +1,9 @@
+/**
+ * @fileoverview This file contains classes whose job it is to handle cards being dragged and 
+ * dropped from one place to another. These classes handle all state changes associated with
+ * that drag and drop.
+ */
+
 "use strict";
 
 
