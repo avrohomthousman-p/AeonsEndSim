@@ -14,19 +14,21 @@ import { NORMAL_HAND_SIZE } from "../data/constants";
  * Draws {NORMAL_HAND_SIZE} new cards if the users hand is empty. Otherwise does nothing.
  */
 export function drawNewHand(cardsInHand, setCardsInHand, cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard) {
-    if (cardsInHand.length > 0)
+    const numCardsToDraw = NORMAL_HAND_SIZE - cardsInHand.length;
+    if (numCardsToDraw <= 0){
         return;
-
+    }
+    
     const deckSize = cardsInDeck.length;
 
     //Draw cards from the deck
-    let startIndex = Math.max(0, deckSize - NORMAL_HAND_SIZE);
+    let startIndex = Math.max(0, deckSize - numCardsToDraw);
     let endIndex = deckSize;
     let cardsDrawn = cardsInDeck.slice(startIndex, endIndex);
 
-    if (cardsDrawn.length < NORMAL_HAND_SIZE) {
+    if (cardsDrawn.length < numCardsToDraw) {
         //Draw remaining cards from discard pile, and reset the deck.
-        const additionalCardsNeeded = Math.min(NORMAL_HAND_SIZE - cardsDrawn.length, cardsInDiscard.length);
+        const additionalCardsNeeded = Math.min(numCardsToDraw - cardsDrawn.length, cardsInDiscard.length);
         let cardsDrawnFromDiscard = cardsInDiscard.slice(0, additionalCardsNeeded);
         let cardsLeftInDiscard = cardsInDiscard.slice(additionalCardsNeeded, cardsInDiscard.length);
 
@@ -40,7 +42,7 @@ export function drawNewHand(cardsInHand, setCardsInHand, cardsInDeck, setCardsIn
     }
 
 
-    setCardsInHand(cardsDrawn.reverse());
+    setCardsInHand(prev => [...prev, ...cardsDrawn.reverse()]);
 }
 
 
