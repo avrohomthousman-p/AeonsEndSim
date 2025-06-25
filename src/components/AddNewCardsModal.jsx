@@ -75,9 +75,13 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
             </div>
 
             <div>
-                <button onClick={() => addCardToList(false, setCardsInHand)}>Put Into Hand</button>
-                <button onClick={() => addCardToList(true, setCardsInDeck)}>Put On Top of Deck</button>
-                <button onClick={() => addCardToList(true, setCardsInDiscard)}>Put On Top Of Discard Pile</button>
+                <div style={{ marginBottom: "10px", marginTop: "20px", color: "#888" }}>
+                    Put that card in...
+                </div>
+                <button onClick={() => addCardToList(false, setCardsInHand)}>Hand</button>
+                <button onClick={() => addCardToList(true, setCardsInDeck)}>Deck (Top)</button>
+                <button onClick={() => addCardToList(true, setCardsInDiscard)}>Discard Pile (Top)</button>
+                <button onClick={() => addCardToList(false, setCardsInDiscard)}>Discard Pile (Bottom)</button>
             </div>
         </div>
     );
