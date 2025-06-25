@@ -50,17 +50,6 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
         ],
     }),
-    Dorian: Object.freeze({
-        startingHand: ["Spark", "Spatial_Distortion", "Crystal", "Crystal", "Crystal"],
-        startingDeck: ["Spark", "Crystal", "Crystal", "Crystal", "Crystal"],
-        chargeSlots: 4,
-        breaches: [
-            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
-            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 180 },
-            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 180 },
-            { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 0 },
-        ],
-    }),
     Garu: Object.freeze({
         startingHand: ["Torch", "Crystal", "Crystal", "Crystal", "Spark"],
         startingDeck: ["Spark", "Spark", "Crystal", "Crystal", "Crystal"],
