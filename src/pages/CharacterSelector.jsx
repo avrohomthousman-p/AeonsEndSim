@@ -50,7 +50,7 @@ function CharacterPicker() {
             <div style={{ marginTop: "10px" }}>
                 <img 
                     src={hoveredCharacter ? `${BASE_URL}characters/${hoveredCharacter}.webp` : null}
-                    style={{ height: "50vh" }} />
+                    style={{ height: "48vh" }} />
             </div>
         </div>
     )
