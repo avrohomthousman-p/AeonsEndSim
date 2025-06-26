@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import "./Breach.css";
-import { BASE_URL, BreachType } from "../data/constants"
+import { BASE_URL, BreachType, GetBreachFileName } from "../data/constants";
 import CardDropZone from "./CardDropZone";
 import DraggableCard from "./DraggableCard";
 import { HandleCardDropOntoPile } from "../utils/CardDropHandlers";
@@ -47,8 +47,14 @@ export default function SingleBreach({ breachNumber, breachType, startingOrienta
         <div className="breach-container">
             {
                 breachNumber === 1 ?
-                    (<Tier1Breach />) :
-                    (<RegularBreach breachNumber={breachNumber} startingOrientation={startingOrientation} preppedSpells={preppedSpells} />)
+                    (<Tier1Breach breachType={breachType} />) :
+                    (
+                        <RegularBreach
+                            breachNumber={breachNumber}
+                            breachType={breachType}
+                            startingOrientation={startingOrientation}
+                            preppedSpells={preppedSpells} />
+                    )
             }
 
             <div className="breach-dropzone">
@@ -73,9 +79,11 @@ export default function SingleBreach({ breachNumber, breachType, startingOrienta
 /**
  * Represents a tier 1 breach that is always open and cannot be focused
  * or un-focused.
+ * @param {BreachType} breachType - enum telling the function what breach to display.
  */
-function Tier1Breach() {
-    const url = BASE_URL + "breaches/breach1-open.webp";
+function Tier1Breach({ breachType }) {
+    const breachFileName = GetBreachFileName(breachType, true, 1);
+    const url = BASE_URL + "breaches/" + breachFileName;
 
     return (
         <img
@@ -96,12 +104,13 @@ function Tier1Breach() {
  * any of the extra context menu functionality.
  * 
  * @param {number} breachNumber - The breach tier that this breach is (2-4).
+ * @param {BreachType} breachType - enum telling system which type of breach to display.
  * @param {number} startingOrientation - A value indication which way the breach is facing.
  *          0, 90, 180, 270, or 360 degrees.
  * 
  * @param {string[]} preppedSpells - An array of spells prepped to this breach.
  */
-function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
+function RegularBreach({ breachNumber, breachType, startingOrientation, preppedSpells }) {
     const { breachState, focusBreach, unfocusBreach, openBreach } = useBreachOrientation(startingOrientation);
     const { contextMenu, showContextMenu, hideContextMenu } = useContextMenu();
 
@@ -141,8 +150,8 @@ function RegularBreach({ breachNumber, startingOrientation, preppedSpells }) {
         focusBreach();
     }
 
-    //URL must be dynamic, based on state
-    const url = BASE_URL + `breaches/breach${breachNumber}-${breachState.isOpen ? "open" : "closed"}.webp`;
+    
+    const url = BASE_URL + "breaches/" + GetBreachFileName(breachType, breachState.isOpen, breachNumber);
 
 
     return (

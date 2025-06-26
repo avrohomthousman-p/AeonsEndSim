@@ -39,8 +39,43 @@ export const ModalShowing = {
 export const BreachType = {
     REGULAR: "REGULAR",
     NONE: "NONE",
+    ANCIENT: "ANCIENT", //Special breach for character Gygar
+    REMNENT: "REMNENT", //Special breach for character Remnent
+    CELESTIAL: "CELESTIAL", //Special breach for character Sahala
+    DEFENDER: "DEFENDER", //Special breach for character Taqren
     //TODO: add special breaches for the characters that have them
 };
+
+
+
+/**
+ * Gets the proper filename for a breach image url.
+ * @param {BreachType} breachType - enum value deciding what kind of breach is being displayed.
+ * @param {boolean} isOpen - Tells if should use the breach image that is open or not.
+ * @param {number} breachNumber - Which breach is being displayed (tier 1-4). This argument is 
+ *              only required when BreachType is regular or none.
+ * @returns The filename of the image url: As is `${BASE_URL}breaches/${filename}.
+ */
+export function GetBreachFileName(breachType, isOpen, breachNumber) {
+    const open = (isOpen ? "open" : "closed");
+
+    switch(breachType){
+        case BreachType.REGULAR:
+            return `breach${breachNumber}-${open}.webp`;
+        case BreachType.NONE:
+            return null;
+        case BreachType.ANCIENT:
+            return "ancient-breach-open.webp"
+        case BreachType.REMNENT:
+            return `remnant-breach-${open}.webp`;
+        case BreachType.CELESTIAL:
+            return `celestial-breach-${open}.webp`;
+        case BreachType.DEFENDER:
+            return `defender-breach-${open}.webp`;
+        default:
+            throw new Error("invalid breach type: " + breachType);
+    }
+}
 
 
 /**

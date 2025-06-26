@@ -67,7 +67,18 @@ export const CHARACTERS = Object.freeze({
         chargeSlots: 5,
         breaches: [
             { breachNumber: 1, breachType: BreachType.NONE, orientation: 360 },
-            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 3600 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
+            { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+    }),
+    Gygar: Object.freeze({
+        startingHand: ["Crystal", "Crystal", "Crystal", "Tidal_Surge", "Spark"],
+        startingDeck: ["Spark", "Tidal_Surge", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 5,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.ANCIENT, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 360 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
@@ -193,6 +204,17 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
         ],
     }),
+    Quilius: Object.freeze({
+        startingHand: ["Crystal", "Crystal", "Crystal", "Extinguish", "Spark"],
+        startingDeck: ["Spark", "Extinguish", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 5,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
+            { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+    }),
     Reeve: Object.freeze({
         startingHand: ["Spark", "Spark", "Crystal", "Crystal", "Obsidian_Shard"],
         startingDeck: ["Spark", "Spark", "Crystal", "Crystal", "Crystal"],
@@ -204,6 +226,39 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
         ],
     }),
+    Remnant: Object.freeze({
+        startingHand: ["Void_Shard", "Crystal", "Crystal", "Spark", "Spark"],
+        startingDeck: ["Spark", "Crystal", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 5,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REMNENT, orientation: 0 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
+            { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+    }),
+    Sahala: Object.freeze({
+        startingHand: ["Crystal", "Crystal", "Crystal", "Sparkling_Meteorite", "Spark"],
+        startingDeck: ["Spark", "Spark", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 4,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 180 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
+            { breachNumber: 4, breachType: BreachType.CELESTIAL, orientation: 0 },
+        ],
+    }),
+    Soskel: Object.freeze({
+        startingHand: ["Crystal", "Crystal", "Crystal", "Lucky_Coin", "Spark"],
+        startingDeck: ["Spark", "Crystal", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 4,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
+            { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 0 },
+        ],
+    }),
     Sparrow: Object.freeze({
         startingHand: ["Smolder", "Crystal", "Crystal", "Crystal", "Crystal"],
         startingDeck: ["Crystal", "Crystal", "Crystal", "Crystal", "Crystal"],
@@ -213,6 +268,28 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 0 },
+        ],
+    }),
+    Taqren: Object.freeze({
+        startingHand: ["Crystal", "Crystal", "Crystal", "Crystal", "Gift_of_Spirit"],
+        startingDeck: ["Spark", "Crystal", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 4,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
+            { breachNumber: 4, breachType: BreachType.DEFENDER, orientation: 90 },
+        ],
+    }),
+    Ulgimor: Object.freeze({
+        startingHand: ["Coal_Shard", "Crystal", "Crystal", "Spark", "Spark"],
+        startingDeck: ["Spark", "Spark", "Crystal", "Crystal", "Crystal"],
+        chargeSlots: 6,
+        breaches: [
+            { breachNumber: 1, breachType: BreachType.REGULAR, orientation: 360 },
+            { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
+            { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
+            { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
     }),
     Xaxos: Object.freeze({
