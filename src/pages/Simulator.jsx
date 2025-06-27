@@ -17,7 +17,6 @@ import Toolbar from "../components/Toolbar";
 
 
 
-
 /**
  * The main component of the simulator page.
  */
@@ -58,46 +57,6 @@ function PlayerArea() {
     const [modalShowing, setModalShowing] = useState(ModalShowing.NONE);
 
 
-    let correctModal = null;
-
-    switch (modalShowing) {
-        case ModalShowing.REORDER_DECK:
-            correctModal = (
-                <ReorderCardListModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    locationName={CardLocations.Deck}
-                    cardList={cardsInDeck}
-                    setCardList={setCardsInDeck} />
-            );
-            break;
-
-        case ModalShowing.REORDER_DISCARD:
-            correctModal = (
-                <ReorderCardListModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    locationName={CardLocations.DiscardPile}
-                    cardList={cardsInDiscard}
-                    setCardList={setCardsInDiscard} />
-            );
-            break;
-
-        case ModalShowing.ADD_NEW_CARDS:
-            correctModal = (
-                <AddNewCardsModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    setCardsInHand={setCardsInHand}
-                    setCardsInDeck={setCardsInDeck}
-                    setCardsInDiscard={setCardsInDiscard} />
-            );
-            break;
-
-        default:
-            break;
-    }
-
 
     return (
         <div style={{ display: "flex", height: "100%" }}>
@@ -116,8 +75,14 @@ function PlayerArea() {
 
                     <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
 
-
-                    {correctModal}
+                    <Modals
+                        modalShowing={modalShowing}
+                        setModalShowing={setModalShowing}
+                        setCardsInHand={setCardsInHand}
+                        cardsInDeck={cardsInDeck}
+                        setCardsInDeck={setCardsInDeck}
+                        cardsInDiscard={cardsInDiscard}
+                        setCardsInDiscard={setCardsInDiscard} />
                 </div>
             </div>
 
@@ -279,6 +244,38 @@ function HandSection({ cardsInHand, setCardsInHand }) {
             </div>
         </div >
     )
+}
+
+
+
+/**
+ * Componenent that contains all the modals
+ */
+function Modals({ modalShowing, setModalShowing, setCardsInHand, cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard }) {
+    return (
+        <>
+            <ReorderCardListModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
+                    locationName={CardLocations.Deck}
+                    cardList={cardsInDeck}
+                    setCardList={setCardsInDeck} />
+
+            <ReorderCardListModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
+                    locationName={CardLocations.DiscardPile}
+                    cardList={cardsInDiscard}
+                    setCardList={setCardsInDiscard} />
+
+            <AddNewCardsModal
+                    modalShowing={modalShowing}
+                    setModalShowing={setModalShowing}
+                    setCardsInHand={setCardsInHand}
+                    setCardsInDeck={setCardsInDeck}
+                    setCardsInDiscard={setCardsInDiscard} />
+        </>
+    );
 }
 
 

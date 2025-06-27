@@ -3,36 +3,46 @@ import "./Modal.css";
 import { ModalShowing } from "../data/constants";
 import { SORTED_CARD_NAMES } from "../data/cards";
 import Select from "react-select";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 
 /**
  * Modal popup that allows users to add new cards to their deck/hand/discard pile.
- * @param {ModalShowing} modalShowing - A enum that tells which modal popup is currently visible.
- * @param {function} setModalShowing - A setter function for changing which modal is showing.
  * @param {function} setCardsInHand - A setter function for modifying the user's cards in hand.
  * @param {function} setCardsInDeck - A setter function for modifying the cards in theuser's deck.
  * @param {function} setCardsInDiscard - A setter function for modifying the cards in the user's discard pile.
  */
-export default function AddNewCardsModal({ modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
-    if (modalShowing === ModalShowing.NONE) {
-        return null;
-    }
-
-
+export default function AddNewCardsModal({modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
     const closeModal = () => {
         setModalShowing(ModalShowing.NONE);
     }
 
-
     return (
-        <div id="overlay">
-            <div className="modal-base-style">
-                <h3>Add a Card to Your Deck</h3>
-                <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
+        <Dialog open={modalShowing === ModalShowing.ADD_NEW_CARDS} 
+            slotProps={{
+                paper: {
+                    sx: {
+                        width: "45vw",
+                        maxWidth: "none"
+                    }
+                }
+            }} >
 
+            <DialogTitle>Add New Cards To The Game</DialogTitle>
+
+            <DialogContent sx={{ overflow: "hidden", textAlign: "center" }}>
+                <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
+            </DialogContent>
+
+            <DialogActions>
                 <button onClick={closeModal} className="btn close-btn">Close</button>
-            </div>
-        </div>
+            </DialogActions>
+
+        </Dialog>
     );
 }
 
