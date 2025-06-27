@@ -30,7 +30,7 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
                 <h3>Add a Card to Your Deck</h3>
                 <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
 
-                <button onClick={closeModal} className="close-btn">Close</button>
+                <button onClick={closeModal} className="btn close-btn">Close</button>
             </div>
         </div>
     );
@@ -78,10 +78,10 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
                 <div style={{ marginBottom: "10px", marginTop: "20px", color: "#888" }}>
                     Put that card in...
                 </div>
-                <button onClick={() => addCardToList(false, setCardsInHand)}>Hand</button>
-                <button onClick={() => addCardToList(true, setCardsInDeck)}>Deck (Top)</button>
-                <button onClick={() => addCardToList(true, setCardsInDiscard)}>Discard Pile (Top)</button>
-                <button onClick={() => addCardToList(false, setCardsInDiscard)}>Discard Pile (Bottom)</button>
+                <button className="btn" onClick={() => addCardToList(false, setCardsInHand)}>Hand</button>
+                <button className="btn" onClick={() => addCardToList(true, setCardsInDeck)}>Deck (Top)</button>
+                <button className="btn" onClick={() => addCardToList(true, setCardsInDiscard)}>Discard Pile (Top)</button>
+                <button className="btn" onClick={() => addCardToList(false, setCardsInDiscard)}>Discard Pile (Bottom)</button>
             </div>
         </div>
     );

@@ -20,11 +20,11 @@ export default function Toolbar({ setModalShowing, cardsInHand, setCardsInHand, 
         <div id="toolbar" style={toolbarStyle}>
             <h3 style={{ margin: "5px", textDecoration: "underline" }}>ToolBar</h3>
             <TurnTracker />
-            <button onClick={handleDiscardHand}>Discard Hand</button>
-            <button onClick={handleDrawNewHand}>Draw New Hand</button>
-            <button onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
-            <button onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
-            <button onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
+            <button className="btn" onClick={handleDiscardHand}>Discard Hand</button>
+            <button className="btn" onClick={handleDrawNewHand}>Draw New Hand</button>
+            <button className="btn" onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
+            <button className="btn" onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
+            <button className="btn" onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
             {/* TODO: add more tools here */}
         </div>
     );

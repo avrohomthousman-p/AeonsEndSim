@@ -16,7 +16,7 @@ h1 {
 }
 
 
-button {
+.btn {
     padding: 10px 15px;
     margin: 10px;
     cursor: pointer;
@@ -28,25 +28,8 @@ button {
 }
 
 
-button:hover {
+.btn:hover {
     background-color: #1d4ed8;
-}
-
-
-.button-alt {
-    padding: 10px 15px;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 13px;
-    border-radius: 5px;
-    border: none;
-    background-color: #34eb83;
-    color: white;
-}
-
-
-.button-alt:hover {
-    background-color: #14c360;
 }
 
 

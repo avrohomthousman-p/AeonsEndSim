@@ -31,7 +31,7 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
 
     return (
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-            <button onClick={scrollLeft} style={{ backgroundColor: "LightGray" }}>
+            <button onClick={scrollLeft} style={styles.arrowBtn}>
                 <img src="/left-arrow.webp" alt="left arrow" />
             </button>
 
@@ -72,9 +72,19 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
             </div>
 
 
-            <button onClick={scrollRight} style={{ backgroundColor: "LightGray" }}>
+            <button onClick={scrollRight} style={styles.arrowBtn}>
                 <img src="/right-arrow.webp" alt="right arrow" />
             </button>
         </div>
     );
+}
+
+
+const styles = {
+    arrowBtn: {
+        backgroundColor: "LightGray", 
+        border: "none",
+        paddingTop: "10px",
+        paddingBottom: "10px",
+    }
 }

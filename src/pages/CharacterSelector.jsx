@@ -34,7 +34,7 @@ function CharacterPicker() {
 
 
     return (
-        <div>
+        <div id="character-picker">
             <div>
                 {Object.keys(CHARACTERS).map((name) => (
                     <button

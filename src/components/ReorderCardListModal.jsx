@@ -32,7 +32,7 @@ export default function ReorderCardListModal({ modalShowing, setModalShowing, lo
                 </div>
                 <CardListDisplay locationName={locationName} cardList={cardList} setCardList={setCardList} />
 
-                <button onClick={closeModal} className="close-btn">Close</button>
+                <button onClick={closeModal} className="btn close-btn">Close</button>
             </div>
         </div>
     );
