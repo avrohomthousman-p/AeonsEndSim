@@ -10,6 +10,10 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.14.0",
+		"@emotion/styled": "^11.14.1",
+		"@mui/icons-material": "^7.1.2",
+		"@mui/material": "^7.1.2",
 		"react": "^19.1.0",
 		"react-dnd": "^16.0.1",
 		"react-dnd-html5-backend": "^16.0.1",
