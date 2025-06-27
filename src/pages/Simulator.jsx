@@ -2,7 +2,9 @@ import { useState } from "react";
 import "./Simulator.css";
 import { CHARACTERS } from "../data/characters";
 import { BASE_URL, CardLocations, ModalShowing, GetChargeTrackPosition } from "../data/constants";
-import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { useParams } from "react-router-dom";
 import SingleBreach from "../components/Breach";
 import DragToDetector from "../components/DragToDetector";
@@ -24,8 +26,8 @@ function Simulator() {
     return (
         <div>
             <div style={{ position: "relative" }}>
-                <a href="/" className="back-link">
-                    <FaArrowLeft style={{ marginRight: "0.5rem" }} />
+                <a href="/" className="back-link" style={{ display: "inline-flex" }}>
+                    <NavigateBeforeIcon />
                     Select a different character
                 </a>
                 <h3 className="title">Aeons End Simulator</h3>
@@ -232,10 +234,10 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 
                 <div>
                     <DragToDetector onDragTo={toggleTab}>
-                        <div onClick={toggleTab}>
-                            {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                        <div onClick={toggleTab} style={{ display: "inline-flex" }}>
+                            {isTabOpen ? (<ExpandLessIcon />) : (<ExpandMoreIcon />)}
                             <span style={{ padding: "0px 10px" }}> {cardTabTitle} </span>
-                            {isTabOpen ? (<FaChevronDown />) : (<FaChevronUp />)}
+                            {isTabOpen ? (<ExpandLessIcon />) : (<ExpandMoreIcon />)}
                         </div>
                     </DragToDetector>
                 </div>
