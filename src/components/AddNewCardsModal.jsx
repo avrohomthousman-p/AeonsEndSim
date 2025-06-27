@@ -1,11 +1,16 @@
 import "./Modal.css";
 
+import { TabPanel } from "@mui/lab";
+import TabContext from "@mui/lab/TabContext";
 import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
@@ -21,6 +26,8 @@ import { ModalShowing } from "../data/constants";
  * @param {function} setCardsInDiscard - A setter function for modifying the cards in the user's discard pile.
  */
 export default function AddNewCardsModal({ modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
+    const [tabNumber, setTabNumber] = useState("1");
+
     const closeModal = () => {
         setModalShowing(ModalShowing.NONE);
     }
@@ -31,7 +38,9 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
                 paper: {
                     sx: {
                         width: "50vw",
+                        height: "60vh",
                         maxWidth: "none",
+                        maxHeight: "none",
                     }
                 }
             }} >
@@ -39,7 +48,24 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
             <DialogTitle>Add New Cards To The Game</DialogTitle>
 
             <DialogContent sx={{ overflow: "hidden", textAlign: "center" }}>
-                <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
+                <Box sx={{ width: "100%", typography: "body1" }}>
+                    <TabContext value={tabNumber}>
+                        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                            <Tabs value={tabNumber} onChange={(e, newValue) => setTabNumber(newValue)}>
+                                <Tab label="Card Search" value="1" />
+                                <Tab label="From Market" value="2" />
+                            </Tabs>
+                        </Box>
+
+                        <TabPanel value="1">
+                            <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
+                        </TabPanel >
+                        <TabPanel value="2">
+                            <h3>Coming Soon...</h3>
+                        </TabPanel>
+
+                    </TabContext>
+                </Box>
             </DialogContent>
 
             <DialogActions>
