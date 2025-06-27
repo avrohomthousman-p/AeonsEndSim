@@ -2,12 +2,13 @@ import { useState } from "react";
 import "./Modal.css";
 import { ModalShowing } from "../data/constants";
 import { SORTED_CARD_NAMES } from "../data/cards";
-import Select from "react-select";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 
 /**
@@ -16,18 +17,18 @@ import DialogTitle from "@mui/material/DialogTitle";
  * @param {function} setCardsInDeck - A setter function for modifying the cards in theuser's deck.
  * @param {function} setCardsInDiscard - A setter function for modifying the cards in the user's discard pile.
  */
-export default function AddNewCardsModal({modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
+export default function AddNewCardsModal({ modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
     const closeModal = () => {
         setModalShowing(ModalShowing.NONE);
     }
 
     return (
-        <Dialog open={modalShowing === ModalShowing.ADD_NEW_CARDS} 
+        <Dialog open={modalShowing === ModalShowing.ADD_NEW_CARDS}
             slotProps={{
                 paper: {
                     sx: {
-                        width: "45vw",
-                        maxWidth: "none"
+                        width: "50vw",
+                        maxWidth: "none",
                     }
                 }
             }} >
@@ -75,13 +76,15 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
 
     return (
         <div className="vertical-stack">
-            <div style={{ marginBottom: "20px" }}>
-                <Select
-                    options={SORTED_CARD_NAMES}
+            <div style={{ marginBottom: "20px", display: "flex", justifyContent: "center" }}>
+                <Autocomplete
+                    disablePortal={false}
                     value={selectedItem}
-                    onChange={setSelectedItem}
-                    isSearchable={true}
-                    placeholder="Enter Card Name..." />
+                    onChange={(event, newValue) => setSelectedItem(newValue)}
+                    options={SORTED_CARD_NAMES}
+                    sx={{ width: "330px", marginTop: "10px" }}
+                    renderInput={(params) => <TextField {...params} label="Card name..." />}
+                />
             </div>
 
             <div>
@@ -96,4 +99,3 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
         </div>
     );
 }
-
