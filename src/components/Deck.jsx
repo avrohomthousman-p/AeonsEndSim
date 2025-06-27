@@ -3,7 +3,7 @@ import { BASE_URL, CardLocations } from "../data/constants";
 import CardDropZone from "./CardDropZone";
 import { HandleCardDropOntoPile } from "../utils/CardDropHandlers";
 import DraggableCard from "../components/DraggableCard";
-import { Tooltip } from "react-tooltip";
+import Tooltip from "@mui/material/Tooltip";
 
 
 /**
@@ -65,33 +65,29 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
     let deckImage;
     if (cardsInDeck.length === 0) {
         deckImage = (
-            <img 
-                src={"/refresh.webp"} 
-                data-tooltip-id="deck-tooltip"
-                data-tooltip-content="Double Click to move discard pile into deck"
-                data-tooltip-place="top"
-                onDoubleClick={resetDeck} 
-                className="card-image" 
-                alt="deck" 
-                width="100%" />
+            <Tooltip title="Double click to refill deck" placement="right" arrow>
+                <img
+                    src={"/refresh.webp"}
+                    onDoubleClick={resetDeck}
+                    className="card-image"
+                    alt="deck"
+                    width="100%" />
+            </Tooltip>
         );
     }
     else {
         deckImage = (
-            <div 
-                data-tooltip-id="deck-tooltip"
-                data-tooltip-content="Click to draw a card"
-                data-tooltip-place="right"
-                onClick={drawCard}>
-
-                <DraggableCard
-                    cardName={cardsInDeck.at(-1)}
-                    cardPosition={cardsInDeck.length - 1}
-                    locationName={CardLocations.Deck}
-                    cardSrcList={cardsInDeck}
-                    setCardSrcList={setCardsInDeck}
-                    altImageUrl={BASE_URL + "other/cardBack.webp"} />
-            </div>
+            <Tooltip title="Click to draw" placement="right" arrow>
+                <div onClick={drawCard}>
+                    <DraggableCard
+                        cardName={cardsInDeck.at(-1)}
+                        cardPosition={cardsInDeck.length - 1}
+                        locationName={CardLocations.Deck}
+                        cardSrcList={cardsInDeck}
+                        setCardSrcList={setCardsInDeck}
+                        altImageUrl={BASE_URL + "other/cardBack.webp"} />
+                </div>
+            </Tooltip>
         );
     }
 
@@ -99,7 +95,6 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
     return (
         <div style={{ display: "inline-block" }}>
             <p>{cardsInDeck.length} card{cardsInDeck.length === 1 ? "" : "s"}</p>
-            <Tooltip id="deck-tooltip" />
             <CardDropZone cardDropHandler={onDropHandler} >
                 {deckImage}
             </CardDropZone>
