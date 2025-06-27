@@ -230,7 +230,6 @@ export const SORTED_CARD_NAMES = Object.freeze([
     { label: "Rip, Fetch!", value: "Rip,_Fetch!" },
     { label: "Rip, Go!", value: "Rip,_Go!" },
     { label: "Rip, Help!", value: "Rip,_Help!" },
-    { label: "Rip, Help!", value: "Rip,_Help!" },
     { label: "Rock Launcher", value: "Rock_Launcher" },
     { label: "Rose Thorn", value: "Rose_Thorn" },
     { label: "Sage's Brand", value: "Sage's_Brand" },
