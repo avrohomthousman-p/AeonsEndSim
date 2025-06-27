@@ -1,14 +1,17 @@
-import { useState } from "react";
 import "./Modal.css";
-import { ModalShowing } from "../data/constants";
-import { SORTED_CARD_NAMES } from "../data/cards";
+
+import Autocomplete from "@mui/material/Autocomplete";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { useState } from "react";
+
+import { SORTED_CARD_NAMES } from "../data/cards";
+import { ModalShowing } from "../data/constants";
+
 
 
 /**

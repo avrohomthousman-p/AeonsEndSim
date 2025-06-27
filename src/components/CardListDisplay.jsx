@@ -1,6 +1,7 @@
 import { useRef } from "react";
-import { HandleCardDropIntoList } from "../utils/CardDropHandlers";
 import React from "react";
+
+import { HandleCardDropIntoList } from "../utils/CardDropHandlers";
 import CardDropZone from "./CardDropZone";
 import DraggableCard from "./DraggableCard";
 

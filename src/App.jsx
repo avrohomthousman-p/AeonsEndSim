@@ -1,6 +1,7 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import CharacterSelectorPage from "./pages/CharacterSelector";
 import Simulator from "./pages/Simulator";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App() {

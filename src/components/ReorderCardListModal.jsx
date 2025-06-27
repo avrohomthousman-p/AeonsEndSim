@@ -1,11 +1,13 @@
 import "./Modal.css";
-import { ModalShowing, CardLocations } from "../data/constants";
-import CardListDisplay from "./CardListDisplay";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+
+import { CardLocations, ModalShowing } from "../data/constants";
+import CardListDisplay from "./CardListDisplay";
 
 
 /**

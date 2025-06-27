@@ -1,9 +1,12 @@
-import logo from "/icon.jpg";
-import { useState } from "react";
 import "./CharacterSelector.css";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import logo from "/icon.jpg";
+
 import { CHARACTERS } from "../data/characters";
 import { BASE_URL } from "../data/constants";
-import { useNavigate } from "react-router-dom";
 
 
 function CharacterSelectorPage() {
