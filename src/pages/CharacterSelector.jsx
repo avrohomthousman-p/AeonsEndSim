@@ -44,8 +44,7 @@ function CharacterPicker() {
                         key={name}
                         className="btn"
                         onClick={() => navigate(`/simulator/${name}`)}
-                        onMouseEnter={() => setHoveredCharacter(name)}
-                        onMouseLeave={() => setHoveredCharacter(null)} >
+                        onMouseEnter={() => setHoveredCharacter(name)} >
 
                         {name}</button>
                 ))}
