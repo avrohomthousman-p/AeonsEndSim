@@ -16,6 +16,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Aurora", value: "Aurora"},
+        ],
     }),
     Brama: Object.freeze({
         startingHand: ["Buried_Light", "Crystal", "Crystal", "Crystal", "Crystal"],
@@ -26,6 +30,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Aurora", value: "Aurora"},
         ],
     }),
     Claudia: Object.freeze({
@@ -38,6 +46,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 270 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
+            {label: "Spirit Lift", value: "Spirit_Lift"},
+        ],
     }),
     Dezmodia: Object.freeze({
         startingHand: ["Spark", "Spark", "Oblivion_Shard", "Crystal", "Crystal"],
@@ -48,6 +60,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
+            {label: "Aurora", value: "Aurora"},
         ],
     }),
     Garu: Object.freeze({
@@ -60,6 +76,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Kindle", value: "Kindle"}, 
+            {label: "Nerve Jab", value: "Nerve_Jab"},
+        ],
     }),
     Gex: Object.freeze({
         startingHand: ["Shattered_Geode", "Crystal", "Crystal", "Crystal", "Spark"],
@@ -70,6 +90,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 360 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+        topCards: [
+            {label: "Char", value: "Char"}, 
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
         ],
     }),
     Gygar: Object.freeze({
@@ -82,6 +106,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Bouncing Boom", value: "Bouncing_Boom"}, 
+            {label: "Link Conduit", value: "Link_Conduit"},
+        ],
     }),
     Ilya: Object.freeze({
         startingHand: ["Spark", "Spark", "Entwined_Amethyst", "Trulite_of_Force", "Crystal"],
@@ -92,6 +120,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 180 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+        topCards: [
+            {label: "Blaze", value: "Blaze"}, 
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
         ],
     }),
     Indira: Object.freeze({
@@ -104,6 +136,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.NONE, orientation: 360 },
         ],
+        topCards: [
+            {label: "Blaze", value: "Blaze"}, 
+            {label: "Fiend Catcher", value: "Fiend_Catcher"},
+        ],
     }),
     Jian: Object.freeze({
         startingHand: ["Moonstone_Shard", "Crystal", "Crystal", "Spark", "Spark"],
@@ -114,6 +150,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 360 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+        topCards: [
+            {label: "Crystallize", value: "Crystallize"}, 
+            {label: "Radiance", value: "Radiance"},
         ],
     }),
     Kadir: Object.freeze({
@@ -126,6 +166,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
         ],
+        topCards: [
+            {label: "Chaos Arc", value: "Chaos_Arc"}, 
+            {label: "Flexing Dagger", value: "Flexing_Dagger"},
+        ],
     }),
     Kel: Object.freeze({
         startingHand: ["Spark", "Entwined_Amethyst", "Trulite_of_Energy", "Crystal", "Crystal"],
@@ -136,6 +180,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 0 },
+        ],
+        topCards: [
+            {label: "Tethered Darts", value: "Tethered_Darts"}, 
+            {label: "Well of Energy", value: "Well_of_Energy"},
         ],
     }),
     Lash: Object.freeze({
@@ -148,6 +196,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Well of Energy", value: "Well_of_Energy"},
+        ],
     }),
     Malastar: Object.freeze({
         startingHand: ["Immolate", "Crystal", "Crystal", "Crystal", "Crystal"],
@@ -158,6 +210,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 270 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Char", value: "Char"},
         ],
     }),
     Mazahaedron: Object.freeze({
@@ -170,6 +226,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
+            {label: "Aurora", value: "Aurora"},
+        ],
     }),
     Mist: Object.freeze({
         startingHand: ["Spark", "Crystal", "Crystal", "Crystal", "Garnet_Shard"],
@@ -180,6 +240,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 180 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Well of Energy", value: "Well_of_Energy"},
         ],
     }),
     Nym: Object.freeze({
@@ -192,6 +256,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Well of Energy", value: "Well_of_Energy"},
+        ],
     }),
     Phaedraxa: Object.freeze({
         startingHand: ["Spark", "Crystal", "Crystal", "Crystal", "Tourmaline_Shard"],
@@ -202,6 +270,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 360 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Aurora", value: "Aurora"},
         ],
     }),
     Quilius: Object.freeze({
@@ -214,6 +286,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Monstrous Inferno", value: "Monstrous_Inferno"},
+        ],
     }),
     Reeve: Object.freeze({
         startingHand: ["Spark", "Spark", "Crystal", "Crystal", "Obsidian_Shard"],
@@ -224,6 +300,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 180 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 180 },
+        ],
+        topCards: [
+            {label: "Well of Energy", value: "Well_of_Energy"}, 
+            {label: "Radiance", value: "Radiance"},
         ],
     }),
     Remnant: Object.freeze({
@@ -236,6 +316,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Aurora", value: "Aurora"},
+        ],
     }),
     Sahala: Object.freeze({
         startingHand: ["Crystal", "Crystal", "Crystal", "Sparkling_Meteorite", "Spark"],
@@ -246,6 +330,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 180 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.CELESTIAL, orientation: 0 },
+        ],
+        topCards: [
+            {label: "Flexing Dagger", value: "Flexing_Dagger"}, 
+            {label: "Tethered Darts", value: "Tethered_Darts"},
         ],
     }),
     Soskel: Object.freeze({
@@ -258,6 +346,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 0 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
+            {label: "Link Conduit", value: "Link_Conduit"},
+        ],
     }),
     Sparrow: Object.freeze({
         startingHand: ["Smolder", "Crystal", "Crystal", "Crystal", "Crystal"],
@@ -268,6 +360,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 0 },
+        ],
+        topCards: [
+            {label: "Well of Energy", value: "Well_of_Energy"}, 
+            {label: "Fiend Catcher", value: "Fiend_Catcher"},
         ],
     }),
     Taqren: Object.freeze({
@@ -280,6 +376,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.DEFENDER, orientation: 90 },
         ],
+        topCards: [
+            {label: "Flexing Dagger", value: "Flexing_Dagger"}, 
+            {label: "Tethered Darts", value: "Tethered_Darts"},
+        ],
     }),
     Ulgimor: Object.freeze({
         startingHand: ["Coal_Shard", "Crystal", "Crystal", "Spark", "Spark"],
@@ -290,6 +390,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Aurora", value: "Aurora"},
         ],
     }),
     Xaxos: Object.freeze({
@@ -302,6 +406,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 90 },
         ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"}, 
+            {label: "Aurora", value: "Aurora"},
+        ],
     }),
     Zhana: Object.freeze({
         startingHand: ["Crystal", "Crystal", "Crystal", "Crystal", "Eternal_Ember"],
@@ -312,6 +420,10 @@ export const CHARACTERS = Object.freeze({
             { breachNumber: 2, breachType: BreachType.REGULAR, orientation: 0 },
             { breachNumber: 3, breachType: BreachType.REGULAR, orientation: 90 },
             { breachNumber: 4, breachType: BreachType.REGULAR, orientation: 270 },
+        ],
+        topCards: [
+            {label: "Arcane Nexus", value: "Arcane_Nexus"},
+            {label: "Flexing Dagger", value: "Flexing_Dagger"},
         ],
     }),
 });

@@ -82,6 +82,7 @@ function PlayerArea() {
                     <Modals
                         modalShowing={modalShowing}
                         setModalShowing={setModalShowing}
+                        characterData={data}
                         setCardsInHand={setCardsInHand}
                         cardsInDeck={cardsInDeck}
                         setCardsInDeck={setCardsInDeck}
@@ -255,7 +256,7 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 /**
  * Componenent that contains all the modals
  */
-function Modals({ modalShowing, setModalShowing, setCardsInHand, cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard }) {
+function Modals({ modalShowing, setModalShowing, characterData, setCardsInHand, cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard }) {
     return (
         <>
             <ReorderCardListModal
@@ -275,6 +276,7 @@ function Modals({ modalShowing, setModalShowing, setCardsInHand, cardsInDeck, se
             <AddNewCardsModal
                     modalShowing={modalShowing}
                     setModalShowing={setModalShowing}
+                    characterData={characterData}
                     setCardsInHand={setCardsInHand}
                     setCardsInDeck={setCardsInDeck}
                     setCardsInDiscard={setCardsInDiscard} />

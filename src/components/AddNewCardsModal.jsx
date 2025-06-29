@@ -16,17 +16,20 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 import { SORTED_CARD_NAMES } from "../data/cards";
-import { BASE_URL, ModalShowing } from "../data/constants";
+import { BASE_URL, ModalShowing, StandardMarket } from "../data/constants";
 
 
 
 /**
  * Modal popup that allows users to add new cards to their deck/hand/discard pile.
+ * @param {ModalShowing} modalShowing - An enum state variable telling which modal is currently showing.
+ * @param {function} setModalShowing - A setter for changing which modal is showing.
+ * @param {dictionary} characterData - The character data from src/data/characters.js, for the current character.
  * @param {function} setCardsInHand - A setter function for modifying the user's cards in hand.
  * @param {function} setCardsInDeck - A setter function for modifying the cards in theuser's deck.
  * @param {function} setCardsInDiscard - A setter function for modifying the cards in the user's discard pile.
  */
-export default function AddNewCardsModal({ modalShowing, setModalShowing, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
+export default function AddNewCardsModal({ modalShowing, setModalShowing, characterData, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
     const [tabNumber, setTabNumber] = useState("1");
 
     const closeModal = () => {
@@ -62,7 +65,7 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
                             <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
                         </TabPanel >
                         <TabPanel value="2">
-                            <CardMarket setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
+                            <CardMarket characterData={characterData} setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
                         </TabPanel>
 
                     </TabContext>
@@ -120,20 +123,15 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
  * A widget for displaying an handful of card options (like the in game market) and allowing the
  * user to put cards from that market into the deck, discard pile, or hand.
  */
-function CardMarket({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
+function CardMarket({ characterData, setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
     const { selectedCard, setSelectedCard, addCardToList } = useCardTransfer();
 
-    //TODO: find a better approach for getting such data
-    const sampleMarket = [
-        { label: "Clouded Sapphire", value: "Clouded_Sapphire" },
-        { label: "Scoria Slag", value: "Scoria_Slag" },
-        { label: "V'riswood Amber", value: "V'riswood_Amber" },
-        { label: "Bottled Vortex", value: "Bottled_Vortex" },
-        { label: "Unstable Prism", value: "Unstable_Prism" },
-        { label: "Spectral Echo", value: "Spectral_Echo" },
-        { label: "Conjure the Lost", value: "Conjure_the_Lost" },
+
+    const market = [
+        ...StandardMarket, ...characterData.topCards
     ];
 
+    
     let imageDisplay = null;
     if (selectedCard !== null) {
         const url = (selectedCard === null ? null : `${BASE_URL}cards/${selectedCard.value}.webp`);
@@ -149,7 +147,7 @@ function CardMarket({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
                 <Box>
                     <Grid container spacing={1}>
                         {
-                            sampleMarket.map((data, index) => (
+                            market.map((data, index) => (
                                 <Grid
                                     key={index}
                                     sx={{

@@ -59,7 +59,7 @@ export const BreachType = {
 export function GetBreachFileName(breachType, isOpen, breachNumber) {
     const open = (isOpen ? "open" : "closed");
 
-    switch(breachType){
+    switch (breachType) {
         case BreachType.REGULAR:
             return `breach${breachNumber}-${open}.webp`;
         case BreachType.NONE:
@@ -79,6 +79,21 @@ export function GetBreachFileName(breachType, isOpen, breachNumber) {
 
 
 /**
+ * A standard 7 cards to include in the market regaurdless of player. You should
+ * add each players topCards to this list before using it.
+ */
+export const StandardMarket = Object.freeze([
+    { label: "Clouded Sapphire", value: "Clouded_Sapphire" },
+    { label: "Scoria Slag", value: "Scoria_Slag" },
+    { label: "V'riswood Amber", value: "V'riswood_Amber" },
+    { label: "Bottled Vortex", value: "Bottled_Vortex" },
+    { label: "Unstable Prism", value: "Unstable_Prism" },
+    { label: "Spectral Echo", value: "Spectral_Echo" },
+    { label: "Conjure the Lost", value: "Conjure_the_Lost" },
+]);
+
+
+/**
  * The charge slots displayed on charcter mats are displayed in slightly different places
  * when there are more or fewer charge slots. As such, for the charges to be aligned 
  * correctly, they need dynamic CSS that offsets them from the player mat based on the
@@ -86,14 +101,14 @@ export function GetBreachFileName(breachType, isOpen, breachNumber) {
  * @param {number} numCharges - The maximum number of charges the character can have (number of charge slots).
  * @returns A style that can be applied to the charge image to align it with the charge slots.
  */
-export function GetChargeTrackPosition(numCharges){
-    switch(numCharges){
+export function GetChargeTrackPosition(numCharges) {
+    switch (numCharges) {
         case 4:
-            return {left: "55%"};
+            return { left: "55%" };
         case 5:
-            return {left: "51%"};
+            return { left: "51%" };
         case 6:
-            return {left: "48%"}
+            return { left: "48%" }
         default:
             throw new Error("Invalid number of charges");
     }
