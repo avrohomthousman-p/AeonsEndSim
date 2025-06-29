@@ -9,13 +9,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Grid from "@mui/material/Grid";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 import { SORTED_CARD_NAMES } from "../data/cards";
-import { ModalShowing } from "../data/constants";
+import { BASE_URL, ModalShowing } from "../data/constants";
 
 
 
@@ -37,8 +38,8 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
             slotProps={{
                 paper: {
                     sx: {
-                        width: "50vw",
-                        height: "60vh",
+                        width: "60vw",
+                        height: "75vh",
                         maxWidth: "none",
                         maxHeight: "none",
                     }
@@ -61,7 +62,7 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
                             <CardSearch setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
                         </TabPanel >
                         <TabPanel value="2">
-                            <h3>Coming Soon...</h3>
+                            <CardMarket setCardsInHand={setCardsInHand} setCardsInDeck={setCardsInDeck} setCardsInDiscard={setCardsInDiscard} />
                         </TabPanel>
 
                     </TabContext>
@@ -84,23 +85,7 @@ export default function AddNewCardsModal({ modalShowing, setModalShowing, setCar
  * @param {function} setCardsInDiscard - A setter for the cards in the user's discard pile.
  */
 function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
-    const [selectedItem, setSelectedItem] = useState(null);
-
-
-    const addCardToList = (putAtEnd, listSetter) => {
-        if (selectedItem === null) {
-            return;
-        }
-
-        if (putAtEnd) {
-            listSetter(prev => [...prev, selectedItem.value]);
-        }
-        else {
-            listSetter(prev => [selectedItem.value, ...prev]);
-        }
-
-        setSelectedItem(null);
-    }
+    const { selectedCard, setSelectedCard, addCardToList } = useCardTransfer();
 
 
     return (
@@ -108,8 +93,8 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
             <div style={{ marginBottom: "20px", display: "flex", justifyContent: "center" }}>
                 <Autocomplete
                     disablePortal={false}
-                    value={selectedItem}
-                    onChange={(event, newValue) => setSelectedItem(newValue)}
+                    value={selectedCard}
+                    onChange={(event, newValue) => setSelectedCard(newValue)}
                     options={SORTED_CARD_NAMES}
                     sx={{ width: "330px", marginTop: "10px" }}
                     renderInput={(params) => <TextField {...params} label="Card name..." />}
@@ -127,4 +112,112 @@ function CardSearch({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
             </div>
         </div>
     );
+}
+
+
+
+/**
+ * A widget for displaying an handful of card options (like the in game market) and allowing the
+ * user to put cards from that market into the deck, discard pile, or hand.
+ */
+function CardMarket({ setCardsInHand, setCardsInDeck, setCardsInDiscard }) {
+    const { selectedCard, setSelectedCard, addCardToList } = useCardTransfer();
+
+    //TODO: find a better approach for getting such data
+    const sampleMarket = [
+        { label: "Clouded Sapphire", value: "Clouded_Sapphire" },
+        { label: "Scoria Slag", value: "Scoria_Slag" },
+        { label: "V'riswood Amber", value: "V'riswood_Amber" },
+        { label: "Bottled Vortex", value: "Bottled_Vortex" },
+        { label: "Unstable Prism", value: "Unstable_Prism" },
+        { label: "Spectral Echo", value: "Spectral_Echo" },
+        { label: "Conjure the Lost", value: "Conjure_the_Lost" },
+    ];
+
+    let imageDisplay = null;
+    if (selectedCard !== null) {
+        const url = (selectedCard === null ? null : `${BASE_URL}cards/${selectedCard.value}.webp`);
+        imageDisplay = (
+            <img src={url} alt={selectedCard.label} style={{ maxHeight: "100%" }} />
+        )
+    }
+
+
+    return (
+        <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ flexBasis: "40%", flexGrow: 0, flexShrink: 0 }}>
+                <Box>
+                    <Grid container spacing={1}>
+                        {
+                            sampleMarket.map((data, index) => (
+                                <Grid
+                                    key={index}
+                                    sx={{
+                                        border: "1px solid #ccc",
+                                        borderRadius: 1,
+                                        padding: 2,
+                                        textAlign: "center",
+                                        cursor: "pointer",
+                                        transition: "background-color 0.3s",
+                                        "&:hover": {
+                                            backgroundColor: "#f0f0f0",
+                                        },
+                                    }}
+                                    onClick={() => setSelectedCard(data)}
+                                >
+                                    {data.label}
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </Box>
+            </div>
+
+            <div style={{ flexBasis: "30%", flexGrow: 0, flexShrink: 0 }}>
+                {imageDisplay}
+            </div>
+
+            <div style={{ flexBasis: "30%", flexGrow: 0, flexShrink: 0 }}>
+                <div className="vertical-stack">
+                    <div>
+                        Put that card in...
+                    </div>
+                    <button className="btn" onClick={() => addCardToList(false, setCardsInHand)}>Hand</button>
+                    <button className="btn" onClick={() => addCardToList(true, setCardsInDeck)}>Deck (Top)</button>
+                    <button className="btn" onClick={() => addCardToList(true, setCardsInDiscard)}>Discard Pile (Top)</button>
+                    <button className="btn" onClick={() => addCardToList(false, setCardsInDiscard)}>Discard Pile (Bottom)</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+
+
+/**
+ * Custom hook that provides a state variable to track what card is selected, and a
+ * function for moving the selected card to the appropriate place.
+ * @returns A getter and setter for the selectedItem state and a function for moving
+ *      the actual item.
+ */
+function useCardTransfer() {
+    const [selectedCard, setSelectedCard] = useState(null);
+
+    const addCardToList = (putAtEnd, listSetter) => {
+        if (selectedCard === null) {
+            return;
+        }
+
+        if (putAtEnd) {
+            listSetter(prev => [...prev, selectedCard.value]);
+        }
+        else {
+            listSetter(prev => [selectedCard.value, ...prev]);
+        }
+
+        setSelectedCard(null);
+    }
+
+
+    return { selectedCard, setSelectedCard, addCardToList };
 }
