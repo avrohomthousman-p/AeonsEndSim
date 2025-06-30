@@ -19,10 +19,6 @@ export default function DragToDetector({ children, onDragTo }){
             item: monitor.getItem(),
         }),
         hover: (item, monitor) => {
-            const hand = document.getElementById("hand");
-            const clientOffset = monitor.getClientOffset();
-            if (!clientOffset || !hand) return;
-
             onDragTo();
         },
     });

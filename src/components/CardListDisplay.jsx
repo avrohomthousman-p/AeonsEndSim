@@ -4,6 +4,7 @@ import React from "react";
 import { HandleCardDropIntoList } from "../utils/CardDropHandlers";
 import CardDropZone from "./CardDropZone";
 import DraggableCard from "./DraggableCard";
+import DragToDetector from "./DragToDetector";
 
 
 /**
@@ -32,9 +33,11 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
 
     return (
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-            <button onClick={scrollLeft} style={styles.arrowBtn}>
-                <img src="/left-arrow.webp" alt="left arrow" />
-            </button>
+            <DragToDetector onDragTo={scrollLeft}>
+                <button onClick={scrollLeft} style={styles.arrowBtn}>
+                    <img src="/left-arrow.webp" alt="left arrow" />
+                </button>
+            </DragToDetector>
 
 
             <div ref={containerRef}
@@ -73,9 +76,11 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
             </div>
 
 
-            <button onClick={scrollRight} style={styles.arrowBtn}>
-                <img src="/right-arrow.webp" alt="right arrow" />
-            </button>
+            <DragToDetector onDragTo={scrollRight}>
+                <button onClick={scrollRight} style={styles.arrowBtn}>
+                    <img src="/right-arrow.webp" alt="right arrow" />
+                </button>
+            </DragToDetector>
         </div>
     );
 }
@@ -83,7 +88,7 @@ export default function CardListDisplay({ locationName, cardList, setCardList })
 
 const styles = {
     arrowBtn: {
-        backgroundColor: "LightGray", 
+        backgroundColor: "LightGray",
         border: "none",
         paddingTop: "10px",
         paddingBottom: "10px",
