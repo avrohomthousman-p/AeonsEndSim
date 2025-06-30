@@ -144,11 +144,12 @@ function CardMarket({ characterData, setCardsInHand, setCardsInDeck, setCardsInD
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
             <div style={{ flexBasis: "40%", flexGrow: 0, flexShrink: 0 }}>
-                <Box>
+                <Box sx={{ overflowY: "auto", maxHeight: "300px" }}>
                     <Grid container spacing={1}>
                         {
                             market.map((data, index) => (
                                 <Grid
+                                    size={{ xs: 12, md: 6 }}
                                     key={index}
                                     sx={{
                                         border: "1px solid #ccc",
