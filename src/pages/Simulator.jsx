@@ -32,7 +32,7 @@ function Simulator() {
                     <NavigateBeforeIcon />
                     Select a different character
                 </a>
-                <h3 className="title">Aeons End Simulator</h3>
+                <h3 style={{ marginBottom: "4px", marginTop: "4px" }} >Aeons End Simulator</h3>
 
                 <DndProvider backend={HTML5Backend} >
                     <PlayerArea />
@@ -150,7 +150,7 @@ function CharacterSection({ characterName, characterData, cardsInDeck, setCardsI
                 cardsInDiscard={cardsInDiscard}
                 setCardsInDiscard={setCardsInDiscard} />
 
-            <div style={{ display: "inline-block", width: "55%", position: "relative" }} >
+            <div style={{ display: "inline-block", width: "58%", position: "relative" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
 
                 <div id="charge-track" style={GetChargeTrackPosition(characterData.chargeSlots)}>

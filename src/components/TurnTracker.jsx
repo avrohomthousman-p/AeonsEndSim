@@ -1,13 +1,11 @@
-import { useState } from "react";
-
 
 /**
  * Allows the user to keep track of the turn count.
+ * 
+ * @param {number} turnNumber - The state variable used to track the current turn.
+ * @param {function} setTurnNumber - A function for changing the Current turn.
  */
-export default function TurnTracker() {
-    const [turnNumber, setTurnNumber] = useState(1);
-
-
+export default function TurnTracker({ turnNumber, setTurnNumber }) {
     return (
         <div style={{
             border: "1px solid #ccc",

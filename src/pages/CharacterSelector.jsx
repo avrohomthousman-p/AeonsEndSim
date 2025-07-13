@@ -13,14 +13,14 @@ function CharacterSelectorPage() {
     return (
         <>
             <div>
-                <h1>
+                <h1 style={{ margin: "4px" }}>
                     <img src={logo} className="logo" alt="logo" />
                     Aeons End Simulator
                     <img src={logo} className="logo" alt="logo" />
                 </h1>
             </div>
             <div>
-                <p>Pick a character</p>
+                <p style={{ marginBottom: "4px" }} >Pick a character</p>
                 <CharacterPicker />
             </div>
         </>
@@ -49,10 +49,10 @@ function CharacterPicker() {
                         {name}</button>
                 ))}
             </div>
-            <div style={{ marginTop: "10px" }}>
+            <div>
                 <img 
                     src={hoveredCharacter ? `${BASE_URL}characters/${hoveredCharacter}.webp` : null}
-                    style={{ height: "48vh" }} />
+                    style={{ height: "56vh" }} />
             </div>
         </div>
     )
