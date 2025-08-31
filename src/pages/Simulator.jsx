@@ -75,7 +75,8 @@ function PlayerArea() {
                         setCardsInDeck={setCardsInDeck}
                         setCardsInHand={setCardsInHand}
                         cardsInDiscard={cardsInDiscard}
-                        setCardsInDiscard={setCardsInDiscard} />
+                        setCardsInDiscard={setCardsInDiscard}
+                        setModalShowing={setModalShowing} />
 
                     <HandSection cardsInHand={cardsInHand} setCardsInHand={setCardsInHand} />
 
@@ -138,7 +139,17 @@ function BreachSection({ characterData }) {
 /**
  * Component that displays the player mat, deck, and discard pile.
  */
-function CharacterSection({ characterName, characterData, cardsInDeck, setCardsInDeck, setCardsInHand, cardsInDiscard, setCardsInDiscard }) {
+function CharacterSection({ 
+    characterName, 
+    characterData, 
+    cardsInDeck, 
+    setCardsInDeck, 
+    setCardsInHand, 
+    cardsInDiscard, 
+    setCardsInDiscard, 
+    setModalShowing 
+}) {
+    
     const [chargeCount, setChargeCount] = useState(0);
 
     return (
@@ -148,7 +159,8 @@ function CharacterSection({ characterName, characterData, cardsInDeck, setCardsI
                 setCardsInDeck={setCardsInDeck}
                 setCardsInHand={setCardsInHand}
                 cardsInDiscard={cardsInDiscard}
-                setCardsInDiscard={setCardsInDiscard} />
+                setCardsInDiscard={setCardsInDiscard}
+                setModalShowing={setModalShowing} />
 
             <div style={{ display: "inline-block", width: "58%", position: "relative" }} >
                 <img src={BASE_URL + "characters/" + characterName + ".webp"} alt="player mat" width="100%" />
