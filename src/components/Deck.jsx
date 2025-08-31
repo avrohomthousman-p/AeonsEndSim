@@ -70,35 +70,11 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
     let deckImage;
     let deckActionButton;
     if (cardsInDeck.length === 0) {
-        deckImage = (
-            <Tooltip title="Double click to refill deck" placement="right" arrow>
-                <img
-                    src={"/refresh.webp"}
-                    onDoubleClick={resetDeck}
-                    className="card-image"
-                    alt="deck"
-                    width="100%" />
-            </Tooltip>
-        );
-
+        deckImage = <EmptyDeckImage resetDeck={resetDeck} />;
         deckActionButton = <ResetDeckButton resetDeck={resetDeck} />;
     }
     else {
-        deckImage = (
-            <Tooltip title="Click to draw" placement="right" arrow>
-                <div onClick={drawCard}>
-                    <DraggableCard
-                        cardName={cardsInDeck.at(-1)}
-                        cardPosition={cardsInDeck.length - 1}
-                        locationName={CardLocations.Deck}
-                        cardSrcList={cardsInDeck}
-                        setCardSrcList={setCardsInDeck}
-                        altImageUrl={BASE_URL + "other/cardBack.webp"} />
-                </div>
-            </Tooltip>
-        );
-
-
+        deckImage = <FullDeckImage drawCard={drawCard} cardsInDeck={cardsInDeck} setCardsInDeck={setCardsInDeck} />;
         deckActionButton = <ReorderDeckButton setModalShowing={setModalShowing} />;
     }
 
@@ -121,6 +97,50 @@ export default function Deck({ cardsInDeck, setCardsInDeck, setCardsInHand, card
 
 
 /**
+ * Displays the empty deck.
+ * @param {function} resetDeck - A reference to the function used to reset the deck when it is empty. 
+ */
+function EmptyDeckImage({ resetDeck }) {
+    return (
+        <Tooltip title="Double click to refill deck" placement="right" arrow>
+            <img
+                src={"/refresh.webp"}
+                onDoubleClick={resetDeck}
+                className="card-image"
+                alt="deck"
+                width="100%" />
+        </Tooltip>
+    )
+}
+
+
+
+/**
+ * Displays the deck.
+ * 
+ * @param {function} drawCard - A reference to the function used to draw a card from the deck.
+ * @param {string[]} cardsInDeck - An array of cards in the deck (last index is top of the deck).
+ * @param {function} setCardsInDeck - A setter function for modifying the deck contennts.
+ */
+function FullDeckImage({ drawCard, cardsInDeck, setCardsInDeck }) {
+    return (
+        <Tooltip title="Click to draw" placement="right" arrow>
+            <div onClick={drawCard}>
+                <DraggableCard
+                    cardName={cardsInDeck.at(-1)}
+                    cardPosition={cardsInDeck.length - 1}
+                    locationName={CardLocations.Deck}
+                    cardSrcList={cardsInDeck}
+                    setCardSrcList={setCardsInDeck}
+                    altImageUrl={BASE_URL + "other/cardBack.webp"} />
+            </div>
+        </Tooltip>
+    )
+}
+
+
+
+/**
  * Renders an icon button used to reset the deck when it is empty.
  * 
  * This button should be rendered **inside a container with `position: relative`** 
@@ -134,7 +154,7 @@ function ResetDeckButton({ resetDeck }) {
         <IconButton
             size="small"
             style={{ position: "absolute", top: 4, right: 4, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
-            onClick={ resetDeck } >
+            onClick={resetDeck} >
 
             <LoopOutlinedIcon fontSize="small" />
 
@@ -158,7 +178,7 @@ function ReorderDeckButton({ setModalShowing }) {
         <IconButton
             size="small"
             style={{ position: "absolute", top: 4, right: 4, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
-            onClick={ () => setModalShowing(ModalShowing.REORDER_DECK) } >
+            onClick={() => setModalShowing(ModalShowing.REORDER_DECK)} >
 
             <VisibilityOutlinedIcon fontSize="small" />
 
