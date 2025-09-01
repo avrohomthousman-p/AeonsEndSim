@@ -28,8 +28,6 @@ export default function Toolbar({ setModalShowing, cardsInHand, setCardsInHand, 
             <button className="btn" onClick={handleDrawNewHand}>Draw New Hand</button>
             <button className="btn" onClick={handleDiscardHand}>Discard Hand</button>
             <button className="btn" onClick={() => setModalShowing(ModalShowing.ADD_NEW_CARDS)}>Add New Cards</button>
-            <button className="btn" onClick={() => setModalShowing(ModalShowing.REORDER_DECK)}>Reorder Deck</button>
-            <button className="btn" onClick={() => setModalShowing(ModalShowing.REORDER_DISCARD)}>Reorder Discard Pile</button>
             {/* TODO: add more tools here */}
         </div>
     );

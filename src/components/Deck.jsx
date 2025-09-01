@@ -104,7 +104,7 @@ function EmptyDeckImage({ resetDeck }) {
     return (
         <Tooltip title="Double click to refill deck" placement="right" arrow>
             <img
-                src={"/refresh.webp"}
+                src={"/emptyPile.webp"}
                 onDoubleClick={resetDeck}
                 className="card-image"
                 alt="deck"
@@ -151,14 +151,16 @@ function FullDeckImage({ drawCard, cardsInDeck, setCardsInDeck }) {
  */
 function ResetDeckButton({ resetDeck }) {
     return (
-        <IconButton
-            size="small"
-            style={{ position: "absolute", top: 4, right: 4, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
-            onClick={resetDeck} >
+        <Tooltip title="Refill Deck" placement="right" arrow>
+            <IconButton
+                size="small"
+                style={{ position: "absolute", top: -8, right: -8, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
+                onClick={resetDeck} >
 
-            <LoopOutlinedIcon fontSize="small" />
+                <LoopOutlinedIcon fontSize="small" />
 
-        </IconButton>
+            </IconButton>
+        </Tooltip>
     )
 }
 
@@ -175,13 +177,15 @@ function ResetDeckButton({ resetDeck }) {
  */
 function ReorderDeckButton({ setModalShowing }) {
     return (
-        <IconButton
-            size="small"
-            style={{ position: "absolute", top: 4, right: 4, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
-            onClick={() => setModalShowing(ModalShowing.REORDER_DECK)} >
+        <Tooltip title="View/Reorder" placement="right" arrow>
+            <IconButton
+                size="small"
+                style={{ position: "absolute", top: -8, right: -8, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
+                onClick={() => setModalShowing(ModalShowing.REORDER_DECK)} >
 
-            <VisibilityOutlinedIcon fontSize="small" />
+                <VisibilityOutlinedIcon fontSize="small" />
 
-        </IconButton>
+            </IconButton>
+        </Tooltip>
     )
 }
