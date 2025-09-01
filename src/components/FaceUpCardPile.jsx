@@ -1,4 +1,7 @@
-import { BASE_URL } from "../data/constants";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { IconButton } from "@mui/material";
+
+import { CardLocations, ModalShowing } from "../data/constants";
 import { HandleCardDropOntoPile } from "../utils/CardDropHandlers";
 import CardDropZone from "./CardDropZone";
 import DraggableCard from "./DraggableCard";
@@ -12,8 +15,9 @@ import DraggableCard from "./DraggableCard";
  * @param {CardLocations} pileType - A constant telling the component what pile it represents.
  * @param {string[]} cardList - An array storing the cards in the pile.
  * @param {function} setCardList - A setter function for modifying the array of cards in the pile.
+ * @param {function} setModalShowing - A setter function for controlling what modal is showing (if any).
  */
-export default function FaceUpCardPile({ pileType, cardList, setCardList }) {
+export default function FaceUpCardPile({ pileType, cardList, setCardList, setModalShowing }) {
     const onDropHandler = new HandleCardDropOntoPile(pileType, setCardList);
 
 
@@ -25,13 +29,26 @@ export default function FaceUpCardPile({ pileType, cardList, setCardList }) {
     else {
         const cardPosition = cardList.length - 1;
         const cardName = cardList[cardPosition];
+        const modalType = (pileType === CardLocations.DiscardPile ? ModalShowing.REORDER_DISCARD : ModalShowing.REORDER_DESTROYED);
         imageComponent = (
-            <DraggableCard 
-                cardName={cardName} 
-                cardPosition={cardPosition} 
-                locationName={pileType} 
-                cardSrcList={cardList} 
-                setCardSrcList={setCardList} />
+            <div style={{ position: "relative", display: "inline-block" }}>
+                <DraggableCard 
+                    cardName={cardName} 
+                    cardPosition={cardPosition} 
+                    locationName={pileType} 
+                    cardSrcList={cardList} 
+                    setCardSrcList={setCardList} />
+
+
+                <IconButton
+                    size="small"
+                    style={{ position: "absolute", top: 4, right: 4, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
+                    onClick={() => setModalShowing(modalType)} >
+                
+                    <VisibilityOutlinedIcon fontSize="small" />
+                
+                </IconButton>
+            </div>
         );
     }
 
