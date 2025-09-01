@@ -76,6 +76,10 @@ function isModalOpen(modalShowing, locationName) {
         return modalShowing === ModalShowing.REORDER_DISCARD;
     }
 
+    if (locationName === CardLocations.DestroyedPile) {
+        return modalShowing === ModalShowing.REORDER_DESTROYED;
+    }
+
 
     throw new Error("There is no modal for the card location " + locationName);
 }

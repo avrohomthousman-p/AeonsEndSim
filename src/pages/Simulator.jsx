@@ -88,13 +88,15 @@ function PlayerArea() {
                         cardsInDeck={cardsInDeck}
                         setCardsInDeck={setCardsInDeck}
                         cardsInDiscard={cardsInDiscard}
-                        setCardsInDiscard={setCardsInDiscard} />
+                        setCardsInDiscard={setCardsInDiscard}
+                        destroyedCards={destroyedCards}
+                        setDestroyedCards={setDestroyedCards} />
                 </div>
             </div>
 
             <div style={{ flex: "15" }}>
                 <p><strong> Destroyed Cards </strong></p>
-                <FaceUpCardPile pileType={CardLocations.DestroyedPile} cardList={destroyedCards} setCardList={setDestroyedCards} />
+                <FaceUpCardPile pileType={CardLocations.DestroyedPile} cardList={destroyedCards} setCardList={setDestroyedCards} setModalShowing={setModalShowing} />
             </div>
 
             <Toolbar
@@ -139,17 +141,17 @@ function BreachSection({ characterData }) {
 /**
  * Component that displays the player mat, deck, and discard pile.
  */
-function CharacterSection({ 
-    characterName, 
-    characterData, 
-    cardsInDeck, 
-    setCardsInDeck, 
-    setCardsInHand, 
-    cardsInDiscard, 
-    setCardsInDiscard, 
-    setModalShowing 
+function CharacterSection({
+    characterName,
+    characterData,
+    cardsInDeck,
+    setCardsInDeck,
+    setCardsInHand,
+    cardsInDiscard,
+    setCardsInDiscard,
+    setModalShowing
 }) {
-    
+
     const [chargeCount, setChargeCount] = useState(0);
 
     return (
@@ -183,7 +185,7 @@ function CharacterSection({
             </div>
 
             <div>
-                <FaceUpCardPile pileType={CardLocations.DiscardPile} cardList={cardsInDiscard} setCardList={setCardsInDiscard} />
+                <FaceUpCardPile pileType={CardLocations.DiscardPile} cardList={cardsInDiscard} setCardList={setCardsInDiscard} setModalShowing={setModalShowing} />
             </div>
         </div>
     )
@@ -268,30 +270,49 @@ function HandSection({ cardsInHand, setCardsInHand }) {
 /**
  * Componenent that contains all the modals
  */
-function Modals({ modalShowing, setModalShowing, characterData, setCardsInHand, cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard }) {
+function Modals({
+    modalShowing,
+    setModalShowing,
+    characterData,
+    setCardsInHand,
+    cardsInDeck,
+    setCardsInDeck,
+    cardsInDiscard,
+    setCardsInDiscard,
+    destroyedCards,
+    setDestroyedCards
+}) {
+
     return (
         <>
             <ReorderCardListModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    locationName={CardLocations.Deck}
-                    cardList={cardsInDeck}
-                    setCardList={setCardsInDeck} />
+                modalShowing={modalShowing}
+                setModalShowing={setModalShowing}
+                locationName={CardLocations.Deck}
+                cardList={cardsInDeck}
+                setCardList={setCardsInDeck} />
 
             <ReorderCardListModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    locationName={CardLocations.DiscardPile}
-                    cardList={cardsInDiscard}
-                    setCardList={setCardsInDiscard} />
+                modalShowing={modalShowing}
+                setModalShowing={setModalShowing}
+                locationName={CardLocations.DiscardPile}
+                cardList={cardsInDiscard}
+                setCardList={setCardsInDiscard} />
+
+            <ReorderCardListModal
+                modalShowing={modalShowing}
+                setModalShowing={setModalShowing}
+                locationName={CardLocations.DestroyedPile}
+                cardList={destroyedCards}
+                setCardList={setDestroyedCards} />
 
             <AddNewCardsModal
-                    modalShowing={modalShowing}
-                    setModalShowing={setModalShowing}
-                    characterData={characterData}
-                    setCardsInHand={setCardsInHand}
-                    setCardsInDeck={setCardsInDeck}
-                    setCardsInDiscard={setCardsInDiscard} />
+                modalShowing={modalShowing}
+                setModalShowing={setModalShowing}
+                characterData={characterData}
+                setCardsInHand={setCardsInHand}
+                setCardsInDeck={setCardsInDeck}
+                setCardsInDiscard={setCardsInDiscard} />
         </>
     );
 }

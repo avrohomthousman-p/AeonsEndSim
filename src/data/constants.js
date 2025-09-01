@@ -27,6 +27,7 @@ export const ModalShowing = {
     NONE: "none",
     REORDER_DECK: "reorder_deck",
     REORDER_DISCARD: "reorder_discard",
+    REORDER_DESTROYED: "reorder_destroyed",
     ADD_NEW_CARDS: "add_new_cards",
 };
 
