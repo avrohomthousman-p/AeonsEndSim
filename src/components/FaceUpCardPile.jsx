@@ -1,5 +1,6 @@
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { IconButton } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
 import { CardLocations, ModalShowing } from "../data/constants";
 import { HandleCardDropOntoPile } from "../utils/CardDropHandlers";
@@ -40,14 +41,16 @@ export default function FaceUpCardPile({ pileType, cardList, setCardList, setMod
                     setCardSrcList={setCardList} />
 
 
-                <IconButton
-                    size="small"
-                    style={{ position: "absolute", top: 4, right: 4, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
-                    onClick={() => setModalShowing(modalType)} >
-                
-                    <VisibilityOutlinedIcon fontSize="small" />
-                
-                </IconButton>
+                <Tooltip title="View/Reorder" placement="right" arrow>
+                    <IconButton
+                        size="small"
+                        style={{ position: "absolute", top: -8, right: -8, zIndex: 10, backgroundColor: "rgba(106, 215, 239, 0.8)" }}
+                        onClick={() => setModalShowing(modalType)} >
+                    
+                        <VisibilityOutlinedIcon fontSize="small" />
+                    
+                    </IconButton>
+                </Tooltip>
             </div>
         );
     }
