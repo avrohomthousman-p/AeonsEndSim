@@ -194,33 +194,22 @@ function CharacterSection({
 
 
 /**
- * Click handler for adjusting charges when the user clicks on a charge slot.
+ * Charges fill left-to-right and empty right-to-left.
  * 
- * In accordance with normal gameplay, charges are added left to right (and removed right
- * to left). So clicking the left-most empty charge slot adds a charge to that slot. Clicking
- * the right-most filled charge slot, removes the charge from that slot. Clicking anywhere
- * else does nothing.
- * 
- * E.g.  [filled, filled, empty, empty, empty]
- * A new charge could only be added in index 2 (charge slot 3)
- * A charge could only be removed from index 1 (charge slot 2)
- * @param {number} chargeSlotClicked - 1 based index of which charge slot was clicked.
- * @param {function} setChargeCount - State setter for modifying charge count.
+ * So:
+ * - Clicking the rightmost filled slot removes a charge.
+ * - Clicking the next empty slot adds a charge.
+ * - Clicking any other slot does nothing.
  */
-function HandleChargeSlotClick(chargeSlotClicked, setChargeCount) {
-    setChargeCount((chargeCount) => {
-        const isLastFilledSlot = chargeSlotClicked === chargeCount;
-        const isFirstEmptySlot = chargeSlotClicked === chargeCount + 1;
+function HandleChargeSlotClick(slotClicked, setChargeCount) {
+    setChargeCount(currentCount => {
+        const removeCharge = slotClicked === currentCount; //clicked last filled slot
+        const addCharge = slotClicked === currentCount + 1; //clicked first empty slot
 
-        if (isLastFilledSlot) {
-            return chargeCount - 1;
-        }
-        else if (isFirstEmptySlot) {
-            return chargeCount + 1;
-        }
-        else {
-            return chargeCount;
-        }
+        if (removeCharge) return currentCount - 1;
+        if (addCharge) return currentCount + 1;
+
+        return currentCount;
     });
 }
 
