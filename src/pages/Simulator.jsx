@@ -9,6 +9,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { useParams } from "react-router-dom";
 
 import AddNewCardsModal from "../components/AddNewCardsModal";
+import BackLink from "../components/BackLink";
 import SingleBreach from "../components/Breach";
 import CardListDisplay from "../components/CardListDisplay";
 import Deck from "../components/Deck";
@@ -28,10 +29,7 @@ function Simulator() {
     return (
         <div>
             <div style={{ position: "relative" }}>
-                <a href="/" className="back-link" style={{ display: "inline-flex" }}>
-                    <NavigateBeforeIcon />
-                    Select a different character
-                </a>
+                <BackLink className="back-link" />
                 <h3 style={{ marginBottom: "4px", marginTop: "4px" }} >Aeons End Simulator</h3>
 
                 <DndProvider backend={HTML5Backend} >
