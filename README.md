@@ -5,7 +5,7 @@ to spend a long time setting it up.
 
 Game images are stored in a publicly availible [Google Cloud bucket](https://console.cloud.google.com/storage/browser/aeons-end-pics)
 
-[Click here for a live demo](https://master.d3l72ldid0c0ru.amplifyapp.com/)
+[Click here for a live demo](https://aeonsendsim.ahdevstudios.com/)
 
 
 # Screenshots
