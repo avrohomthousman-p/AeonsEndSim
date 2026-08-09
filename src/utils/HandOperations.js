@@ -11,38 +11,51 @@ import { NORMAL_HAND_SIZE } from "../data/constants";
 
 
 /**
- * Draws {NORMAL_HAND_SIZE} new cards if the users hand is empty. Otherwise does nothing.
+ * Draws a new hand following the standard rules of the game:
+ * 
+ * Draw until you have NORMAL_HAND_SIZE cards.
+ * If the deck runs out, flip the discard pile into the deck and continue drawing.
+ * If the deck and discard pile are both empty, draw as many cards as you can.
  */
-export function drawNewHand(cardsInHand, setCardsInHand, cardsInDeck, setCardsInDeck, cardsInDiscard, setCardsInDiscard) {
-    const numCardsToDraw = NORMAL_HAND_SIZE - cardsInHand.length;
-    if (numCardsToDraw <= 0){
+export function drawNewHand(
+    cardsInHand, setCardsInHand,
+    cardsInDeck, setCardsInDeck,
+    cardsInDiscard, setCardsInDiscard
+) {
+    let cardsNeeded = NORMAL_HAND_SIZE - cardsInHand.length;
+    if (cardsNeeded <= 0)
         return;
-    }
-    
-    const deckSize = cardsInDeck.length;
 
-    //Draw cards from the deck
-    let startIndex = Math.max(0, deckSize - numCardsToDraw);
-    let endIndex = deckSize;
-    let cardsDrawn = cardsInDeck.slice(startIndex, endIndex);
 
-    if (cardsDrawn.length < numCardsToDraw) {
-        //Draw remaining cards from discard pile, and reset the deck.
-        const additionalCardsNeeded = Math.min(numCardsToDraw - cardsDrawn.length, cardsInDiscard.length);
-        let cardsDrawnFromDiscard = cardsInDiscard.slice(0, additionalCardsNeeded);
-        let cardsLeftInDiscard = cardsInDiscard.slice(additionalCardsNeeded, cardsInDiscard.length);
+    // Make local copies so we don't mutate React state until we are ready
+    let deck = [...cardsInDeck];
+    let discard = [...cardsInDiscard];
+    let cardsDrawn = [];
 
-        cardsDrawn = [...cardsDrawn, ...cardsDrawnFromDiscard];
-        setCardsInDeck(cardsLeftInDiscard);
-        setCardsInDiscard([]);
-    }
-    else {
-        //Remove drawn cards from deck
-        setCardsInDeck(prev => prev.slice(0, startIndex));
+
+    // 1. Draw from deck until it runs out or we reach NORMAL_HAND_SIZE cards
+    while (cardsNeeded > 0 && deck.length > 0) {
+        cardsDrawn.push(deck.pop()); // top of deck = last index
+        cardsNeeded--;
     }
 
 
-    setCardsInHand(prev => [...prev, ...cardsDrawn.reverse()]);
+    // 2. If we still need cards, flip discard into deck
+    if (deck.length === 0 &&cardsNeeded > 0 && discard.length > 0) {
+        deck = discard.reverse(); // flip discard pile
+        discard = [];
+
+        while (cardsNeeded > 0 && deck.length > 0) {
+            cardsDrawn.push(deck.pop());
+            cardsNeeded--;
+        }
+    }
+
+
+    // 3. Commit state updates
+    setCardsInDeck(deck);
+    setCardsInDiscard(discard);
+    setCardsInHand(prev => [...prev, ...cardsDrawn]);
 }
 
 
@@ -51,4 +64,3 @@ export function discardHand(cardsInHand, setCardsInHand, setCardsInDiscard) {
     setCardsInDiscard(prev => [...prev, ...cardsInHand.reverse()]);
     setCardsInHand([]);
 }
-
